@@ -1,0 +1,20 @@
+This is a PHP Google Protocol Buffer Generator Plugin for protoc. It generates PHP code from a .proto file.
+by Andrew Brampton (c) 2010
+
+It's not finished, but supports most common features, and I'm currently using it in a production system.
+
+I've only tested the code on Debian Linux. To build just type "make". You may need the following libraries which can be installed from apt:
+
+libprotobuf-dev
+libprotobuf-lite6
+libprotobuf6
+libprotoc-dev
+libprotoc6
+
+Once compiled you can use it via protoc like so:
+
+ protoc -I. -I/usr/include --php_out . --plugin=protoc-gen-php=./protoc-gen-php your.proto
+
+This should generate the file "your.proto.php", which should be able to encode and decode protocol buffer messages. When using the generated PHP code you must include the "protocolbuffers.inc.php" file.
+
+There are many TODOs to finish, for example writing better documentation :)

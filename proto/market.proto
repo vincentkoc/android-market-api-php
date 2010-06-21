@@ -1,0 +1,184 @@
+option java_package = "com.gc.android.market.api.model";
+
+enum AppType {
+	NONE = 0;
+	APPLICATION = 1;
+	RINGTONE = 2;
+	WALLPAPER = 3;
+	GAME = 4;
+}
+
+message AppsRequest {
+  optional AppType appType = 1;
+  optional string query = 2;
+  optional string categoryId = 3;
+  optional string appId = 4;
+  optional bool withExtendedInfo = 6;
+  
+  enum OrderType {
+    NONE = 0;
+    POPULAR = 1;
+    NEWEST = 2;
+    FEATURED = 3;
+  }
+  
+  enum ViewType {
+  	ALL = 0;
+  	FREE = 1;
+  	PAID = 2;
+  }
+  
+  optional OrderType orderType = 7 [default = NONE];
+  optional uint64 startIndex = 8;
+  optional int32 entriesCount = 9;
+  optional ViewType viewType = 10 [default = ALL]; 
+}
+
+
+message AppsResponse {
+	repeated App app = 1;
+	optional int32 entriesCount = 2;
+}
+
+message Category {
+	optional int32 appType = 2;
+	optional string title = 4;
+	optional string categoryId = 3;
+	optional string subtitle = 5;
+	repeated Category subCategories = 8;
+}
+
+message CommentsRequest {
+	optional string appId = 1;
+	optional int32 startIndex = 2;
+	optional int32 entriesCount = 3;
+}
+
+message CommentsResponse {
+	repeated Comment comments = 1;
+	optional int32 entriesCount = 2;
+}
+
+message App {
+	optional string id = 1;
+	optional string title = 2;
+	
+	optional AppType appType = 3 [default = NONE];
+
+	optional string creator = 4;
+	optional string version = 5;
+	optional string price = 6;
+	optional string rating = 7;
+	optional int32 ratingsCount = 8;
+	
+	optional group ExtendedInfo = 12 {
+		optional string description = 13;
+		optional int32 downloadsCount = 14;
+		repeated string permissionId = 15;
+		optional int32 installSize = 16;
+		optional string packageName = 17;
+		optional string category = 18;
+		optional string contactEmail = 20;
+		optional string downloadsCountText = 23;
+		optional string contactPhone = 26;
+		optional string contactWebsite = 27;
+		
+		// V2
+		optional int32 screenshotsCount = 30;
+		optional string promoText = 31;
+	} 	
+	
+	optional string creatorId = 22;
+	optional string packageName = 24;
+	optional int32 versionCode = 25;
+	//V2
+	optional string priceCurrency = 32;
+	optional int32 priceMicros = 33;
+}
+
+message Comment {
+	optional string text = 1;
+	optional int32 rating = 2;
+	optional string authorName = 3;
+	optional uint64 creationTime = 4;
+	optional string authorId = 5;
+}
+
+message CategoriesRequest {
+}
+
+message CategoriesResponse {
+	repeated Category categories = 1;
+}
+
+message SubCategoriesRequest {
+	optional AppType appType = 1;
+}
+
+message SubCategoriesResponse {
+	repeated Category category = 1;
+	optional string subCategoryDisplay = 2;
+	optional int32 subCategoryId = 3;
+}
+
+// operator : http://www.2030.tk/wiki/Android_market_switch
+// operatorNumeric : see http://en.wikipedia.org/wiki/Mobile_Network_Code
+message RequestContext {
+	required string authSubToken = 1; // authsub token for service 'android'
+	required int32 unknown1 = 2; // always 0
+	required int32 version = 3;  // always 1002
+	required string androidId = 4;  // android id converted to hexadecimal
+	optional string deviceAndSdkVersion = 5; // ro.product.device ':' ro.build.version.sdk 
+	optional string userLanguage = 6; // ro.product.locale.language
+	optional string userCountry = 7; // ro.product.locale.region
+	optional string operatorAlpha = 8; // gsm.operator.alpha
+	optional string simOperatorAlpha = 9; // gsm.sim.operator.alpha
+	optional string operatorNumeric = 10; // gsm.operator.numeric
+	optional string simOperatorNumeric = 11; // sim.gsm.operator.numeric
+}
+
+message GetImageRequest {
+	optional string appId = 1;
+	enum AppImageUsage {
+		ICON = 0;
+		SCREENSHOT = 1;
+		SCREENSHOT_THUMBNAIL = 2;
+		PROMO_BADGE = 3;
+		BILING_ICON = 4;
+	}
+	optional AppImageUsage imageUsage = 3; 
+	optional string imageId = 4; // 0 or 1
+}
+
+message GetImageResponse {
+	optional bytes imageData = 1;
+}
+
+message Request {
+	optional RequestContext context = 1;
+	repeated group RequestGroup = 2 {
+		optional AppsRequest appsRequest = 4;
+		optional CommentsRequest commentsRequest = 5;
+		optional GetImageRequest imageRequest = 11;
+		optional SubCategoriesRequest subCategoriesRequest = 14;
+		optional CategoriesRequest categoriesRequest = 21;
+	}
+}
+
+message ResponseContext {
+	optional int32 result = 1;
+	optional int32 unknown1 = 2;
+	optional string unknown2 = 3;
+	optional int32 unknown3 = 4;
+}
+
+message Response {
+	repeated group ResponseGroup = 1 { 
+		optional ResponseContext context = 2;
+		optional AppsResponse appsResponse = 3;
+		optional CommentsResponse commentsResponse = 4;
+		optional GetImageResponse imageResponse = 10;
+		optional CategoriesResponse categoriesResponse = 20;
+		optional SubCategoriesResponse subCategoriesResponse = 13;
+	}
+}
