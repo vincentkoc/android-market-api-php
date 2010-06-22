@@ -7,14 +7,14 @@ class AppsRequest_OrderType {
   const POPULAR = 1;
   const NEWEST = 2;
   const FEATURED = 3;
-  
+
   public static $_values = array(
     0 => self::NONE,
     1 => self::POPULAR,
     2 => self::NEWEST,
     3 => self::FEATURED,
   );
-  
+
   public static function toString($value) {
     if (is_null($value)) return null;
     if (array_key_exists($value, self::$_values))
@@ -28,13 +28,13 @@ class AppsRequest_ViewType {
   const ALL = 0;
   const FREE = 1;
   const PAID = 2;
-  
+
   public static $_values = array(
     0 => self::ALL,
     1 => self::FREE,
     2 => self::PAID,
   );
-  
+
   public static function toString($value) {
     if (is_null($value)) return null;
     if (array_key_exists($value, self::$_values))
@@ -46,7 +46,7 @@ class AppsRequest_ViewType {
 // message AppsRequest
 class AppsRequest {
   private $_unknown;
-  
+
   function __construct($in = NULL, &$limit = PHP_INT_MAX) {
     if($in !== NULL) {
       if (is_string($in)) {
@@ -61,7 +61,7 @@ class AppsRequest {
       $this->read($fp, $limit);
     }
   }
-  
+
   function read($fp, &$limit = PHP_INT_MAX) {
     while(!feof($fp) && $limit > 0) {
       $tag = Protobuf::read_varint($fp, $limit);
@@ -76,7 +76,7 @@ class AppsRequest {
           if ($tmp === false)
             throw new Exception('Protobuf::read_varint returned false');
           $this->appType_ = $tmp;
-          
+
           break;
         case 2:
           ASSERT('$wire == 2');
@@ -133,7 +133,7 @@ class AppsRequest {
           if ($tmp === false)
             throw new Exception('Protobuf::read_varint returned false');
           $this->orderType_ = $tmp;
-          
+
           break;
         case 8:
           ASSERT('$wire == 0');
@@ -141,7 +141,7 @@ class AppsRequest {
           if ($tmp === false)
             throw new Exception('Protobuf::read_varint returned false');
           $this->startIndex_ = $tmp;
-          
+
           break;
         case 9:
           ASSERT('$wire == 0');
@@ -149,7 +149,7 @@ class AppsRequest {
           if ($tmp === false)
             throw new Exception('Protobuf::read_varint returned false');
           $this->entriesCount_ = $tmp;
-          
+
           break;
         case 10:
           ASSERT('$wire == 0');
@@ -157,7 +157,7 @@ class AppsRequest {
           if ($tmp === false)
             throw new Exception('Protobuf::read_varint returned false');
           $this->viewType_ = $tmp;
-          
+
           break;
         default:
           $this->_unknown[$field . '-' . Protobuf::get_wiretype($wire)][] = Protobuf::read_field($fp, $wire, $limit);
@@ -166,7 +166,7 @@ class AppsRequest {
     if (!$this->validateRequired())
       throw new Exception('Required fields are missing');
   }
-  
+
   function write($fp) {
     if (!$this->validateRequired())
       throw new Exception('Required fields are missing');
@@ -210,7 +210,7 @@ class AppsRequest {
       Protobuf::write_varint($fp, $this->viewType_);
     }
   }
-  
+
   public function size() {
     $size = 0;
     if (!is_null($this->appType_)) {
@@ -245,11 +245,11 @@ class AppsRequest {
     }
     return $size;
   }
-  
+
   public function validateRequired() {
     return true;
   }
-  
+
   public function __toString() {
     return ''
          . Protobuf::toString('unknown', $this->_unknown)
@@ -263,7 +263,7 @@ class AppsRequest {
          . Protobuf::toString('entriesCount_', $this->entriesCount_)
          . Protobuf::toString('viewType_', AppsRequest_ViewType::toString($this->viewType_));
   }
-  
+
   // optional .AppType appType = 1;
 
   private $appType_ = null;
@@ -271,7 +271,7 @@ class AppsRequest {
   public function hasAppType() { return $this->appType_ !== null; }
   public function getAppType() { if($this->appType_ === null) return AppType::NONE; else return $this->appType_; }
   public function setAppType($value) { $this->appType_ = $value; }
-  
+
   // optional string query = 2;
 
   private $query_ = null;
@@ -279,7 +279,7 @@ class AppsRequest {
   public function hasQuery() { return $this->query_ !== null; }
   public function getQuery() { if($this->query_ === null) return ""; else return $this->query_; }
   public function setQuery($value) { $this->query_ = $value; }
-  
+
   // optional string categoryId = 3;
 
   private $categoryId_ = null;
@@ -287,7 +287,7 @@ class AppsRequest {
   public function hasCategoryId() { return $this->categoryId_ !== null; }
   public function getCategoryId() { if($this->categoryId_ === null) return ""; else return $this->categoryId_; }
   public function setCategoryId($value) { $this->categoryId_ = $value; }
-  
+
   // optional string appId = 4;
 
   private $appId_ = null;
@@ -295,7 +295,7 @@ class AppsRequest {
   public function hasAppId() { return $this->appId_ !== null; }
   public function getAppId() { if($this->appId_ === null) return ""; else return $this->appId_; }
   public function setAppId($value) { $this->appId_ = $value; }
-  
+
   // optional bool withExtendedInfo = 6;
 
   private $withExtendedInfo_ = null;
@@ -303,7 +303,7 @@ class AppsRequest {
   public function hasWithExtendedInfo() { return $this->withExtendedInfo_ !== null; }
   public function getWithExtendedInfo() { if($this->withExtendedInfo_ === null) return false; else return $this->withExtendedInfo_; }
   public function setWithExtendedInfo($value) { $this->withExtendedInfo_ = $value; }
-  
+
   // optional .AppsRequest.OrderType orderType = 7 [default = NONE];
 
   private $orderType_ = null;
@@ -311,7 +311,7 @@ class AppsRequest {
   public function hasOrderType() { return $this->orderType_ !== null; }
   public function getOrderType() { if($this->orderType_ === null) return AppsRequest_OrderType::NONE; else return $this->orderType_; }
   public function setOrderType($value) { $this->orderType_ = $value; }
-  
+
   // optional uint64 startIndex = 8;
 
   private $startIndex_ = null;
@@ -319,7 +319,7 @@ class AppsRequest {
   public function hasStartIndex() { return $this->startIndex_ !== null; }
   public function getStartIndex() { if($this->startIndex_ === null) return 0; else return $this->startIndex_; }
   public function setStartIndex($value) { $this->startIndex_ = $value; }
-  
+
   // optional int32 entriesCount = 9;
 
   private $entriesCount_ = null;
@@ -327,7 +327,7 @@ class AppsRequest {
   public function hasEntriesCount() { return $this->entriesCount_ !== null; }
   public function getEntriesCount() { if($this->entriesCount_ === null) return 0; else return $this->entriesCount_; }
   public function setEntriesCount($value) { $this->entriesCount_ = $value; }
-  
+
   // optional .AppsRequest.ViewType viewType = 10 [default = ALL];
 
   private $viewType_ = null;
@@ -335,14 +335,14 @@ class AppsRequest {
   public function hasViewType() { return $this->viewType_ !== null; }
   public function getViewType() { if($this->viewType_ === null) return AppsRequest_ViewType::ALL; else return $this->viewType_; }
   public function setViewType($value) { $this->viewType_ = $value; }
-  
+
   // @@protoc_insertion_point(class_scope:AppsRequest)
 }
 
 // message AppsResponse
 class AppsResponse {
   private $_unknown;
-  
+
   function __construct($in = NULL, &$limit = PHP_INT_MAX) {
     if($in !== NULL) {
       if (is_string($in)) {
@@ -357,7 +357,7 @@ class AppsResponse {
       $this->read($fp, $limit);
     }
   }
-  
+
   function read($fp, &$limit = PHP_INT_MAX) {
     while(!feof($fp) && $limit > 0) {
       $tag = Protobuf::read_varint($fp, $limit);
@@ -381,7 +381,7 @@ class AppsResponse {
           if ($tmp === false)
             throw new Exception('Protobuf::read_varint returned false');
           $this->entriesCount_ = $tmp;
-          
+
           break;
         default:
           $this->_unknown[$field . '-' . Protobuf::get_wiretype($wire)][] = Protobuf::read_field($fp, $wire, $limit);
@@ -390,7 +390,7 @@ class AppsResponse {
     if (!$this->validateRequired())
       throw new Exception('Required fields are missing');
   }
-  
+
   function write($fp) {
     if (!$this->validateRequired())
       throw new Exception('Required fields are missing');
@@ -405,7 +405,7 @@ class AppsResponse {
       Protobuf::write_varint($fp, $this->entriesCount_);
     }
   }
-  
+
   public function size() {
     $size = 0;
     if (!is_null($this->app_))
@@ -418,18 +418,18 @@ class AppsResponse {
     }
     return $size;
   }
-  
+
   public function validateRequired() {
     return true;
   }
-  
+
   public function __toString() {
     return ''
          . Protobuf::toString('unknown', $this->_unknown)
          . Protobuf::toString('app_', $this->app_)
          . Protobuf::toString('entriesCount_', $this->entriesCount_);
   }
-  
+
   // repeated .App app = 1;
 
   private $app_ = null;
@@ -440,7 +440,7 @@ class AppsResponse {
   public function setApp($index, $value) {$this->app_[$index] = $value;	}
   public function addApp($value) { $this->app_[] = $value; }
   public function addAllApp(array $values) { foreach($values as $value) {$this->app_[] = $value;} }
-  
+
   // optional int32 entriesCount = 2;
 
   private $entriesCount_ = null;
@@ -448,14 +448,14 @@ class AppsResponse {
   public function hasEntriesCount() { return $this->entriesCount_ !== null; }
   public function getEntriesCount() { if($this->entriesCount_ === null) return 0; else return $this->entriesCount_; }
   public function setEntriesCount($value) { $this->entriesCount_ = $value; }
-  
+
   // @@protoc_insertion_point(class_scope:AppsResponse)
 }
 
 // message Category
 class Category {
   private $_unknown;
-  
+
   function __construct($in = NULL, &$limit = PHP_INT_MAX) {
     if($in !== NULL) {
       if (is_string($in)) {
@@ -470,7 +470,7 @@ class Category {
       $this->read($fp, $limit);
     }
   }
-  
+
   function read($fp, &$limit = PHP_INT_MAX) {
     while(!feof($fp) && $limit > 0) {
       $tag = Protobuf::read_varint($fp, $limit);
@@ -485,7 +485,7 @@ class Category {
           if ($tmp === false)
             throw new Exception('Protobuf::read_varint returned false');
           $this->appType_ = $tmp;
-          
+
           break;
         case 4:
           ASSERT('$wire == 2');
@@ -545,7 +545,7 @@ class Category {
     if (!$this->validateRequired())
       throw new Exception('Required fields are missing');
   }
-  
+
   function write($fp) {
     if (!$this->validateRequired())
       throw new Exception('Required fields are missing');
@@ -575,7 +575,7 @@ class Category {
         $v->write($fp);
       }
   }
-  
+
   public function size() {
     $size = 0;
     if (!is_null($this->appType_)) {
@@ -600,11 +600,11 @@ class Category {
       }
     return $size;
   }
-  
+
   public function validateRequired() {
     return true;
   }
-  
+
   public function __toString() {
     return ''
          . Protobuf::toString('unknown', $this->_unknown)
@@ -614,7 +614,7 @@ class Category {
          . Protobuf::toString('subtitle_', $this->subtitle_)
          . Protobuf::toString('subCategories_', $this->subCategories_);
   }
-  
+
   // optional int32 appType = 2;
 
   private $appType_ = null;
@@ -622,7 +622,7 @@ class Category {
   public function hasAppType() { return $this->appType_ !== null; }
   public function getAppType() { if($this->appType_ === null) return 0; else return $this->appType_; }
   public function setAppType($value) { $this->appType_ = $value; }
-  
+
   // optional string title = 4;
 
   private $title_ = null;
@@ -630,7 +630,7 @@ class Category {
   public function hasTitle() { return $this->title_ !== null; }
   public function getTitle() { if($this->title_ === null) return ""; else return $this->title_; }
   public function setTitle($value) { $this->title_ = $value; }
-  
+
   // optional string categoryId = 3;
 
   private $categoryId_ = null;
@@ -638,7 +638,7 @@ class Category {
   public function hasCategoryId() { return $this->categoryId_ !== null; }
   public function getCategoryId() { if($this->categoryId_ === null) return ""; else return $this->categoryId_; }
   public function setCategoryId($value) { $this->categoryId_ = $value; }
-  
+
   // optional string subtitle = 5;
 
   private $subtitle_ = null;
@@ -646,7 +646,7 @@ class Category {
   public function hasSubtitle() { return $this->subtitle_ !== null; }
   public function getSubtitle() { if($this->subtitle_ === null) return ""; else return $this->subtitle_; }
   public function setSubtitle($value) { $this->subtitle_ = $value; }
-  
+
   // repeated .Category subCategories = 8;
 
   private $subCategories_ = null;
@@ -657,14 +657,14 @@ class Category {
   public function setSubCategories($index, $value) {$this->subCategories_[$index] = $value;	}
   public function addSubCategories($value) { $this->subCategories_[] = $value; }
   public function addAllSubCategories(array $values) { foreach($values as $value) {$this->subCategories_[] = $value;} }
-  
+
   // @@protoc_insertion_point(class_scope:Category)
 }
 
 // message CommentsRequest
 class CommentsRequest {
   private $_unknown;
-  
+
   function __construct($in = NULL, &$limit = PHP_INT_MAX) {
     if($in !== NULL) {
       if (is_string($in)) {
@@ -679,7 +679,7 @@ class CommentsRequest {
       $this->read($fp, $limit);
     }
   }
-  
+
   function read($fp, &$limit = PHP_INT_MAX) {
     while(!feof($fp) && $limit > 0) {
       $tag = Protobuf::read_varint($fp, $limit);
@@ -708,7 +708,7 @@ class CommentsRequest {
           if ($tmp === false)
             throw new Exception('Protobuf::read_varint returned false');
           $this->startIndex_ = $tmp;
-          
+
           break;
         case 3:
           ASSERT('$wire == 0');
@@ -716,7 +716,7 @@ class CommentsRequest {
           if ($tmp === false)
             throw new Exception('Protobuf::read_varint returned false');
           $this->entriesCount_ = $tmp;
-          
+
           break;
         default:
           $this->_unknown[$field . '-' . Protobuf::get_wiretype($wire)][] = Protobuf::read_field($fp, $wire, $limit);
@@ -725,7 +725,7 @@ class CommentsRequest {
     if (!$this->validateRequired())
       throw new Exception('Required fields are missing');
   }
-  
+
   function write($fp) {
     if (!$this->validateRequired())
       throw new Exception('Required fields are missing');
@@ -743,7 +743,7 @@ class CommentsRequest {
       Protobuf::write_varint($fp, $this->entriesCount_);
     }
   }
-  
+
   public function size() {
     $size = 0;
     if (!is_null($this->appId_)) {
@@ -758,11 +758,11 @@ class CommentsRequest {
     }
     return $size;
   }
-  
+
   public function validateRequired() {
     return true;
   }
-  
+
   public function __toString() {
     return ''
          . Protobuf::toString('unknown', $this->_unknown)
@@ -770,7 +770,7 @@ class CommentsRequest {
          . Protobuf::toString('startIndex_', $this->startIndex_)
          . Protobuf::toString('entriesCount_', $this->entriesCount_);
   }
-  
+
   // optional string appId = 1;
 
   private $appId_ = null;
@@ -778,7 +778,7 @@ class CommentsRequest {
   public function hasAppId() { return $this->appId_ !== null; }
   public function getAppId() { if($this->appId_ === null) return ""; else return $this->appId_; }
   public function setAppId($value) { $this->appId_ = $value; }
-  
+
   // optional int32 startIndex = 2;
 
   private $startIndex_ = null;
@@ -786,7 +786,7 @@ class CommentsRequest {
   public function hasStartIndex() { return $this->startIndex_ !== null; }
   public function getStartIndex() { if($this->startIndex_ === null) return 0; else return $this->startIndex_; }
   public function setStartIndex($value) { $this->startIndex_ = $value; }
-  
+
   // optional int32 entriesCount = 3;
 
   private $entriesCount_ = null;
@@ -794,14 +794,14 @@ class CommentsRequest {
   public function hasEntriesCount() { return $this->entriesCount_ !== null; }
   public function getEntriesCount() { if($this->entriesCount_ === null) return 0; else return $this->entriesCount_; }
   public function setEntriesCount($value) { $this->entriesCount_ = $value; }
-  
+
   // @@protoc_insertion_point(class_scope:CommentsRequest)
 }
 
 // message CommentsResponse
 class CommentsResponse {
   private $_unknown;
-  
+
   function __construct($in = NULL, &$limit = PHP_INT_MAX) {
     if($in !== NULL) {
       if (is_string($in)) {
@@ -816,7 +816,7 @@ class CommentsResponse {
       $this->read($fp, $limit);
     }
   }
-  
+
   function read($fp, &$limit = PHP_INT_MAX) {
     while(!feof($fp) && $limit > 0) {
       $tag = Protobuf::read_varint($fp, $limit);
@@ -840,7 +840,7 @@ class CommentsResponse {
           if ($tmp === false)
             throw new Exception('Protobuf::read_varint returned false');
           $this->entriesCount_ = $tmp;
-          
+
           break;
         default:
           $this->_unknown[$field . '-' . Protobuf::get_wiretype($wire)][] = Protobuf::read_field($fp, $wire, $limit);
@@ -849,7 +849,7 @@ class CommentsResponse {
     if (!$this->validateRequired())
       throw new Exception('Required fields are missing');
   }
-  
+
   function write($fp) {
     if (!$this->validateRequired())
       throw new Exception('Required fields are missing');
@@ -864,7 +864,7 @@ class CommentsResponse {
       Protobuf::write_varint($fp, $this->entriesCount_);
     }
   }
-  
+
   public function size() {
     $size = 0;
     if (!is_null($this->comments_))
@@ -877,18 +877,18 @@ class CommentsResponse {
     }
     return $size;
   }
-  
+
   public function validateRequired() {
     return true;
   }
-  
+
   public function __toString() {
     return ''
          . Protobuf::toString('unknown', $this->_unknown)
          . Protobuf::toString('comments_', $this->comments_)
          . Protobuf::toString('entriesCount_', $this->entriesCount_);
   }
-  
+
   // repeated .Comment comments = 1;
 
   private $comments_ = null;
@@ -899,7 +899,7 @@ class CommentsResponse {
   public function setComments($index, $value) {$this->comments_[$index] = $value;	}
   public function addComments($value) { $this->comments_[] = $value; }
   public function addAllComments(array $values) { foreach($values as $value) {$this->comments_[] = $value;} }
-  
+
   // optional int32 entriesCount = 2;
 
   private $entriesCount_ = null;
@@ -907,7 +907,7 @@ class CommentsResponse {
   public function hasEntriesCount() { return $this->entriesCount_ !== null; }
   public function getEntriesCount() { if($this->entriesCount_ === null) return 0; else return $this->entriesCount_; }
   public function setEntriesCount($value) { $this->entriesCount_ = $value; }
-  
+
   // @@protoc_insertion_point(class_scope:CommentsResponse)
 }
 
@@ -915,7 +915,7 @@ class CommentsResponse {
 // group App.ExtendedInfo
 class App_ExtendedInfo {
   private $_unknown;
-  
+
   function __construct($in = NULL, &$limit = PHP_INT_MAX) {
     if($in !== NULL) {
       if (is_string($in)) {
@@ -930,7 +930,7 @@ class App_ExtendedInfo {
       $this->read($fp, $limit);
     }
   }
-  
+
   function read($fp, &$limit = PHP_INT_MAX) {
     while(!feof($fp) && $limit > 0) {
       $tag = Protobuf::read_varint($fp, $limit);
@@ -962,7 +962,7 @@ class App_ExtendedInfo {
           if ($tmp === false)
             throw new Exception('Protobuf::read_varint returned false');
           $this->downloadsCount_ = $tmp;
-          
+
           break;
         case 15:
           ASSERT('$wire == 2');
@@ -984,7 +984,7 @@ class App_ExtendedInfo {
           if ($tmp === false)
             throw new Exception('Protobuf::read_varint returned false');
           $this->installSize_ = $tmp;
-          
+
           break;
         case 17:
           ASSERT('$wire == 2');
@@ -1076,7 +1076,7 @@ class App_ExtendedInfo {
           if ($tmp === false)
             throw new Exception('Protobuf::read_varint returned false');
           $this->screenshotsCount_ = $tmp;
-          
+
           break;
         case 31:
           ASSERT('$wire == 2');
@@ -1099,7 +1099,7 @@ class App_ExtendedInfo {
     if (!$this->validateRequired())
       throw new Exception('Required fields are missing');
   }
-  
+
   function write($fp) {
     if (!$this->validateRequired())
       throw new Exception('Required fields are missing');
@@ -1162,7 +1162,7 @@ class App_ExtendedInfo {
       fwrite($fp, $this->promoText_);
     }
   }
-  
+
   public function size() {
     $size = 0;
     if (!is_null($this->description_)) {
@@ -1213,11 +1213,11 @@ class App_ExtendedInfo {
     }
     return $size;
   }
-  
+
   public function validateRequired() {
     return true;
   }
-  
+
   public function __toString() {
     return ''
          . Protobuf::toString('unknown', $this->_unknown)
@@ -1234,7 +1234,7 @@ class App_ExtendedInfo {
          . Protobuf::toString('screenshotsCount_', $this->screenshotsCount_)
          . Protobuf::toString('promoText_', $this->promoText_);
   }
-  
+
   // optional string description = 13;
 
   private $description_ = null;
@@ -1242,7 +1242,7 @@ class App_ExtendedInfo {
   public function hasDescription() { return $this->description_ !== null; }
   public function getDescription() { if($this->description_ === null) return ""; else return $this->description_; }
   public function setDescription($value) { $this->description_ = $value; }
-  
+
   // optional int32 downloadsCount = 14;
 
   private $downloadsCount_ = null;
@@ -1250,7 +1250,7 @@ class App_ExtendedInfo {
   public function hasDownloadsCount() { return $this->downloadsCount_ !== null; }
   public function getDownloadsCount() { if($this->downloadsCount_ === null) return 0; else return $this->downloadsCount_; }
   public function setDownloadsCount($value) { $this->downloadsCount_ = $value; }
-  
+
   // repeated string permissionId = 15;
 
   private $permissionId_ = null;
@@ -1261,7 +1261,7 @@ class App_ExtendedInfo {
   public function setPermissionId($index, $value) {$this->permissionId_[$index] = $value;	}
   public function addPermissionId($value) { $this->permissionId_[] = $value; }
   public function addAllPermissionId(array $values) { foreach($values as $value) {$this->permissionId_[] = $value;} }
-  
+
   // optional int32 installSize = 16;
 
   private $installSize_ = null;
@@ -1269,7 +1269,7 @@ class App_ExtendedInfo {
   public function hasInstallSize() { return $this->installSize_ !== null; }
   public function getInstallSize() { if($this->installSize_ === null) return 0; else return $this->installSize_; }
   public function setInstallSize($value) { $this->installSize_ = $value; }
-  
+
   // optional string packageName = 17;
 
   private $packageName_ = null;
@@ -1277,7 +1277,7 @@ class App_ExtendedInfo {
   public function hasPackageName() { return $this->packageName_ !== null; }
   public function getPackageName() { if($this->packageName_ === null) return ""; else return $this->packageName_; }
   public function setPackageName($value) { $this->packageName_ = $value; }
-  
+
   // optional string category = 18;
 
   private $category_ = null;
@@ -1285,7 +1285,7 @@ class App_ExtendedInfo {
   public function hasCategory() { return $this->category_ !== null; }
   public function getCategory() { if($this->category_ === null) return ""; else return $this->category_; }
   public function setCategory($value) { $this->category_ = $value; }
-  
+
   // optional string contactEmail = 20;
 
   private $contactEmail_ = null;
@@ -1293,7 +1293,7 @@ class App_ExtendedInfo {
   public function hasContactEmail() { return $this->contactEmail_ !== null; }
   public function getContactEmail() { if($this->contactEmail_ === null) return ""; else return $this->contactEmail_; }
   public function setContactEmail($value) { $this->contactEmail_ = $value; }
-  
+
   // optional string downloadsCountText = 23;
 
   private $downloadsCountText_ = null;
@@ -1301,7 +1301,7 @@ class App_ExtendedInfo {
   public function hasDownloadsCountText() { return $this->downloadsCountText_ !== null; }
   public function getDownloadsCountText() { if($this->downloadsCountText_ === null) return ""; else return $this->downloadsCountText_; }
   public function setDownloadsCountText($value) { $this->downloadsCountText_ = $value; }
-  
+
   // optional string contactPhone = 26;
 
   private $contactPhone_ = null;
@@ -1309,7 +1309,7 @@ class App_ExtendedInfo {
   public function hasContactPhone() { return $this->contactPhone_ !== null; }
   public function getContactPhone() { if($this->contactPhone_ === null) return ""; else return $this->contactPhone_; }
   public function setContactPhone($value) { $this->contactPhone_ = $value; }
-  
+
   // optional string contactWebsite = 27;
 
   private $contactWebsite_ = null;
@@ -1317,7 +1317,7 @@ class App_ExtendedInfo {
   public function hasContactWebsite() { return $this->contactWebsite_ !== null; }
   public function getContactWebsite() { if($this->contactWebsite_ === null) return ""; else return $this->contactWebsite_; }
   public function setContactWebsite($value) { $this->contactWebsite_ = $value; }
-  
+
   // optional int32 screenshotsCount = 30;
 
   private $screenshotsCount_ = null;
@@ -1325,7 +1325,7 @@ class App_ExtendedInfo {
   public function hasScreenshotsCount() { return $this->screenshotsCount_ !== null; }
   public function getScreenshotsCount() { if($this->screenshotsCount_ === null) return 0; else return $this->screenshotsCount_; }
   public function setScreenshotsCount($value) { $this->screenshotsCount_ = $value; }
-  
+
   // optional string promoText = 31;
 
   private $promoText_ = null;
@@ -1333,14 +1333,14 @@ class App_ExtendedInfo {
   public function hasPromoText() { return $this->promoText_ !== null; }
   public function getPromoText() { if($this->promoText_ === null) return ""; else return $this->promoText_; }
   public function setPromoText($value) { $this->promoText_ = $value; }
-  
+
   // @@protoc_insertion_point(class_scope:App.ExtendedInfo)
 }
 
 // message App
 class App {
   private $_unknown;
-  
+
   function __construct($in = NULL, &$limit = PHP_INT_MAX) {
     if($in !== NULL) {
       if (is_string($in)) {
@@ -1355,7 +1355,7 @@ class App {
       $this->read($fp, $limit);
     }
   }
-  
+
   function read($fp, &$limit = PHP_INT_MAX) {
     while(!feof($fp) && $limit > 0) {
       $tag = Protobuf::read_varint($fp, $limit);
@@ -1398,7 +1398,7 @@ class App {
           if ($tmp === false)
             throw new Exception('Protobuf::read_varint returned false');
           $this->appType_ = $tmp;
-          
+
           break;
         case 4:
           ASSERT('$wire == 2');
@@ -1462,7 +1462,7 @@ class App {
           if ($tmp === false)
             throw new Exception('Protobuf::read_varint returned false');
           $this->ratingsCount_ = $tmp;
-          
+
           break;
         case 12:
           ASSERT('$wire == 3');
@@ -1502,7 +1502,7 @@ class App {
           if ($tmp === false)
             throw new Exception('Protobuf::read_varint returned false');
           $this->versionCode_ = $tmp;
-          
+
           break;
         case 32:
           ASSERT('$wire == 2');
@@ -1524,7 +1524,7 @@ class App {
           if ($tmp === false)
             throw new Exception('Protobuf::read_varint returned false');
           $this->priceMicros_ = $tmp;
-          
+
           break;
         default:
           $this->_unknown[$field . '-' . Protobuf::get_wiretype($wire)][] = Protobuf::read_field($fp, $wire, $limit);
@@ -1533,7 +1533,7 @@ class App {
     if (!$this->validateRequired())
       throw new Exception('Required fields are missing');
   }
-  
+
   function write($fp) {
     if (!$this->validateRequired())
       throw new Exception('Required fields are missing');
@@ -1604,7 +1604,7 @@ class App {
       Protobuf::write_varint($fp, $this->priceMicros_);
     }
   }
-  
+
   public function size() {
     $size = 0;
     if (!is_null($this->id_)) {
@@ -1660,11 +1660,11 @@ class App {
     }
     return $size;
   }
-  
+
   public function validateRequired() {
     return true;
   }
-  
+
   public function __toString() {
     return ''
          . Protobuf::toString('unknown', $this->_unknown)
@@ -1683,7 +1683,7 @@ class App {
          . Protobuf::toString('priceCurrency_', $this->priceCurrency_)
          . Protobuf::toString('priceMicros_', $this->priceMicros_);
   }
-  
+
   // optional string id = 1;
 
   private $id_ = null;
@@ -1691,7 +1691,7 @@ class App {
   public function hasId() { return $this->id_ !== null; }
   public function getId() { if($this->id_ === null) return ""; else return $this->id_; }
   public function setId($value) { $this->id_ = $value; }
-  
+
   // optional string title = 2;
 
   private $title_ = null;
@@ -1699,7 +1699,7 @@ class App {
   public function hasTitle() { return $this->title_ !== null; }
   public function getTitle() { if($this->title_ === null) return ""; else return $this->title_; }
   public function setTitle($value) { $this->title_ = $value; }
-  
+
   // optional .AppType appType = 3 [default = NONE];
 
   private $appType_ = null;
@@ -1707,7 +1707,7 @@ class App {
   public function hasAppType() { return $this->appType_ !== null; }
   public function getAppType() { if($this->appType_ === null) return AppType::NONE; else return $this->appType_; }
   public function setAppType($value) { $this->appType_ = $value; }
-  
+
   // optional string creator = 4;
 
   private $creator_ = null;
@@ -1715,7 +1715,7 @@ class App {
   public function hasCreator() { return $this->creator_ !== null; }
   public function getCreator() { if($this->creator_ === null) return ""; else return $this->creator_; }
   public function setCreator($value) { $this->creator_ = $value; }
-  
+
   // optional string version = 5;
 
   private $version_ = null;
@@ -1723,7 +1723,7 @@ class App {
   public function hasVersion() { return $this->version_ !== null; }
   public function getVersion() { if($this->version_ === null) return ""; else return $this->version_; }
   public function setVersion($value) { $this->version_ = $value; }
-  
+
   // optional string price = 6;
 
   private $price_ = null;
@@ -1731,7 +1731,7 @@ class App {
   public function hasPrice() { return $this->price_ !== null; }
   public function getPrice() { if($this->price_ === null) return ""; else return $this->price_; }
   public function setPrice($value) { $this->price_ = $value; }
-  
+
   // optional string rating = 7;
 
   private $rating_ = null;
@@ -1739,7 +1739,7 @@ class App {
   public function hasRating() { return $this->rating_ !== null; }
   public function getRating() { if($this->rating_ === null) return ""; else return $this->rating_; }
   public function setRating($value) { $this->rating_ = $value; }
-  
+
   // optional int32 ratingsCount = 8;
 
   private $ratingsCount_ = null;
@@ -1747,14 +1747,14 @@ class App {
   public function hasRatingsCount() { return $this->ratingsCount_ !== null; }
   public function getRatingsCount() { if($this->ratingsCount_ === null) return 0; else return $this->ratingsCount_; }
   public function setRatingsCount($value) { $this->ratingsCount_ = $value; }
-  
+
   // optional group ExtendedInfo = 12
   private $extendedinfo_ = null;
   public function clearExtendedinfo() { $this->extendedinfo_ = null; }
   public function hasExtendedinfo() { return $this->extendedinfo_ !== null; }
   public function getExtendedinfo() { if($this->extendedinfo_ === null) return null; else return $this->extendedinfo_; }
   public function setExtendedinfo(App_ExtendedInfo $value) { $this->extendedinfo_ = $value; }
-  
+
   // optional string creatorId = 22;
 
   private $creatorId_ = null;
@@ -1762,7 +1762,7 @@ class App {
   public function hasCreatorId() { return $this->creatorId_ !== null; }
   public function getCreatorId() { if($this->creatorId_ === null) return ""; else return $this->creatorId_; }
   public function setCreatorId($value) { $this->creatorId_ = $value; }
-  
+
   // optional string packageName = 24;
 
   private $packageName_ = null;
@@ -1770,7 +1770,7 @@ class App {
   public function hasPackageName() { return $this->packageName_ !== null; }
   public function getPackageName() { if($this->packageName_ === null) return ""; else return $this->packageName_; }
   public function setPackageName($value) { $this->packageName_ = $value; }
-  
+
   // optional int32 versionCode = 25;
 
   private $versionCode_ = null;
@@ -1778,7 +1778,7 @@ class App {
   public function hasVersionCode() { return $this->versionCode_ !== null; }
   public function getVersionCode() { if($this->versionCode_ === null) return 0; else return $this->versionCode_; }
   public function setVersionCode($value) { $this->versionCode_ = $value; }
-  
+
   // optional string priceCurrency = 32;
 
   private $priceCurrency_ = null;
@@ -1786,7 +1786,7 @@ class App {
   public function hasPriceCurrency() { return $this->priceCurrency_ !== null; }
   public function getPriceCurrency() { if($this->priceCurrency_ === null) return ""; else return $this->priceCurrency_; }
   public function setPriceCurrency($value) { $this->priceCurrency_ = $value; }
-  
+
   // optional int32 priceMicros = 33;
 
   private $priceMicros_ = null;
@@ -1794,14 +1794,14 @@ class App {
   public function hasPriceMicros() { return $this->priceMicros_ !== null; }
   public function getPriceMicros() { if($this->priceMicros_ === null) return 0; else return $this->priceMicros_; }
   public function setPriceMicros($value) { $this->priceMicros_ = $value; }
-  
+
   // @@protoc_insertion_point(class_scope:App)
 }
 
 // message Comment
 class Comment {
   private $_unknown;
-  
+
   function __construct($in = NULL, &$limit = PHP_INT_MAX) {
     if($in !== NULL) {
       if (is_string($in)) {
@@ -1816,7 +1816,7 @@ class Comment {
       $this->read($fp, $limit);
     }
   }
-  
+
   function read($fp, &$limit = PHP_INT_MAX) {
     while(!feof($fp) && $limit > 0) {
       $tag = Protobuf::read_varint($fp, $limit);
@@ -1845,7 +1845,7 @@ class Comment {
           if ($tmp === false)
             throw new Exception('Protobuf::read_varint returned false');
           $this->rating_ = $tmp;
-          
+
           break;
         case 3:
           ASSERT('$wire == 2');
@@ -1867,7 +1867,7 @@ class Comment {
           if ($tmp === false)
             throw new Exception('Protobuf::read_varint returned false');
           $this->creationTime_ = $tmp;
-          
+
           break;
         case 5:
           ASSERT('$wire == 2');
@@ -1890,7 +1890,7 @@ class Comment {
     if (!$this->validateRequired())
       throw new Exception('Required fields are missing');
   }
-  
+
   function write($fp) {
     if (!$this->validateRequired())
       throw new Exception('Required fields are missing');
@@ -1918,7 +1918,7 @@ class Comment {
       fwrite($fp, $this->authorId_);
     }
   }
-  
+
   public function size() {
     $size = 0;
     if (!is_null($this->text_)) {
@@ -1941,11 +1941,11 @@ class Comment {
     }
     return $size;
   }
-  
+
   public function validateRequired() {
     return true;
   }
-  
+
   public function __toString() {
     return ''
          . Protobuf::toString('unknown', $this->_unknown)
@@ -1955,7 +1955,7 @@ class Comment {
          . Protobuf::toString('creationTime_', $this->creationTime_)
          . Protobuf::toString('authorId_', $this->authorId_);
   }
-  
+
   // optional string text = 1;
 
   private $text_ = null;
@@ -1963,7 +1963,7 @@ class Comment {
   public function hasText() { return $this->text_ !== null; }
   public function getText() { if($this->text_ === null) return ""; else return $this->text_; }
   public function setText($value) { $this->text_ = $value; }
-  
+
   // optional int32 rating = 2;
 
   private $rating_ = null;
@@ -1971,7 +1971,7 @@ class Comment {
   public function hasRating() { return $this->rating_ !== null; }
   public function getRating() { if($this->rating_ === null) return 0; else return $this->rating_; }
   public function setRating($value) { $this->rating_ = $value; }
-  
+
   // optional string authorName = 3;
 
   private $authorName_ = null;
@@ -1979,7 +1979,7 @@ class Comment {
   public function hasAuthorName() { return $this->authorName_ !== null; }
   public function getAuthorName() { if($this->authorName_ === null) return ""; else return $this->authorName_; }
   public function setAuthorName($value) { $this->authorName_ = $value; }
-  
+
   // optional uint64 creationTime = 4;
 
   private $creationTime_ = null;
@@ -1987,7 +1987,7 @@ class Comment {
   public function hasCreationTime() { return $this->creationTime_ !== null; }
   public function getCreationTime() { if($this->creationTime_ === null) return 0; else return $this->creationTime_; }
   public function setCreationTime($value) { $this->creationTime_ = $value; }
-  
+
   // optional string authorId = 5;
 
   private $authorId_ = null;
@@ -1995,14 +1995,14 @@ class Comment {
   public function hasAuthorId() { return $this->authorId_ !== null; }
   public function getAuthorId() { if($this->authorId_ === null) return ""; else return $this->authorId_; }
   public function setAuthorId($value) { $this->authorId_ = $value; }
-  
+
   // @@protoc_insertion_point(class_scope:Comment)
 }
 
 // message CategoriesRequest
 class CategoriesRequest {
   private $_unknown;
-  
+
   function __construct($in = NULL, &$limit = PHP_INT_MAX) {
     if($in !== NULL) {
       if (is_string($in)) {
@@ -2017,7 +2017,7 @@ class CategoriesRequest {
       $this->read($fp, $limit);
     }
   }
-  
+
   function read($fp, &$limit = PHP_INT_MAX) {
     while(!feof($fp) && $limit > 0) {
       $tag = Protobuf::read_varint($fp, $limit);
@@ -2033,33 +2033,33 @@ class CategoriesRequest {
     if (!$this->validateRequired())
       throw new Exception('Required fields are missing');
   }
-  
+
   function write($fp) {
     if (!$this->validateRequired())
       throw new Exception('Required fields are missing');
   }
-  
+
   public function size() {
     $size = 0;
     return $size;
   }
-  
+
   public function validateRequired() {
     return true;
   }
-  
+
   public function __toString() {
     return ''
          . Protobuf::toString('unknown', $this->_unknown);
   }
-  
+
   // @@protoc_insertion_point(class_scope:CategoriesRequest)
 }
 
 // message CategoriesResponse
 class CategoriesResponse {
   private $_unknown;
-  
+
   function __construct($in = NULL, &$limit = PHP_INT_MAX) {
     if($in !== NULL) {
       if (is_string($in)) {
@@ -2074,7 +2074,7 @@ class CategoriesResponse {
       $this->read($fp, $limit);
     }
   }
-  
+
   function read($fp, &$limit = PHP_INT_MAX) {
     while(!feof($fp) && $limit > 0) {
       $tag = Protobuf::read_varint($fp, $limit);
@@ -2099,7 +2099,7 @@ class CategoriesResponse {
     if (!$this->validateRequired())
       throw new Exception('Required fields are missing');
   }
-  
+
   function write($fp) {
     if (!$this->validateRequired())
       throw new Exception('Required fields are missing');
@@ -2110,7 +2110,7 @@ class CategoriesResponse {
         $v->write($fp);
       }
   }
-  
+
   public function size() {
     $size = 0;
     if (!is_null($this->categories_))
@@ -2120,17 +2120,17 @@ class CategoriesResponse {
       }
     return $size;
   }
-  
+
   public function validateRequired() {
     return true;
   }
-  
+
   public function __toString() {
     return ''
          . Protobuf::toString('unknown', $this->_unknown)
          . Protobuf::toString('categories_', $this->categories_);
   }
-  
+
   // repeated .Category categories = 1;
 
   private $categories_ = null;
@@ -2141,14 +2141,14 @@ class CategoriesResponse {
   public function setCategories($index, $value) {$this->categories_[$index] = $value;	}
   public function addCategories($value) { $this->categories_[] = $value; }
   public function addAllCategories(array $values) { foreach($values as $value) {$this->categories_[] = $value;} }
-  
+
   // @@protoc_insertion_point(class_scope:CategoriesResponse)
 }
 
 // message SubCategoriesRequest
 class SubCategoriesRequest {
   private $_unknown;
-  
+
   function __construct($in = NULL, &$limit = PHP_INT_MAX) {
     if($in !== NULL) {
       if (is_string($in)) {
@@ -2163,7 +2163,7 @@ class SubCategoriesRequest {
       $this->read($fp, $limit);
     }
   }
-  
+
   function read($fp, &$limit = PHP_INT_MAX) {
     while(!feof($fp) && $limit > 0) {
       $tag = Protobuf::read_varint($fp, $limit);
@@ -2178,7 +2178,7 @@ class SubCategoriesRequest {
           if ($tmp === false)
             throw new Exception('Protobuf::read_varint returned false');
           $this->appType_ = $tmp;
-          
+
           break;
         default:
           $this->_unknown[$field . '-' . Protobuf::get_wiretype($wire)][] = Protobuf::read_field($fp, $wire, $limit);
@@ -2187,7 +2187,7 @@ class SubCategoriesRequest {
     if (!$this->validateRequired())
       throw new Exception('Required fields are missing');
   }
-  
+
   function write($fp) {
     if (!$this->validateRequired())
       throw new Exception('Required fields are missing');
@@ -2196,7 +2196,7 @@ class SubCategoriesRequest {
       Protobuf::write_varint($fp, $this->appType_);
     }
   }
-  
+
   public function size() {
     $size = 0;
     if (!is_null($this->appType_)) {
@@ -2204,17 +2204,17 @@ class SubCategoriesRequest {
     }
     return $size;
   }
-  
+
   public function validateRequired() {
     return true;
   }
-  
+
   public function __toString() {
     return ''
          . Protobuf::toString('unknown', $this->_unknown)
          . Protobuf::toString('appType_', AppType::toString($this->appType_));
   }
-  
+
   // optional .AppType appType = 1;
 
   private $appType_ = null;
@@ -2222,14 +2222,14 @@ class SubCategoriesRequest {
   public function hasAppType() { return $this->appType_ !== null; }
   public function getAppType() { if($this->appType_ === null) return AppType::NONE; else return $this->appType_; }
   public function setAppType($value) { $this->appType_ = $value; }
-  
+
   // @@protoc_insertion_point(class_scope:SubCategoriesRequest)
 }
 
 // message SubCategoriesResponse
 class SubCategoriesResponse {
   private $_unknown;
-  
+
   function __construct($in = NULL, &$limit = PHP_INT_MAX) {
     if($in !== NULL) {
       if (is_string($in)) {
@@ -2244,7 +2244,7 @@ class SubCategoriesResponse {
       $this->read($fp, $limit);
     }
   }
-  
+
   function read($fp, &$limit = PHP_INT_MAX) {
     while(!feof($fp) && $limit > 0) {
       $tag = Protobuf::read_varint($fp, $limit);
@@ -2282,7 +2282,7 @@ class SubCategoriesResponse {
           if ($tmp === false)
             throw new Exception('Protobuf::read_varint returned false');
           $this->subCategoryId_ = $tmp;
-          
+
           break;
         default:
           $this->_unknown[$field . '-' . Protobuf::get_wiretype($wire)][] = Protobuf::read_field($fp, $wire, $limit);
@@ -2291,7 +2291,7 @@ class SubCategoriesResponse {
     if (!$this->validateRequired())
       throw new Exception('Required fields are missing');
   }
-  
+
   function write($fp) {
     if (!$this->validateRequired())
       throw new Exception('Required fields are missing');
@@ -2311,7 +2311,7 @@ class SubCategoriesResponse {
       Protobuf::write_varint($fp, $this->subCategoryId_);
     }
   }
-  
+
   public function size() {
     $size = 0;
     if (!is_null($this->category_))
@@ -2328,11 +2328,11 @@ class SubCategoriesResponse {
     }
     return $size;
   }
-  
+
   public function validateRequired() {
     return true;
   }
-  
+
   public function __toString() {
     return ''
          . Protobuf::toString('unknown', $this->_unknown)
@@ -2340,7 +2340,7 @@ class SubCategoriesResponse {
          . Protobuf::toString('subCategoryDisplay_', $this->subCategoryDisplay_)
          . Protobuf::toString('subCategoryId_', $this->subCategoryId_);
   }
-  
+
   // repeated .Category category = 1;
 
   private $category_ = null;
@@ -2351,7 +2351,7 @@ class SubCategoriesResponse {
   public function setCategory($index, $value) {$this->category_[$index] = $value;	}
   public function addCategory($value) { $this->category_[] = $value; }
   public function addAllCategory(array $values) { foreach($values as $value) {$this->category_[] = $value;} }
-  
+
   // optional string subCategoryDisplay = 2;
 
   private $subCategoryDisplay_ = null;
@@ -2359,7 +2359,7 @@ class SubCategoriesResponse {
   public function hasSubCategoryDisplay() { return $this->subCategoryDisplay_ !== null; }
   public function getSubCategoryDisplay() { if($this->subCategoryDisplay_ === null) return ""; else return $this->subCategoryDisplay_; }
   public function setSubCategoryDisplay($value) { $this->subCategoryDisplay_ = $value; }
-  
+
   // optional int32 subCategoryId = 3;
 
   private $subCategoryId_ = null;
@@ -2367,14 +2367,14 @@ class SubCategoriesResponse {
   public function hasSubCategoryId() { return $this->subCategoryId_ !== null; }
   public function getSubCategoryId() { if($this->subCategoryId_ === null) return 0; else return $this->subCategoryId_; }
   public function setSubCategoryId($value) { $this->subCategoryId_ = $value; }
-  
+
   // @@protoc_insertion_point(class_scope:SubCategoriesResponse)
 }
 
 // message RequestContext
 class RequestContext {
   private $_unknown;
-  
+
   function __construct($in = NULL, &$limit = PHP_INT_MAX) {
     if($in !== NULL) {
       if (is_string($in)) {
@@ -2389,7 +2389,7 @@ class RequestContext {
       $this->read($fp, $limit);
     }
   }
-  
+
   function read($fp, &$limit = PHP_INT_MAX) {
     while(!feof($fp) && $limit > 0) {
       $tag = Protobuf::read_varint($fp, $limit);
@@ -2418,7 +2418,7 @@ class RequestContext {
           if ($tmp === false)
             throw new Exception('Protobuf::read_varint returned false');
           $this->unknown1_ = $tmp;
-          
+
           break;
         case 3:
           ASSERT('$wire == 0');
@@ -2426,7 +2426,7 @@ class RequestContext {
           if ($tmp === false)
             throw new Exception('Protobuf::read_varint returned false');
           $this->version_ = $tmp;
-          
+
           break;
         case 4:
           ASSERT('$wire == 2');
@@ -2547,7 +2547,7 @@ class RequestContext {
     if (!$this->validateRequired())
       throw new Exception('Required fields are missing');
   }
-  
+
   function write($fp) {
     if (!$this->validateRequired())
       throw new Exception('Required fields are missing');
@@ -2605,7 +2605,7 @@ class RequestContext {
       fwrite($fp, $this->simOperatorNumeric_);
     }
   }
-  
+
   public function size() {
     $size = 0;
     if (!is_null($this->authSubToken_)) {
@@ -2652,7 +2652,7 @@ class RequestContext {
     }
     return $size;
   }
-  
+
   public function validateRequired() {
     if ($this->authSubToken_ === null) return false;
     if ($this->unknown1_ === null) return false;
@@ -2660,7 +2660,7 @@ class RequestContext {
     if ($this->androidId_ === null) return false;
     return true;
   }
-  
+
   public function __toString() {
     return ''
          . Protobuf::toString('unknown', $this->_unknown)
@@ -2676,7 +2676,7 @@ class RequestContext {
          . Protobuf::toString('operatorNumeric_', $this->operatorNumeric_)
          . Protobuf::toString('simOperatorNumeric_', $this->simOperatorNumeric_);
   }
-  
+
   // required string authSubToken = 1;
 
   private $authSubToken_ = null;
@@ -2684,7 +2684,7 @@ class RequestContext {
   public function hasAuthSubToken() { return $this->authSubToken_ !== null; }
   public function getAuthSubToken() { if($this->authSubToken_ === null) return ""; else return $this->authSubToken_; }
   public function setAuthSubToken($value) { $this->authSubToken_ = $value; }
-  
+
   // required int32 unknown1 = 2;
 
   private $unknown1_ = null;
@@ -2692,7 +2692,7 @@ class RequestContext {
   public function hasUnknown1() { return $this->unknown1_ !== null; }
   public function getUnknown1() { if($this->unknown1_ === null) return 0; else return $this->unknown1_; }
   public function setUnknown1($value) { $this->unknown1_ = $value; }
-  
+
   // required int32 version = 3;
 
   private $version_ = null;
@@ -2700,7 +2700,7 @@ class RequestContext {
   public function hasVersion() { return $this->version_ !== null; }
   public function getVersion() { if($this->version_ === null) return 0; else return $this->version_; }
   public function setVersion($value) { $this->version_ = $value; }
-  
+
   // required string androidId = 4;
 
   private $androidId_ = null;
@@ -2708,7 +2708,7 @@ class RequestContext {
   public function hasAndroidId() { return $this->androidId_ !== null; }
   public function getAndroidId() { if($this->androidId_ === null) return ""; else return $this->androidId_; }
   public function setAndroidId($value) { $this->androidId_ = $value; }
-  
+
   // optional string deviceAndSdkVersion = 5;
 
   private $deviceAndSdkVersion_ = null;
@@ -2716,7 +2716,7 @@ class RequestContext {
   public function hasDeviceAndSdkVersion() { return $this->deviceAndSdkVersion_ !== null; }
   public function getDeviceAndSdkVersion() { if($this->deviceAndSdkVersion_ === null) return ""; else return $this->deviceAndSdkVersion_; }
   public function setDeviceAndSdkVersion($value) { $this->deviceAndSdkVersion_ = $value; }
-  
+
   // optional string userLanguage = 6;
 
   private $userLanguage_ = null;
@@ -2724,7 +2724,7 @@ class RequestContext {
   public function hasUserLanguage() { return $this->userLanguage_ !== null; }
   public function getUserLanguage() { if($this->userLanguage_ === null) return ""; else return $this->userLanguage_; }
   public function setUserLanguage($value) { $this->userLanguage_ = $value; }
-  
+
   // optional string userCountry = 7;
 
   private $userCountry_ = null;
@@ -2732,7 +2732,7 @@ class RequestContext {
   public function hasUserCountry() { return $this->userCountry_ !== null; }
   public function getUserCountry() { if($this->userCountry_ === null) return ""; else return $this->userCountry_; }
   public function setUserCountry($value) { $this->userCountry_ = $value; }
-  
+
   // optional string operatorAlpha = 8;
 
   private $operatorAlpha_ = null;
@@ -2740,7 +2740,7 @@ class RequestContext {
   public function hasOperatorAlpha() { return $this->operatorAlpha_ !== null; }
   public function getOperatorAlpha() { if($this->operatorAlpha_ === null) return ""; else return $this->operatorAlpha_; }
   public function setOperatorAlpha($value) { $this->operatorAlpha_ = $value; }
-  
+
   // optional string simOperatorAlpha = 9;
 
   private $simOperatorAlpha_ = null;
@@ -2748,7 +2748,7 @@ class RequestContext {
   public function hasSimOperatorAlpha() { return $this->simOperatorAlpha_ !== null; }
   public function getSimOperatorAlpha() { if($this->simOperatorAlpha_ === null) return ""; else return $this->simOperatorAlpha_; }
   public function setSimOperatorAlpha($value) { $this->simOperatorAlpha_ = $value; }
-  
+
   // optional string operatorNumeric = 10;
 
   private $operatorNumeric_ = null;
@@ -2756,7 +2756,7 @@ class RequestContext {
   public function hasOperatorNumeric() { return $this->operatorNumeric_ !== null; }
   public function getOperatorNumeric() { if($this->operatorNumeric_ === null) return ""; else return $this->operatorNumeric_; }
   public function setOperatorNumeric($value) { $this->operatorNumeric_ = $value; }
-  
+
   // optional string simOperatorNumeric = 11;
 
   private $simOperatorNumeric_ = null;
@@ -2764,7 +2764,7 @@ class RequestContext {
   public function hasSimOperatorNumeric() { return $this->simOperatorNumeric_ !== null; }
   public function getSimOperatorNumeric() { if($this->simOperatorNumeric_ === null) return ""; else return $this->simOperatorNumeric_; }
   public function setSimOperatorNumeric($value) { $this->simOperatorNumeric_ = $value; }
-  
+
   // @@protoc_insertion_point(class_scope:RequestContext)
 }
 
@@ -2775,7 +2775,7 @@ class GetImageRequest_AppImageUsage {
   const SCREENSHOT_THUMBNAIL = 2;
   const PROMO_BADGE = 3;
   const BILING_ICON = 4;
-  
+
   public static $_values = array(
     0 => self::ICON,
     1 => self::SCREENSHOT,
@@ -2783,7 +2783,7 @@ class GetImageRequest_AppImageUsage {
     3 => self::PROMO_BADGE,
     4 => self::BILING_ICON,
   );
-  
+
   public static function toString($value) {
     if (is_null($value)) return null;
     if (array_key_exists($value, self::$_values))
@@ -2795,7 +2795,7 @@ class GetImageRequest_AppImageUsage {
 // message GetImageRequest
 class GetImageRequest {
   private $_unknown;
-  
+
   function __construct($in = NULL, &$limit = PHP_INT_MAX) {
     if($in !== NULL) {
       if (is_string($in)) {
@@ -2810,7 +2810,7 @@ class GetImageRequest {
       $this->read($fp, $limit);
     }
   }
-  
+
   function read($fp, &$limit = PHP_INT_MAX) {
     while(!feof($fp) && $limit > 0) {
       $tag = Protobuf::read_varint($fp, $limit);
@@ -2839,7 +2839,7 @@ class GetImageRequest {
           if ($tmp === false)
             throw new Exception('Protobuf::read_varint returned false');
           $this->imageUsage_ = $tmp;
-          
+
           break;
         case 4:
           ASSERT('$wire == 2');
@@ -2862,7 +2862,7 @@ class GetImageRequest {
     if (!$this->validateRequired())
       throw new Exception('Required fields are missing');
   }
-  
+
   function write($fp) {
     if (!$this->validateRequired())
       throw new Exception('Required fields are missing');
@@ -2881,7 +2881,7 @@ class GetImageRequest {
       fwrite($fp, $this->imageId_);
     }
   }
-  
+
   public function size() {
     $size = 0;
     if (!is_null($this->appId_)) {
@@ -2897,11 +2897,11 @@ class GetImageRequest {
     }
     return $size;
   }
-  
+
   public function validateRequired() {
     return true;
   }
-  
+
   public function __toString() {
     return ''
          . Protobuf::toString('unknown', $this->_unknown)
@@ -2909,7 +2909,7 @@ class GetImageRequest {
          . Protobuf::toString('imageUsage_', GetImageRequest_AppImageUsage::toString($this->imageUsage_))
          . Protobuf::toString('imageId_', $this->imageId_);
   }
-  
+
   // optional string appId = 1;
 
   private $appId_ = null;
@@ -2917,7 +2917,7 @@ class GetImageRequest {
   public function hasAppId() { return $this->appId_ !== null; }
   public function getAppId() { if($this->appId_ === null) return ""; else return $this->appId_; }
   public function setAppId($value) { $this->appId_ = $value; }
-  
+
   // optional .GetImageRequest.AppImageUsage imageUsage = 3;
 
   private $imageUsage_ = null;
@@ -2925,7 +2925,7 @@ class GetImageRequest {
   public function hasImageUsage() { return $this->imageUsage_ !== null; }
   public function getImageUsage() { if($this->imageUsage_ === null) return GetImageRequest_AppImageUsage::ICON; else return $this->imageUsage_; }
   public function setImageUsage($value) { $this->imageUsage_ = $value; }
-  
+
   // optional string imageId = 4;
 
   private $imageId_ = null;
@@ -2933,14 +2933,14 @@ class GetImageRequest {
   public function hasImageId() { return $this->imageId_ !== null; }
   public function getImageId() { if($this->imageId_ === null) return ""; else return $this->imageId_; }
   public function setImageId($value) { $this->imageId_ = $value; }
-  
+
   // @@protoc_insertion_point(class_scope:GetImageRequest)
 }
 
 // message GetImageResponse
 class GetImageResponse {
   private $_unknown;
-  
+
   function __construct($in = NULL, &$limit = PHP_INT_MAX) {
     if($in !== NULL) {
       if (is_string($in)) {
@@ -2955,7 +2955,7 @@ class GetImageResponse {
       $this->read($fp, $limit);
     }
   }
-  
+
   function read($fp, &$limit = PHP_INT_MAX) {
     while(!feof($fp) && $limit > 0) {
       $tag = Protobuf::read_varint($fp, $limit);
@@ -2985,7 +2985,7 @@ class GetImageResponse {
     if (!$this->validateRequired())
       throw new Exception('Required fields are missing');
   }
-  
+
   function write($fp) {
     if (!$this->validateRequired())
       throw new Exception('Required fields are missing');
@@ -2995,7 +2995,7 @@ class GetImageResponse {
       fwrite($fp, $this->imageData_);
     }
   }
-  
+
   public function size() {
     $size = 0;
     if (!is_null($this->imageData_)) {
@@ -3004,17 +3004,17 @@ class GetImageResponse {
     }
     return $size;
   }
-  
+
   public function validateRequired() {
     return true;
   }
-  
+
   public function __toString() {
     return ''
          . Protobuf::toString('unknown', $this->_unknown)
          . Protobuf::toString('imageData_', $this->imageData_);
   }
-  
+
   // optional bytes imageData = 1;
 
   private $imageData_ = null;
@@ -3022,7 +3022,7 @@ class GetImageResponse {
   public function hasImageData() { return $this->imageData_ !== null; }
   public function getImageData() { if($this->imageData_ === null) return ""; else return $this->imageData_; }
   public function setImageData($value) { $this->imageData_ = $value; }
-  
+
   // @@protoc_insertion_point(class_scope:GetImageResponse)
 }
 
@@ -3030,7 +3030,7 @@ class GetImageResponse {
 // group Request.RequestGroup
 class Request_RequestGroup {
   private $_unknown;
-  
+
   function __construct($in = NULL, &$limit = PHP_INT_MAX) {
     if($in !== NULL) {
       if (is_string($in)) {
@@ -3045,7 +3045,7 @@ class Request_RequestGroup {
       $this->read($fp, $limit);
     }
   }
-  
+
   function read($fp, &$limit = PHP_INT_MAX) {
     while(!feof($fp) && $limit > 0) {
       $tag = Protobuf::read_varint($fp, $limit);
@@ -3109,7 +3109,7 @@ class Request_RequestGroup {
     if (!$this->validateRequired())
       throw new Exception('Required fields are missing');
   }
-  
+
   function write($fp) {
     if (!$this->validateRequired())
       throw new Exception('Required fields are missing');
@@ -3139,7 +3139,7 @@ class Request_RequestGroup {
       $this->categoriesRequest_->write($fp);
     }
   }
-  
+
   public function size() {
     $size = 0;
     if (!is_null($this->appsRequest_)) {
@@ -3164,11 +3164,11 @@ class Request_RequestGroup {
     }
     return $size;
   }
-  
+
   public function validateRequired() {
     return true;
   }
-  
+
   public function __toString() {
     return ''
          . Protobuf::toString('unknown', $this->_unknown)
@@ -3178,7 +3178,7 @@ class Request_RequestGroup {
          . Protobuf::toString('subCategoriesRequest_', $this->subCategoriesRequest_)
          . Protobuf::toString('categoriesRequest_', $this->categoriesRequest_);
   }
-  
+
   // optional .AppsRequest appsRequest = 4;
 
   private $appsRequest_ = null;
@@ -3186,7 +3186,7 @@ class Request_RequestGroup {
   public function hasAppsRequest() { return $this->appsRequest_ !== null; }
   public function getAppsRequest() { if($this->appsRequest_ === null) return null; else return $this->appsRequest_; }
   public function setAppsRequest(AppsRequest $value) { $this->appsRequest_ = $value; }
-  
+
   // optional .CommentsRequest commentsRequest = 5;
 
   private $commentsRequest_ = null;
@@ -3194,7 +3194,7 @@ class Request_RequestGroup {
   public function hasCommentsRequest() { return $this->commentsRequest_ !== null; }
   public function getCommentsRequest() { if($this->commentsRequest_ === null) return null; else return $this->commentsRequest_; }
   public function setCommentsRequest(CommentsRequest $value) { $this->commentsRequest_ = $value; }
-  
+
   // optional .GetImageRequest imageRequest = 11;
 
   private $imageRequest_ = null;
@@ -3202,7 +3202,7 @@ class Request_RequestGroup {
   public function hasImageRequest() { return $this->imageRequest_ !== null; }
   public function getImageRequest() { if($this->imageRequest_ === null) return null; else return $this->imageRequest_; }
   public function setImageRequest(GetImageRequest $value) { $this->imageRequest_ = $value; }
-  
+
   // optional .SubCategoriesRequest subCategoriesRequest = 14;
 
   private $subCategoriesRequest_ = null;
@@ -3210,7 +3210,7 @@ class Request_RequestGroup {
   public function hasSubCategoriesRequest() { return $this->subCategoriesRequest_ !== null; }
   public function getSubCategoriesRequest() { if($this->subCategoriesRequest_ === null) return null; else return $this->subCategoriesRequest_; }
   public function setSubCategoriesRequest(SubCategoriesRequest $value) { $this->subCategoriesRequest_ = $value; }
-  
+
   // optional .CategoriesRequest categoriesRequest = 21;
 
   private $categoriesRequest_ = null;
@@ -3218,14 +3218,14 @@ class Request_RequestGroup {
   public function hasCategoriesRequest() { return $this->categoriesRequest_ !== null; }
   public function getCategoriesRequest() { if($this->categoriesRequest_ === null) return null; else return $this->categoriesRequest_; }
   public function setCategoriesRequest(CategoriesRequest $value) { $this->categoriesRequest_ = $value; }
-  
+
   // @@protoc_insertion_point(class_scope:Request.RequestGroup)
 }
 
 // message Request
 class Request {
   private $_unknown;
-  
+
   function __construct($in = NULL, &$limit = PHP_INT_MAX) {
     if($in !== NULL) {
       if (is_string($in)) {
@@ -3240,7 +3240,7 @@ class Request {
       $this->read($fp, $limit);
     }
   }
-  
+
   function read($fp, &$limit = PHP_INT_MAX) {
     while(!feof($fp) && $limit > 0) {
       $tag = Protobuf::read_varint($fp, $limit);
@@ -3269,7 +3269,7 @@ class Request {
     if (!$this->validateRequired())
       throw new Exception('Required fields are missing');
   }
-  
+
   function write($fp) {
     if (!$this->validateRequired())
       throw new Exception('Required fields are missing');
@@ -3285,7 +3285,7 @@ class Request {
         fwrite($fp, "\x14");
       }
   }
-  
+
   public function size() {
     $size = 0;
     if (!is_null($this->context_)) {
@@ -3298,18 +3298,18 @@ class Request {
       }
     return $size;
   }
-  
+
   public function validateRequired() {
     return true;
   }
-  
+
   public function __toString() {
     return ''
          . Protobuf::toString('unknown', $this->_unknown)
          . Protobuf::toString('context_', $this->context_)
          . Protobuf::toString('requestgroup_', $this->requestgroup_);
   }
-  
+
   // optional .RequestContext context = 1;
 
   private $context_ = null;
@@ -3317,7 +3317,7 @@ class Request {
   public function hasContext() { return $this->context_ !== null; }
   public function getContext() { if($this->context_ === null) return null; else return $this->context_; }
   public function setContext(RequestContext $value) { $this->context_ = $value; }
-  
+
   // repeated group RequestGroup = 2
   private $requestgroup_ = null;
   public function clearRequestgroup() { $this->requestgroup_ = null; }
@@ -3327,14 +3327,14 @@ class Request {
   public function setRequestgroup($index, $value) {$this->requestgroup_[$index] = $value;	}
   public function addRequestgroup($value) { $this->requestgroup_[] = $value; }
   public function addAllRequestgroup(array $values) { foreach($values as $value) {$this->requestgroup_[] = $value;} }
-  
+
   // @@protoc_insertion_point(class_scope:Request)
 }
 
 // message ResponseContext
 class ResponseContext {
   private $_unknown;
-  
+
   function __construct($in = NULL, &$limit = PHP_INT_MAX) {
     if($in !== NULL) {
       if (is_string($in)) {
@@ -3349,7 +3349,7 @@ class ResponseContext {
       $this->read($fp, $limit);
     }
   }
-  
+
   function read($fp, &$limit = PHP_INT_MAX) {
     while(!feof($fp) && $limit > 0) {
       $tag = Protobuf::read_varint($fp, $limit);
@@ -3364,7 +3364,7 @@ class ResponseContext {
           if ($tmp === false)
             throw new Exception('Protobuf::read_varint returned false');
           $this->result_ = $tmp;
-          
+
           break;
         case 2:
           ASSERT('$wire == 0');
@@ -3372,7 +3372,7 @@ class ResponseContext {
           if ($tmp === false)
             throw new Exception('Protobuf::read_varint returned false');
           $this->unknown1_ = $tmp;
-          
+
           break;
         case 3:
           ASSERT('$wire == 2');
@@ -3394,7 +3394,7 @@ class ResponseContext {
           if ($tmp === false)
             throw new Exception('Protobuf::read_varint returned false');
           $this->unknown3_ = $tmp;
-          
+
           break;
         default:
           $this->_unknown[$field . '-' . Protobuf::get_wiretype($wire)][] = Protobuf::read_field($fp, $wire, $limit);
@@ -3403,7 +3403,7 @@ class ResponseContext {
     if (!$this->validateRequired())
       throw new Exception('Required fields are missing');
   }
-  
+
   function write($fp) {
     if (!$this->validateRequired())
       throw new Exception('Required fields are missing');
@@ -3425,7 +3425,7 @@ class ResponseContext {
       Protobuf::write_varint($fp, $this->unknown3_);
     }
   }
-  
+
   public function size() {
     $size = 0;
     if (!is_null($this->result_)) {
@@ -3443,11 +3443,11 @@ class ResponseContext {
     }
     return $size;
   }
-  
+
   public function validateRequired() {
     return true;
   }
-  
+
   public function __toString() {
     return ''
          . Protobuf::toString('unknown', $this->_unknown)
@@ -3456,7 +3456,7 @@ class ResponseContext {
          . Protobuf::toString('unknown2_', $this->unknown2_)
          . Protobuf::toString('unknown3_', $this->unknown3_);
   }
-  
+
   // optional int32 result = 1;
 
   private $result_ = null;
@@ -3464,7 +3464,7 @@ class ResponseContext {
   public function hasResult() { return $this->result_ !== null; }
   public function getResult() { if($this->result_ === null) return 0; else return $this->result_; }
   public function setResult($value) { $this->result_ = $value; }
-  
+
   // optional int32 unknown1 = 2;
 
   private $unknown1_ = null;
@@ -3472,7 +3472,7 @@ class ResponseContext {
   public function hasUnknown1() { return $this->unknown1_ !== null; }
   public function getUnknown1() { if($this->unknown1_ === null) return 0; else return $this->unknown1_; }
   public function setUnknown1($value) { $this->unknown1_ = $value; }
-  
+
   // optional string unknown2 = 3;
 
   private $unknown2_ = null;
@@ -3480,7 +3480,7 @@ class ResponseContext {
   public function hasUnknown2() { return $this->unknown2_ !== null; }
   public function getUnknown2() { if($this->unknown2_ === null) return ""; else return $this->unknown2_; }
   public function setUnknown2($value) { $this->unknown2_ = $value; }
-  
+
   // optional int32 unknown3 = 4;
 
   private $unknown3_ = null;
@@ -3488,7 +3488,7 @@ class ResponseContext {
   public function hasUnknown3() { return $this->unknown3_ !== null; }
   public function getUnknown3() { if($this->unknown3_ === null) return 0; else return $this->unknown3_; }
   public function setUnknown3($value) { $this->unknown3_ = $value; }
-  
+
   // @@protoc_insertion_point(class_scope:ResponseContext)
 }
 
@@ -3496,7 +3496,7 @@ class ResponseContext {
 // group Response.ResponseGroup
 class Response_ResponseGroup {
   private $_unknown;
-  
+
   function __construct($in = NULL, &$limit = PHP_INT_MAX) {
     if($in !== NULL) {
       if (is_string($in)) {
@@ -3511,7 +3511,7 @@ class Response_ResponseGroup {
       $this->read($fp, $limit);
     }
   }
-  
+
   function read($fp, &$limit = PHP_INT_MAX) {
     while(!feof($fp) && $limit > 0) {
       $tag = Protobuf::read_varint($fp, $limit);
@@ -3584,7 +3584,7 @@ class Response_ResponseGroup {
     if (!$this->validateRequired())
       throw new Exception('Required fields are missing');
   }
-  
+
   function write($fp) {
     if (!$this->validateRequired())
       throw new Exception('Required fields are missing');
@@ -3619,7 +3619,7 @@ class Response_ResponseGroup {
       $this->subCategoriesResponse_->write($fp);
     }
   }
-  
+
   public function size() {
     $size = 0;
     if (!is_null($this->context_)) {
@@ -3648,11 +3648,11 @@ class Response_ResponseGroup {
     }
     return $size;
   }
-  
+
   public function validateRequired() {
     return true;
   }
-  
+
   public function __toString() {
     return ''
          . Protobuf::toString('unknown', $this->_unknown)
@@ -3663,7 +3663,7 @@ class Response_ResponseGroup {
          . Protobuf::toString('categoriesResponse_', $this->categoriesResponse_)
          . Protobuf::toString('subCategoriesResponse_', $this->subCategoriesResponse_);
   }
-  
+
   // optional .ResponseContext context = 2;
 
   private $context_ = null;
@@ -3671,7 +3671,7 @@ class Response_ResponseGroup {
   public function hasContext() { return $this->context_ !== null; }
   public function getContext() { if($this->context_ === null) return null; else return $this->context_; }
   public function setContext(ResponseContext $value) { $this->context_ = $value; }
-  
+
   // optional .AppsResponse appsResponse = 3;
 
   private $appsResponse_ = null;
@@ -3679,7 +3679,7 @@ class Response_ResponseGroup {
   public function hasAppsResponse() { return $this->appsResponse_ !== null; }
   public function getAppsResponse() { if($this->appsResponse_ === null) return null; else return $this->appsResponse_; }
   public function setAppsResponse(AppsResponse $value) { $this->appsResponse_ = $value; }
-  
+
   // optional .CommentsResponse commentsResponse = 4;
 
   private $commentsResponse_ = null;
@@ -3687,7 +3687,7 @@ class Response_ResponseGroup {
   public function hasCommentsResponse() { return $this->commentsResponse_ !== null; }
   public function getCommentsResponse() { if($this->commentsResponse_ === null) return null; else return $this->commentsResponse_; }
   public function setCommentsResponse(CommentsResponse $value) { $this->commentsResponse_ = $value; }
-  
+
   // optional .GetImageResponse imageResponse = 10;
 
   private $imageResponse_ = null;
@@ -3695,7 +3695,7 @@ class Response_ResponseGroup {
   public function hasImageResponse() { return $this->imageResponse_ !== null; }
   public function getImageResponse() { if($this->imageResponse_ === null) return null; else return $this->imageResponse_; }
   public function setImageResponse(GetImageResponse $value) { $this->imageResponse_ = $value; }
-  
+
   // optional .CategoriesResponse categoriesResponse = 20;
 
   private $categoriesResponse_ = null;
@@ -3703,7 +3703,7 @@ class Response_ResponseGroup {
   public function hasCategoriesResponse() { return $this->categoriesResponse_ !== null; }
   public function getCategoriesResponse() { if($this->categoriesResponse_ === null) return null; else return $this->categoriesResponse_; }
   public function setCategoriesResponse(CategoriesResponse $value) { $this->categoriesResponse_ = $value; }
-  
+
   // optional .SubCategoriesResponse subCategoriesResponse = 13;
 
   private $subCategoriesResponse_ = null;
@@ -3711,14 +3711,14 @@ class Response_ResponseGroup {
   public function hasSubCategoriesResponse() { return $this->subCategoriesResponse_ !== null; }
   public function getSubCategoriesResponse() { if($this->subCategoriesResponse_ === null) return null; else return $this->subCategoriesResponse_; }
   public function setSubCategoriesResponse(SubCategoriesResponse $value) { $this->subCategoriesResponse_ = $value; }
-  
+
   // @@protoc_insertion_point(class_scope:Response.ResponseGroup)
 }
 
 // message Response
 class Response {
   private $_unknown;
-  
+
   function __construct($in = NULL, &$limit = PHP_INT_MAX) {
     if($in !== NULL) {
       if (is_string($in)) {
@@ -3733,7 +3733,7 @@ class Response {
       $this->read($fp, $limit);
     }
   }
-  
+
   function read($fp, &$limit = PHP_INT_MAX) {
     while(!feof($fp) && $limit > 0) {
       $tag = Protobuf::read_varint($fp, $limit);
@@ -3753,7 +3753,7 @@ class Response {
     if (!$this->validateRequired())
       throw new Exception('Required fields are missing');
   }
-  
+
   function write($fp) {
     if (!$this->validateRequired())
       throw new Exception('Required fields are missing');
@@ -3764,7 +3764,7 @@ class Response {
         fwrite($fp, "\x0c");
       }
   }
-  
+
   public function size() {
     $size = 0;
     if (!is_null($this->responsegroup_))
@@ -3773,17 +3773,17 @@ class Response {
       }
     return $size;
   }
-  
+
   public function validateRequired() {
     return true;
   }
-  
+
   public function __toString() {
     return ''
          . Protobuf::toString('unknown', $this->_unknown)
          . Protobuf::toString('responsegroup_', $this->responsegroup_);
   }
-  
+
   // repeated group ResponseGroup = 1
   private $responsegroup_ = null;
   public function clearResponsegroup() { $this->responsegroup_ = null; }
@@ -3793,7 +3793,7 @@ class Response {
   public function setResponsegroup($index, $value) {$this->responsegroup_[$index] = $value;	}
   public function addResponsegroup($value) { $this->responsegroup_[] = $value; }
   public function addAllResponsegroup(array $values) { foreach($values as $value) {$this->responsegroup_[] = $value;} }
-  
+
   // @@protoc_insertion_point(class_scope:Response)
 }
 
@@ -3804,7 +3804,7 @@ class AppType {
   const RINGTONE = 2;
   const WALLPAPER = 3;
   const GAME = 4;
-  
+
   public static $_values = array(
     0 => self::NONE,
     1 => self::APPLICATION,
@@ -3812,7 +3812,7 @@ class AppType {
     3 => self::WALLPAPER,
     4 => self::GAME,
   );
-  
+
   public static function toString($value) {
     if (is_null($value)) return null;
     if (array_key_exists($value, self::$_values))
