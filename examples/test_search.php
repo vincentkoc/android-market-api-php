@@ -26,6 +26,29 @@ foreach ($groups as $rg) {
 	$appsResponse = $rg->getAppsResponse();
 	$apps = $appsResponse->getAppArray();
 	foreach ($apps as $app) {
-		echo $app->getTitle()."<br/>";
+		echo $app->getTitle()." (".$app->getId().")<br/>";
+
+		//Get comments
+		echo "<div style=\"padding-left:20px\">";
+		$cr = new CommentsRequest();
+		$cr->setAppId($app->getId());
+		$cr->setEntriesCount(3);
+
+		$reqGroup = new Request_RequestGroup();
+		$reqGroup->setCommentsRequest($cr);
+
+		$response = $session->execute($reqGroup);
+		$groups	= $response->getResponsegroupArray();
+		foreach ($groups as $rg) {
+			$commentsResponse = $rg->getCommentsResponse();
+
+			$comments = $commentsResponse->getCommentsArray();
+			foreach ($comments as $comment) {
+				echo "<strong>".$comment->getAuthorName()."</strong> [".str_repeat("*", $comment->getRating())."]<br/>";
+				echo $comment->getText()."<br/><br/>";
+			}
+		}
+
+		echo "</div>";
 	}
 }
