@@ -1,10 +1,11 @@
 <?
+include("../local.php");
 include("../proto/protocolbuffers.inc.php");
 include("../proto/market.proto.php");
 include("../Market/MarketSession.php");
 
 $session = new MarketSession();
-$session->login("xxx@gmail.com", "xxx");
+$session->login(GOOGLE_EMAIL, GOOGLE_PASSWD);
 
 $ar = new AppsRequest();
 $ar->setQuery("froyo");
