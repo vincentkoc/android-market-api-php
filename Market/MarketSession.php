@@ -17,8 +17,33 @@ class MarketSession {
 		$this->context->setVersion(1002);
 		$this->context->setAndroidId("0000000000000000");
 		$this->context->setDeviceAndSdkVersion("sapphire:7");
-		$this->context->setOperatorAlpha("T-Mobile");
-		$this->context->setSimOperatorAlpha("310260");
+
+		$this->setOperatorTmobile();
+	}
+
+	function setOperatorTmobile() {
+		$this->setOperator("T-Mobile", "310260");
+	}
+
+	public function setOperatorSFR() {
+		$this->setOperator("F SFR", "20810");
+	}
+
+	public function setOperatorO2() {
+		$this->setOperator("o2 - de", "26207");
+	}
+
+	public function setOperatorSimyo() {
+		$this->setOperator("E-Plus", "simyo", "26203", "26203");
+	}
+
+	public function setOperatorSunrise() {
+		$this->setOperator("sunrise", "22802");
+	}
+
+	public function setOperator($alpha, $simAlpha, $numeric = false, $simNumeric = false) {
+		$this->context->setOperatorAlpha($alpha);
+		$this->context->setSimOperatorAlpha($simAlpha);
 	}
 
 	/**
