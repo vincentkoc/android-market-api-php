@@ -5,7 +5,7 @@
  *
  */
 class MarketSession {
-	private $context = NULL;
+	public $context = NULL;
 	private $authSubToken = "";
 
 	/**
@@ -17,6 +17,9 @@ class MarketSession {
 		$this->context->setVersion(1002);
 		$this->context->setAndroidId("0000000000000000");
 		$this->context->setDeviceAndSdkVersion("sapphire:7");
+
+		$this->context->setUserLanguage("en");
+		$this->context->setUserCountry("US");
 
 		$this->setOperatorTmobile();
 	}
@@ -41,9 +44,21 @@ class MarketSession {
 		$this->setOperator("sunrise", "22802");
 	}
 
-	public function setOperator($alpha, $simAlpha, $numeric = false, $simNumeric = false) {
-		$this->context->setOperatorAlpha($alpha);
-		$this->context->setSimOperatorAlpha($simAlpha);
+	public function setOperator($alpha, $simAlpha, $numeric = "", $simNumeric = "") {
+		if (!$numeric && !$simNumeric) {
+			$this->context->setOperatorAlpha($alpha);
+			$this->context->setSimOperatorAlpha($alpha);
+
+			$this->context->setOperatorNumeric($simAlpha);
+			$this->context->setSimOperatorNumeric($simAlpha);
+
+		} else {
+			$this->context->setOperatorAlpha($alpha);
+			$this->context->setSimOperatorAlpha($simAlpha);
+
+			$this->context->setOperatorNumeric($numeric);
+			$this->context->setSimOperatorNumeric($simNumeric);
+		}
 	}
 
 	/**
@@ -164,7 +179,6 @@ class MarketSession {
 		curl_close($ch);
 
 		$ret = $this->gzdecode($ret);
-
 		return $ret;
 	}
 
