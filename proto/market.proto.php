@@ -1527,7 +1527,7 @@ class App {
 
           break;
         default:
-          $this->_unknown[$field . '-' . Protobuf::get_wiretype($wire)][] = Protobuf::read_field($fp, $wire, $limit);
+          //$this->_unknown[$field . '-' . Protobuf::get_wiretype($wire)][] = Protobuf::read_field($fp, $wire, $limit);
       }
     }
     if (!$this->validateRequired())
