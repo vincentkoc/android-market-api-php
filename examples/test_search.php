@@ -1,4 +1,4 @@
-<?
+<?php
 include("../local.php");
 include("../proto/protocolbuffers.inc.php");
 include("../proto/market.proto.php");

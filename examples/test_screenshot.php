@@ -26,5 +26,5 @@ foreach ($groups as $rg) {
 	$imageResponse = $rg->getImageResponse();
 	file_put_contents("../".$appId."_".$imageId.".png", $imageResponse->getImageData());
 
-	?><img src="../<?= $appId."_".$imageId.".png"; ?>"><?
+	?><img src="../<?php echo $appId."_".$imageId.".png"; ?>"><?php
 }
