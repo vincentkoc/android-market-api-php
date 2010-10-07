@@ -1,0 +1,4 @@
+<?
+//Rename this file local.php and change the constants to match your Google Account credentials
+define('GOOGLE_EMAIL','someone@gmail.com');
+define('GOOGLE_PASSWD','SomePassword');
