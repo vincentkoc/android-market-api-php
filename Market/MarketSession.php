@@ -85,6 +85,9 @@ class MarketSession {
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 		curl_setopt($ch, CURLOPT_POST, 1);
 		curl_setopt($ch, CURLOPT_POSTFIELDS, $post);
+		curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
+
 
 		$headers = array(
 			"User-Agent: Android-Market/2 (sapphire PLAT-RC33); gzip",
