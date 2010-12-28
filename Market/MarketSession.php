@@ -15,7 +15,7 @@ class MarketSession {
 		$this->context = new RequestContext();
 		$this->context->setUnknown1(0);
 		$this->context->setVersion(1002);
-		$this->context->setAndroidId("0000000000000000");
+		//$this->context->setAndroidId("0000000000000000");
 		$this->context->setDeviceAndSdkVersion("sapphire:7");
 
 		$this->context->setUserLanguage("en");
@@ -109,6 +109,14 @@ class MarketSession {
 		}
 
 		return false;
+	}
+
+	/**
+	 *
+	 * @param integer $id Android Device ID
+	 */
+	public function setAndroidId($deviceId) {
+		$this->context->setAndroidId($deviceId);
 	}
 
 	/**
