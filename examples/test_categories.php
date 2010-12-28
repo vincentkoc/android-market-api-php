@@ -25,7 +25,4 @@ foreach ($groups as $rg) {
 			echo "- ".$subcategory->getTitle()."<br/>";
 		}
 	}
-
-
-
 }

@@ -8,7 +8,7 @@ $session = new MarketSession();
 $session->login(GOOGLE_EMAIL, GOOGLE_PASSWD);
 
 $ar = new AppsRequest();
-$ar->setQuery("froyo");
+$ar->setQuery($_GET["search"] ? $_GET["search"] : "froyo");
 #$ar->setOrderType(AppsRequest_OrderType::NONE);
 $ar->setStartIndex(0);
 $ar->setEntriesCount(5);
