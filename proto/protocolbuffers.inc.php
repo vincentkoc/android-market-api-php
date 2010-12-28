@@ -255,8 +255,9 @@ class Protobuf {
 				$len = Protobuf::read_varint($fp, $limit);
 				$limit -= $len;
 				return fread($fp, $len);
-
 			//case 3: // Start group TODO we must keep looping until we find the closing end grou
+			case (3||4||7):
+				return null;
 
 			//case 4: // End group - We should never skip a end group!
 			//	return 0; // Do nothing
@@ -302,7 +303,7 @@ class Protobuf {
 				}
 
 				$ret .= '"' . $safevalue . '" (' . strlen($value) . " bytes)\n";
-				
+
 			} elseif (is_bool($value)) {
 				$ret .= ($value ? 'true' : 'false') . "\n";
 			} else {

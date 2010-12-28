@@ -86,6 +86,10 @@ message App {
 		// V2
 		optional int32 screenshotsCount = 30;
 		optional string promoText = 31;
+		
+		// V3
+		optional string recentChanges = 38;
+		optional string promotionalVideo = 43;
 	} 	
 	
 	optional string creatorId = 22;
