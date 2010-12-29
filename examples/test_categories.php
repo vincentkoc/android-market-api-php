@@ -6,6 +6,7 @@ include("../Market/MarketSession.php");
 
 $session = new MarketSession();
 $session->login(GOOGLE_EMAIL, GOOGLE_PASSWD);
+$session->setAndroidId(ANDROID_DEVICEID);
 
 $cr = new CategoriesRequest();
 

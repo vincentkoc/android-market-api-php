@@ -6,6 +6,7 @@ include("../Market/MarketSession.php");
 
 $session = new MarketSession();
 $session->login(GOOGLE_EMAIL, GOOGLE_PASSWD);
+$session->setAndroidId(ANDROID_DEVICEID);
 
 $ar = new AppsRequest();
 $ar->setQuery($_GET["search"] ? $_GET["search"] : "froyo");
