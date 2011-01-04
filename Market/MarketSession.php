@@ -14,9 +14,9 @@ class MarketSession {
 	function __construct () {
 		$this->context = new RequestContext();
 		$this->context->setUnknown1(0);
-		$this->context->setVersion(1002);
+		$this->context->setVersion(1002012);
 		//$this->context->setAndroidId("0000000000000000");
-		$this->context->setDeviceAndSdkVersion("sapphire:7");
+		$this->context->setDeviceAndSdkVersion("passion:8");
 
 		$this->context->setUserLanguage("en");
 		$this->context->setUserCountry("US");
