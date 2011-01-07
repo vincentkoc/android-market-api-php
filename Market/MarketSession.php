@@ -15,7 +15,6 @@ class MarketSession {
 		$this->context = new RequestContext();
 		$this->context->setUnknown1(0);
 		$this->context->setVersion(1002012);
-		//$this->context->setAndroidId("0000000000000000");
 		$this->context->setDeviceAndSdkVersion("passion:8");
 
 		$this->context->setUserLanguage("en");
@@ -186,6 +185,11 @@ class MarketSession {
 		curl_setopt($ch, CURLOPT_VERBOSE, TRUE);
 
 		$ret = curl_exec($ch);
+
+		$http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+		if ($http_code != 200) {
+			throw new Exception("HTTP request returned code $http_code");
+		}
 
 		curl_close($ch);
 
