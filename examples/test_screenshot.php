@@ -1,5 +1,5 @@
 <?php
-include("../local.php");
+include("local.php");
 include("../proto/protocolbuffers.inc.php");
 include("../proto/market.proto.php");
 include("../Market/MarketSession.php");
