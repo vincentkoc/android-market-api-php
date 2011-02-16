@@ -15,7 +15,7 @@ class MarketSession {
 		$this->context = new RequestContext();
 		$this->context->setUnknown1(0);
 		$this->context->setVersion(1002012);
-		$this->context->setDeviceAndSdkVersion("passion:8");
+		$this->context->setDeviceAndSdkVersion("crespo:8");
 
 		$this->context->setUserLanguage("en");
 		$this->context->setUserCountry("US");
@@ -119,6 +119,23 @@ class MarketSession {
 	}
 
 	/**
+	 * Validate all settings needed to make a request
+	 */
+	public function validate() {
+		return true;
+
+		//Check login
+		/*
+		if (!$this->context->hasAuthSubToken) return false;
+
+		//Check androidId
+		if (!$this->context->hasAndroidId) return false;
+
+		return true;
+		*/
+	}
+
+	/**
 	 *
 	 * @param unknown_type $requestGroup
 	 */
@@ -136,6 +153,10 @@ class MarketSession {
 	 * @return Response
 	 */
 	public function executeProtobuf($request) {
+		if (!$this->validate()) {
+			throw new Exception("Missing authentication or Android ID");
+		}
+
 		$http = $this->executeRawHttpQuery($this->protobufToStr($request));
 
 		$fp = fopen("php://memory", "w+b");
