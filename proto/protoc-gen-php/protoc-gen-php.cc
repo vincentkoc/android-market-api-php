@@ -1029,10 +1029,8 @@ bool PHPCodeGenerator::Generate(const FileDescriptor* file,
 
 		if (!namespace_.empty()) {
 			printer.Outdent();
-			printer.Print("}\n");
+			printer.Print("}");
 		}
-
-		printer.Print("?>");
 
 	} catch (const char *msg) {
 		error->assign( msg );

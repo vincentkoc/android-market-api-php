@@ -24,7 +24,7 @@ $(MAIN): $(OBJS)
 	$(CXX) $(CXXFLAGS) $(INCLUDES) -o $(MAIN) $(OBJS) $(LFLAGS) $(LIBS)
 
 php_options.pb.cc php_options.pb.h: php_options.proto
-	protoc php_options.proto --cpp_out=. -I. -I/usr/include
+	protoc php_options.proto --cpp_out=. -I. -I/usr/include -I/usr/local/include
 
 .cc.o:
 	$(CXX) $(CXXFLAGS) $(INCLUDES) -c $<  -o $@
