@@ -13,7 +13,8 @@ $ar->setQuery($_GET["search"] ? $_GET["search"] : "froyo");
 #$ar->setOrderType(AppsRequest_OrderType::NONE);
 $ar->setStartIndex(0);
 $ar->setEntriesCount(5);
-#$ar->setWithExtendedInfo(true);
+
+$ar->setWithExtendedInfo(true);
 #$ar->setViewType(AppsRequest_ViewType::PAID);
 #$ar->setAppType(AppType::WALLPAPER);
 
@@ -28,6 +29,7 @@ foreach ($groups as $rg) {
 	$apps = $appsResponse->getAppArray();
 	foreach ($apps as $app) {
 		echo $app->getTitle()." (".$app->getId().")<br/>";
+		echo $app->getExtendedInfo()->getDescription()."<br/><br/>";
 
 		//Get comments
 		echo "<div style=\"padding-left:20px\">";
