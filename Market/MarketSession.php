@@ -6,7 +6,7 @@
  */
 class MarketSession {
 	public $context = NULL;
-	private $authSubToken = "";
+	public $authSubToken = "";
 
 	/**
 	 *
@@ -14,8 +14,8 @@ class MarketSession {
 	function __construct () {
 		$this->context = new RequestContext();
 		$this->context->setUnknown1(0);
-		$this->context->setVersion(1002012);
-		$this->context->setDeviceAndSdkVersion("crespo:8");
+		$this->context->setVersion(8009011);
+		$this->context->setDeviceAndSdkVersion("p999:10");
 
 		$this->context->setUserLanguage("en");
 		$this->context->setUserCountry("US");
