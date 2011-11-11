@@ -1092,6 +1092,20 @@ class App_ExtendedInfo {
           $this->promoText_ = $tmp;
           $limit-=$len;
           break;
+		case 37:
+          ASSERT('$wire == 2');
+          $len = Protobuf::read_varint($fp, $limit);
+          if ($len === false)
+            throw new Exception('Protobuf::read_varint returned false');
+          if ($len > 0)
+            $tmp = fread($fp, $len);
+          else
+            $tmp = '';
+          if ($tmp === false)
+            throw new Exception("fread($len) returned false");
+          $this->maturity_ = $tmp;
+          $limit-=$len;
+          break;
         case 38:
           ASSERT('$wire == 2');
           $len = Protobuf::read_varint($fp, $limit);
@@ -1199,6 +1213,11 @@ class App_ExtendedInfo {
       Protobuf::write_varint($fp, strlen($this->promotionalVideo_));
       fwrite($fp, $this->promotionalVideo_);
     }
+	if (!is_null($this->maturity_)) {
+      fwrite($fp, "\xfa\x01");
+      Protobuf::write_varint($fp, strlen($this->maturity_));
+      fwrite($fp, $this->maturity_);
+    }
   }
   
   public function size() {
@@ -1257,6 +1276,10 @@ class App_ExtendedInfo {
       $l = strlen($this->promotionalVideo_);
       $size += 2 + Protobuf::size_varint($l) + $l;
     }
+	if (!is_null($this->maturity_)) {
+      $l = strlen($this->maturity_);
+      $size += 2 + Protobuf::size_varint($l) + $l;
+    }
     return $size;
   }
   
@@ -1279,6 +1302,7 @@ class App_ExtendedInfo {
          . Protobuf::toString('contactWebsite_', $this->contactWebsite_)
          . Protobuf::toString('screenshotsCount_', $this->screenshotsCount_)
          . Protobuf::toString('promoText_', $this->promoText_)
+		 . Protobuf::toString('maturity_', $this->maturity_)
          . Protobuf::toString('recentChanges_', $this->recentChanges_)
          . Protobuf::toString('promotionalVideo_', $this->promotionalVideo_);
   }
@@ -1381,6 +1405,14 @@ class App_ExtendedInfo {
   public function hasPromoText() { return $this->promoText_ !== null; }
   public function getPromoText() { if($this->promoText_ === null) return ""; else return $this->promoText_; }
   public function setPromoText($value) { $this->promoText_ = $value; }
+  
+  // optional string maturity = 37;
+
+  private $maturity_ = null;
+  public function clearMaturity() { $this->maturity_ = null; }
+  public function hasMaturity() { return $this->maturity_ !== null; }
+  public function getMaturity() { if($this->maturity_ === null) return ""; else return $this->maturity_; }
+  public function setMaturity($value) { $this->maturity_ = $value; }
   
   // optional string recentChanges = 38;
 
@@ -1590,6 +1622,20 @@ class App {
           $this->priceMicros_ = $tmp;
           
           break;
+		case 40:
+          ASSERT('$wire == 2');
+          $len = Protobuf::read_varint($fp, $limit);
+          if ($len === false)
+            throw new Exception('Protobuf::read_varint returned false');
+          if ($len > 0)
+            $tmp = fread($fp, $len);
+          else
+            $tmp = '';
+          if ($tmp === false)
+            throw new Exception("fread($len) returned false");
+          $this->originalPrice_ = $tmp;
+          $limit-=$len;
+          break;
         default:
           $this->_unknown[$field . '-' . Protobuf::get_wiretype($wire)][] = Protobuf::read_field($fp, $wire, $limit);
       }
@@ -1667,6 +1713,11 @@ class App {
       fwrite($fp, "\x88\x02");
       Protobuf::write_varint($fp, $this->priceMicros_);
     }
+	if (!is_null($this->originalPrice_)) {
+      fwrite($fp, "2");
+      Protobuf::write_varint($fp, strlen($this->originalPrice_));
+      fwrite($fp, $this->originalPrice_);
+    }
   }
   
   public function size() {
@@ -1722,6 +1773,9 @@ class App {
     if (!is_null($this->priceMicros_)) {
       $size += 2 + Protobuf::size_varint($this->priceMicros_);
     }
+	if (!is_null($this->originalPrice_)) {
+      $size += 2 + Protobuf::size_varint($this->originalPrice_);
+    }
     return $size;
   }
   
@@ -1745,7 +1799,8 @@ class App {
          . Protobuf::toString('packageName_', $this->packageName_)
          . Protobuf::toString('versionCode_', $this->versionCode_)
          . Protobuf::toString('priceCurrency_', $this->priceCurrency_)
-         . Protobuf::toString('priceMicros_', $this->priceMicros_);
+         . Protobuf::toString('priceMicros_', $this->priceMicros_)
+		 . Protobuf::toString('originalPrice_', $this->originalPrice_);
   }
   
   // optional string id = 1;
@@ -1858,6 +1913,14 @@ class App {
   public function hasPriceMicros() { return $this->priceMicros_ !== null; }
   public function getPriceMicros() { if($this->priceMicros_ === null) return 0; else return $this->priceMicros_; }
   public function setPriceMicros($value) { $this->priceMicros_ = $value; }
+  
+  // optional string originalPrice = 40;
+
+  private $originalPrice_ = null;
+  public function clearoriginalPrice() { $this->originalPrice_ = null; }
+  public function hasoriginalPrice() { return $this->originalPrice_ !== null; }
+  public function getoriginalPrice() { if($this->originalPrice_ === null) return ""; else return $this->originalPrice_; }
+  public function setoriginalPrice($value) { $this->originalPrice_ = $value; }
   
   // @@protoc_insertion_point(class_scope:App)
 }
@@ -3026,7 +3089,7 @@ class GetImageResponse {
       if ($tag === false) break;
       $wire  = $tag & 0x07;
       $field = $tag >> 3;
-      //var_dump("GetImageResponse: Found $field type " . Protobuf::get_wiretype($wire) . " $limit bytes left");
+      //var_dump("GetImageResponse: Found $field type " . Protobuf::get_wiretype($wire) . " $limit bytes left<br />");
       switch($field) {
         case 1:
           ASSERT('$wire == 2');
@@ -3042,6 +3105,13 @@ class GetImageResponse {
           $this->imageData_ = $tmp;
           $limit-=$len;
           break;
+		case 2:
+          ASSERT('$wire == 0');
+          $tmp = Protobuf::read_varint($fp, $limit);
+          if ($tmp === false)
+            throw new Exception('Protobuf::read_varint returned false');
+          $this->imageWidth_ = $tmp;
+		  break;
         default:
           $this->_unknown[$field . '-' . Protobuf::get_wiretype($wire)][] = Protobuf::read_field($fp, $wire, $limit);
       }
@@ -3086,6 +3156,12 @@ class GetImageResponse {
   public function hasImageData() { return $this->imageData_ !== null; }
   public function getImageData() { if($this->imageData_ === null) return ""; else return $this->imageData_; }
   public function setImageData($value) { $this->imageData_ = $value; }
+  
+  private $imageWidth_ = null;
+  public function clearImageWidth() { $this->imageWidth_ = null; }
+  public function hasImageWidth() { return $this->imageWidth_ !== null; }
+  public function getImageWidth() { if($this->imageWidth_ === null) return ""; else return $this->imageWidth_; }
+  public function setImageWidth($value) { $this->imageWidth_ = $value; }
   
   // @@protoc_insertion_point(class_scope:GetImageResponse)
 }
