@@ -129,7 +129,7 @@ message SubCategoriesResponse {
 // operatorNumeric : see http://en.wikipedia.org/wiki/Mobile_Network_Code
 message RequestContext {
 	required string authSubToken = 1; // authsub token for service 'android'
-	required int32 unknown1 = 2; // always 0
+	required bool isSecure = 2; // is this a secure request or not
 	required int32 version = 3;  // always 1002
 	required string androidId = 4;  // android id converted to hexadecimal
 	optional string deviceAndSdkVersion = 5; // ro.product.device ':' ro.build.version.sdk 
@@ -154,8 +154,31 @@ message GetImageRequest {
 	optional string imageId = 4; // 0 or 1
 }
 
+message GetAssetRequest {
+       required string assetId = 1;
+       optional string directDownloadKey = 2;
+}
+
 message GetImageResponse {
 	optional bytes imageData = 1;
+}
+
+message GetAssetResponse {
+    repeated group InstallAsset = 1 {
+               optional string assetId = 2;
+               optional string assetName = 3;
+               optional string assetType = 4;
+               optional string assetPackage = 5;
+               optional string blobUrl = 6;
+               optional string assetSignature = 7;
+               optional uint64 assetSize = 8;
+               optional uint64 refundTimeout = 9;
+               optional bool forwardLocked = 10;
+               optional bool secured = 11;
+	       optional int32 versionCode = 12;
+               optional string downloadAuthCookieName = 13;
+               optional string downloadAuthCookieValue = 14;
+	}
 }
 
 message Request {
@@ -163,6 +186,7 @@ message Request {
 	repeated group RequestGroup = 2 {
 		optional AppsRequest appsRequest = 4;
 		optional CommentsRequest commentsRequest = 5;
+		optional GetAssetRequest getAssetRequest = 10;
 		optional GetImageRequest imageRequest = 11;
 		optional SubCategoriesRequest subCategoriesRequest = 14;
 		optional CategoriesRequest categoriesRequest = 21;
@@ -170,10 +194,17 @@ message Request {
 }
 
 message ResponseContext {
-	optional int32 result = 1;
-	optional int32 unknown1 = 2;
-	optional string unknown2 = 3;
-	optional int32 unknown3 = 4;
+	enum ResultType {
+	     OK = 0;
+             BAD_REQUEST = 1;
+             INTERNAL_SERVICE_ERROR = 2;
+             NOT_MODIFIED = 3;
+	     USER_INPUT_ERROR = 4;
+	 }		  
+	 optional ResultType result = 1;
+	 optional int32 maxAge = 2;
+	 optional string etag = 3;
+	 optional int32 serverVersion = 4;
 }
 
 message Response {
@@ -181,6 +212,7 @@ message Response {
 		optional ResponseContext context = 2;
 		optional AppsResponse appsResponse = 3;
 		optional CommentsResponse commentsResponse = 4;
+		optional GetAssetResponse getAssetResponse = 9;
 		optional GetImageResponse imageResponse = 10;
 		optional CategoriesResponse categoriesResponse = 20;
 		optional SubCategoriesResponse subCategoriesResponse = 13;
