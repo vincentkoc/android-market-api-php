@@ -13,7 +13,7 @@ class MarketSession {
 	 */
 	function __construct () {
 		$this->context = new RequestContext();
-		$this->context->setUnknown1(0);
+		$this->context->setIsSecure(0);
 		$this->context->setVersion(2009011);
 		$this->context->setDeviceAndSdkVersion("passion:8");
 

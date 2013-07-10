@@ -1092,20 +1092,6 @@ class App_ExtendedInfo {
           $this->promoText_ = $tmp;
           $limit-=$len;
           break;
-		case 37:
-          ASSERT('$wire == 2');
-          $len = Protobuf::read_varint($fp, $limit);
-          if ($len === false)
-            throw new Exception('Protobuf::read_varint returned false');
-          if ($len > 0)
-            $tmp = fread($fp, $len);
-          else
-            $tmp = '';
-          if ($tmp === false)
-            throw new Exception("fread($len) returned false");
-          $this->maturity_ = $tmp;
-          $limit-=$len;
-          break;
         case 38:
           ASSERT('$wire == 2');
           $len = Protobuf::read_varint($fp, $limit);
@@ -1213,11 +1199,6 @@ class App_ExtendedInfo {
       Protobuf::write_varint($fp, strlen($this->promotionalVideo_));
       fwrite($fp, $this->promotionalVideo_);
     }
-	if (!is_null($this->maturity_)) {
-      fwrite($fp, "\xfa\x01");
-      Protobuf::write_varint($fp, strlen($this->maturity_));
-      fwrite($fp, $this->maturity_);
-    }
   }
   
   public function size() {
@@ -1276,10 +1257,6 @@ class App_ExtendedInfo {
       $l = strlen($this->promotionalVideo_);
       $size += 2 + Protobuf::size_varint($l) + $l;
     }
-	if (!is_null($this->maturity_)) {
-      $l = strlen($this->maturity_);
-      $size += 2 + Protobuf::size_varint($l) + $l;
-    }
     return $size;
   }
   
@@ -1302,7 +1279,6 @@ class App_ExtendedInfo {
          . Protobuf::toString('contactWebsite_', $this->contactWebsite_)
          . Protobuf::toString('screenshotsCount_', $this->screenshotsCount_)
          . Protobuf::toString('promoText_', $this->promoText_)
-		 . Protobuf::toString('maturity_', $this->maturity_)
          . Protobuf::toString('recentChanges_', $this->recentChanges_)
          . Protobuf::toString('promotionalVideo_', $this->promotionalVideo_);
   }
@@ -1405,14 +1381,6 @@ class App_ExtendedInfo {
   public function hasPromoText() { return $this->promoText_ !== null; }
   public function getPromoText() { if($this->promoText_ === null) return ""; else return $this->promoText_; }
   public function setPromoText($value) { $this->promoText_ = $value; }
-  
-  // optional string maturity = 37;
-
-  private $maturity_ = null;
-  public function clearMaturity() { $this->maturity_ = null; }
-  public function hasMaturity() { return $this->maturity_ !== null; }
-  public function getMaturity() { if($this->maturity_ === null) return ""; else return $this->maturity_; }
-  public function setMaturity($value) { $this->maturity_ = $value; }
   
   // optional string recentChanges = 38;
 
@@ -1622,20 +1590,6 @@ class App {
           $this->priceMicros_ = $tmp;
           
           break;
-		case 40:
-          ASSERT('$wire == 2');
-          $len = Protobuf::read_varint($fp, $limit);
-          if ($len === false)
-            throw new Exception('Protobuf::read_varint returned false');
-          if ($len > 0)
-            $tmp = fread($fp, $len);
-          else
-            $tmp = '';
-          if ($tmp === false)
-            throw new Exception("fread($len) returned false");
-          $this->originalPrice_ = $tmp;
-          $limit-=$len;
-          break;
         default:
           $this->_unknown[$field . '-' . Protobuf::get_wiretype($wire)][] = Protobuf::read_field($fp, $wire, $limit);
       }
@@ -1713,11 +1667,6 @@ class App {
       fwrite($fp, "\x88\x02");
       Protobuf::write_varint($fp, $this->priceMicros_);
     }
-	if (!is_null($this->originalPrice_)) {
-      fwrite($fp, "2");
-      Protobuf::write_varint($fp, strlen($this->originalPrice_));
-      fwrite($fp, $this->originalPrice_);
-    }
   }
   
   public function size() {
@@ -1773,9 +1722,6 @@ class App {
     if (!is_null($this->priceMicros_)) {
       $size += 2 + Protobuf::size_varint($this->priceMicros_);
     }
-	if (!is_null($this->originalPrice_)) {
-      $size += 2 + Protobuf::size_varint($this->originalPrice_);
-    }
     return $size;
   }
   
@@ -1799,8 +1745,7 @@ class App {
          . Protobuf::toString('packageName_', $this->packageName_)
          . Protobuf::toString('versionCode_', $this->versionCode_)
          . Protobuf::toString('priceCurrency_', $this->priceCurrency_)
-         . Protobuf::toString('priceMicros_', $this->priceMicros_)
-		 . Protobuf::toString('originalPrice_', $this->originalPrice_);
+         . Protobuf::toString('priceMicros_', $this->priceMicros_);
   }
   
   // optional string id = 1;
@@ -1913,14 +1858,6 @@ class App {
   public function hasPriceMicros() { return $this->priceMicros_ !== null; }
   public function getPriceMicros() { if($this->priceMicros_ === null) return 0; else return $this->priceMicros_; }
   public function setPriceMicros($value) { $this->priceMicros_ = $value; }
-  
-  // optional string originalPrice = 40;
-
-  private $originalPrice_ = null;
-  public function clearoriginalPrice() { $this->originalPrice_ = null; }
-  public function hasoriginalPrice() { return $this->originalPrice_ !== null; }
-  public function getoriginalPrice() { if($this->originalPrice_ === null) return ""; else return $this->originalPrice_; }
-  public function setoriginalPrice($value) { $this->originalPrice_ = $value; }
   
   // @@protoc_insertion_point(class_scope:App)
 }
@@ -2544,8 +2481,7 @@ class RequestContext {
           $tmp = Protobuf::read_varint($fp, $limit);
           if ($tmp === false)
             throw new Exception('Protobuf::read_varint returned false');
-          $this->unknown1_ = $tmp;
-          
+          $this->isSecure_ = $tmp > 0 ? true : false;
           break;
         case 3:
           ASSERT('$wire == 0');
@@ -2683,9 +2619,9 @@ class RequestContext {
       Protobuf::write_varint($fp, strlen($this->authSubToken_));
       fwrite($fp, $this->authSubToken_);
     }
-    if (!is_null($this->unknown1_)) {
+    if (!is_null($this->isSecure_)) {
       fwrite($fp, "\x10");
-      Protobuf::write_varint($fp, $this->unknown1_);
+      Protobuf::write_varint($fp, $this->isSecure_ ? 1 : 0);
     }
     if (!is_null($this->version_)) {
       fwrite($fp, "\x18");
@@ -2739,8 +2675,8 @@ class RequestContext {
       $l = strlen($this->authSubToken_);
       $size += 1 + Protobuf::size_varint($l) + $l;
     }
-    if (!is_null($this->unknown1_)) {
-      $size += 1 + Protobuf::size_varint($this->unknown1_);
+    if (!is_null($this->isSecure_)) {
+      $size += 2;
     }
     if (!is_null($this->version_)) {
       $size += 1 + Protobuf::size_varint($this->version_);
@@ -2782,7 +2718,7 @@ class RequestContext {
   
   public function validateRequired() {
     if ($this->authSubToken_ === null) return false;
-    if ($this->unknown1_ === null) return false;
+    if ($this->isSecure_ === null) return false;
     if ($this->version_ === null) return false;
     if ($this->androidId_ === null) return false;
     return true;
@@ -2792,7 +2728,7 @@ class RequestContext {
     return ''
          . Protobuf::toString('unknown', $this->_unknown)
          . Protobuf::toString('authSubToken_', $this->authSubToken_)
-         . Protobuf::toString('unknown1_', $this->unknown1_)
+         . Protobuf::toString('isSecure_', $this->isSecure_)
          . Protobuf::toString('version_', $this->version_)
          . Protobuf::toString('androidId_', $this->androidId_)
          . Protobuf::toString('deviceAndSdkVersion_', $this->deviceAndSdkVersion_)
@@ -2812,13 +2748,13 @@ class RequestContext {
   public function getAuthSubToken() { if($this->authSubToken_ === null) return ""; else return $this->authSubToken_; }
   public function setAuthSubToken($value) { $this->authSubToken_ = $value; }
   
-  // required int32 unknown1 = 2;
+  // required bool isSecure = 2;
 
-  private $unknown1_ = null;
-  public function clearUnknown1() { $this->unknown1_ = null; }
-  public function hasUnknown1() { return $this->unknown1_ !== null; }
-  public function getUnknown1() { if($this->unknown1_ === null) return 0; else return $this->unknown1_; }
-  public function setUnknown1($value) { $this->unknown1_ = $value; }
+  private $isSecure_ = null;
+  public function clearIsSecure() { $this->isSecure_ = null; }
+  public function hasIsSecure() { return $this->isSecure_ !== null; }
+  public function getIsSecure() { if($this->isSecure_ === null) return false; else return $this->isSecure_; }
+  public function setIsSecure($value) { $this->isSecure_ = $value; }
   
   // required int32 version = 3;
 
@@ -3064,6 +3000,128 @@ class GetImageRequest {
   // @@protoc_insertion_point(class_scope:GetImageRequest)
 }
 
+// message GetAssetRequest
+class GetAssetRequest {
+  private $_unknown;
+  
+  function __construct($in = NULL, &$limit = PHP_INT_MAX) {
+    if($in !== NULL) {
+      if (is_string($in)) {
+        $fp = fopen('php://memory', 'r+b');
+        fwrite($fp, $in);
+        rewind($fp);
+      } else if (is_resource($in)) {
+        $fp = $in;
+      } else {
+        throw new Exception('Invalid in parameter');
+      }
+      $this->read($fp, $limit);
+    }
+  }
+  
+  function read($fp, &$limit = PHP_INT_MAX) {
+    while(!feof($fp) && $limit > 0) {
+      $tag = Protobuf::read_varint($fp, $limit);
+      if ($tag === false) break;
+      $wire  = $tag & 0x07;
+      $field = $tag >> 3;
+      //var_dump("GetAssetRequest: Found $field type " . Protobuf::get_wiretype($wire) . " $limit bytes left");
+      switch($field) {
+        case 1:
+          ASSERT('$wire == 2');
+          $len = Protobuf::read_varint($fp, $limit);
+          if ($len === false)
+            throw new Exception('Protobuf::read_varint returned false');
+          if ($len > 0)
+            $tmp = fread($fp, $len);
+          else
+            $tmp = '';
+          if ($tmp === false)
+            throw new Exception("fread($len) returned false");
+          $this->assetId_ = $tmp;
+          $limit-=$len;
+          break;
+        case 2:
+          ASSERT('$wire == 2');
+          $len = Protobuf::read_varint($fp, $limit);
+          if ($len === false)
+            throw new Exception('Protobuf::read_varint returned false');
+          if ($len > 0)
+            $tmp = fread($fp, $len);
+          else
+            $tmp = '';
+          if ($tmp === false)
+            throw new Exception("fread($len) returned false");
+          $this->directDownloadKey_ = $tmp;
+          $limit-=$len;
+          break;
+        default:
+          $this->_unknown[$field . '-' . Protobuf::get_wiretype($wire)][] = Protobuf::read_field($fp, $wire, $limit);
+      }
+    }
+    if (!$this->validateRequired())
+      throw new Exception('Required fields are missing');
+  }
+  
+  function write($fp) {
+    if (!$this->validateRequired())
+      throw new Exception('Required fields are missing');
+    if (!is_null($this->assetId_)) {
+      fwrite($fp, "\x0a");
+      Protobuf::write_varint($fp, strlen($this->assetId_));
+      fwrite($fp, $this->assetId_);
+    }
+    if (!is_null($this->directDownloadKey_)) {
+      fwrite($fp, "\x12");
+      Protobuf::write_varint($fp, strlen($this->directDownloadKey_));
+      fwrite($fp, $this->directDownloadKey_);
+    }
+  }
+  
+  public function size() {
+    $size = 0;
+    if (!is_null($this->assetId_)) {
+      $l = strlen($this->assetId_);
+      $size += 1 + Protobuf::size_varint($l) + $l;
+    }
+    if (!is_null($this->directDownloadKey_)) {
+      $l = strlen($this->directDownloadKey_);
+      $size += 1 + Protobuf::size_varint($l) + $l;
+    }
+    return $size;
+  }
+  
+  public function validateRequired() {
+    if ($this->assetId_ === null) return false;
+    return true;
+  }
+  
+  public function __toString() {
+    return ''
+         . Protobuf::toString('unknown', $this->_unknown)
+         . Protobuf::toString('assetId_', $this->assetId_)
+         . Protobuf::toString('directDownloadKey_', $this->directDownloadKey_);
+  }
+  
+  // required string assetId = 1;
+
+  private $assetId_ = null;
+  public function clearAssetId() { $this->assetId_ = null; }
+  public function hasAssetId() { return $this->assetId_ !== null; }
+  public function getAssetId() { if($this->assetId_ === null) return ""; else return $this->assetId_; }
+  public function setAssetId($value) { $this->assetId_ = $value; }
+  
+  // optional string directDownloadKey = 2;
+
+  private $directDownloadKey_ = null;
+  public function clearDirectDownloadKey() { $this->directDownloadKey_ = null; }
+  public function hasDirectDownloadKey() { return $this->directDownloadKey_ !== null; }
+  public function getDirectDownloadKey() { if($this->directDownloadKey_ === null) return ""; else return $this->directDownloadKey_; }
+  public function setDirectDownloadKey($value) { $this->directDownloadKey_ = $value; }
+  
+  // @@protoc_insertion_point(class_scope:GetAssetRequest)
+}
+
 // message GetImageResponse
 class GetImageResponse {
   private $_unknown;
@@ -3089,7 +3147,7 @@ class GetImageResponse {
       if ($tag === false) break;
       $wire  = $tag & 0x07;
       $field = $tag >> 3;
-      //var_dump("GetImageResponse: Found $field type " . Protobuf::get_wiretype($wire) . " $limit bytes left<br />");
+      //var_dump("GetImageResponse: Found $field type " . Protobuf::get_wiretype($wire) . " $limit bytes left");
       switch($field) {
         case 1:
           ASSERT('$wire == 2');
@@ -3105,13 +3163,6 @@ class GetImageResponse {
           $this->imageData_ = $tmp;
           $limit-=$len;
           break;
-		case 2:
-          ASSERT('$wire == 0');
-          $tmp = Protobuf::read_varint($fp, $limit);
-          if ($tmp === false)
-            throw new Exception('Protobuf::read_varint returned false');
-          $this->imageWidth_ = $tmp;
-		  break;
         default:
           $this->_unknown[$field . '-' . Protobuf::get_wiretype($wire)][] = Protobuf::read_field($fp, $wire, $limit);
       }
@@ -3157,13 +3208,524 @@ class GetImageResponse {
   public function getImageData() { if($this->imageData_ === null) return ""; else return $this->imageData_; }
   public function setImageData($value) { $this->imageData_ = $value; }
   
-  private $imageWidth_ = null;
-  public function clearImageWidth() { $this->imageWidth_ = null; }
-  public function hasImageWidth() { return $this->imageWidth_ !== null; }
-  public function getImageWidth() { if($this->imageWidth_ === null) return ""; else return $this->imageWidth_; }
-  public function setImageWidth($value) { $this->imageWidth_ = $value; }
-  
   // @@protoc_insertion_point(class_scope:GetImageResponse)
+}
+
+
+// group GetAssetResponse.InstallAsset
+class GetAssetResponse_InstallAsset {
+  private $_unknown;
+  
+  function __construct($in = NULL, &$limit = PHP_INT_MAX) {
+    if($in !== NULL) {
+      if (is_string($in)) {
+        $fp = fopen('php://memory', 'r+b');
+        fwrite($fp, $in);
+        rewind($fp);
+      } else if (is_resource($in)) {
+        $fp = $in;
+      } else {
+        throw new Exception('Invalid in parameter');
+      }
+      $this->read($fp, $limit);
+    }
+  }
+  
+  function read($fp, &$limit = PHP_INT_MAX) {
+    while(!feof($fp) && $limit > 0) {
+      $tag = Protobuf::read_varint($fp, $limit);
+      if ($tag === false) break;
+      $wire  = $tag & 0x07;
+      $field = $tag >> 3;
+      //var_dump("GetAssetResponse_InstallAsset: Found $field type " . Protobuf::get_wiretype($wire) . " $limit bytes left");
+      switch($field) {
+        case 1:
+          ASSERT('$wire == 4');
+          break 2;
+        case 2:
+          ASSERT('$wire == 2');
+          $len = Protobuf::read_varint($fp, $limit);
+          if ($len === false)
+            throw new Exception('Protobuf::read_varint returned false');
+          if ($len > 0)
+            $tmp = fread($fp, $len);
+          else
+            $tmp = '';
+          if ($tmp === false)
+            throw new Exception("fread($len) returned false");
+          $this->assetId_ = $tmp;
+          $limit-=$len;
+          break;
+        case 3:
+          ASSERT('$wire == 2');
+          $len = Protobuf::read_varint($fp, $limit);
+          if ($len === false)
+            throw new Exception('Protobuf::read_varint returned false');
+          if ($len > 0)
+            $tmp = fread($fp, $len);
+          else
+            $tmp = '';
+          if ($tmp === false)
+            throw new Exception("fread($len) returned false");
+          $this->assetName_ = $tmp;
+          $limit-=$len;
+          break;
+        case 4:
+          ASSERT('$wire == 2');
+          $len = Protobuf::read_varint($fp, $limit);
+          if ($len === false)
+            throw new Exception('Protobuf::read_varint returned false');
+          if ($len > 0)
+            $tmp = fread($fp, $len);
+          else
+            $tmp = '';
+          if ($tmp === false)
+            throw new Exception("fread($len) returned false");
+          $this->assetType_ = $tmp;
+          $limit-=$len;
+          break;
+        case 5:
+          ASSERT('$wire == 2');
+          $len = Protobuf::read_varint($fp, $limit);
+          if ($len === false)
+            throw new Exception('Protobuf::read_varint returned false');
+          if ($len > 0)
+            $tmp = fread($fp, $len);
+          else
+            $tmp = '';
+          if ($tmp === false)
+            throw new Exception("fread($len) returned false");
+          $this->assetPackage_ = $tmp;
+          $limit-=$len;
+          break;
+        case 6:
+          ASSERT('$wire == 2');
+          $len = Protobuf::read_varint($fp, $limit);
+          if ($len === false)
+            throw new Exception('Protobuf::read_varint returned false');
+          if ($len > 0)
+            $tmp = fread($fp, $len);
+          else
+            $tmp = '';
+          if ($tmp === false)
+            throw new Exception("fread($len) returned false");
+          $this->blobUrl_ = $tmp;
+          $limit-=$len;
+          break;
+        case 7:
+          ASSERT('$wire == 2');
+          $len = Protobuf::read_varint($fp, $limit);
+          if ($len === false)
+            throw new Exception('Protobuf::read_varint returned false');
+          if ($len > 0)
+            $tmp = fread($fp, $len);
+          else
+            $tmp = '';
+          if ($tmp === false)
+            throw new Exception("fread($len) returned false");
+          $this->assetSignature_ = $tmp;
+          $limit-=$len;
+          break;
+        case 8:
+          ASSERT('$wire == 0');
+          $tmp = Protobuf::read_varint($fp, $limit);
+          if ($tmp === false)
+            throw new Exception('Protobuf::read_varint returned false');
+          $this->assetSize_ = $tmp;
+          
+          break;
+        case 9:
+          ASSERT('$wire == 0');
+          $tmp = Protobuf::read_varint($fp, $limit);
+          if ($tmp === false)
+            throw new Exception('Protobuf::read_varint returned false');
+          $this->refundTimeout_ = $tmp;
+          
+          break;
+        case 10:
+          ASSERT('$wire == 0');
+          $tmp = Protobuf::read_varint($fp, $limit);
+          if ($tmp === false)
+            throw new Exception('Protobuf::read_varint returned false');
+          $this->forwardLocked_ = $tmp > 0 ? true : false;
+          break;
+        case 11:
+          ASSERT('$wire == 0');
+          $tmp = Protobuf::read_varint($fp, $limit);
+          if ($tmp === false)
+            throw new Exception('Protobuf::read_varint returned false');
+          $this->secured_ = $tmp > 0 ? true : false;
+          break;
+        case 12:
+          ASSERT('$wire == 0');
+          $tmp = Protobuf::read_varint($fp, $limit);
+          if ($tmp === false)
+            throw new Exception('Protobuf::read_varint returned false');
+          $this->versionCode_ = $tmp;
+          
+          break;
+        case 13:
+          ASSERT('$wire == 2');
+          $len = Protobuf::read_varint($fp, $limit);
+          if ($len === false)
+            throw new Exception('Protobuf::read_varint returned false');
+          if ($len > 0)
+            $tmp = fread($fp, $len);
+          else
+            $tmp = '';
+          if ($tmp === false)
+            throw new Exception("fread($len) returned false");
+          $this->downloadAuthCookieName_ = $tmp;
+          $limit-=$len;
+          break;
+        case 14:
+          ASSERT('$wire == 2');
+          $len = Protobuf::read_varint($fp, $limit);
+          if ($len === false)
+            throw new Exception('Protobuf::read_varint returned false');
+          if ($len > 0)
+            $tmp = fread($fp, $len);
+          else
+            $tmp = '';
+          if ($tmp === false)
+            throw new Exception("fread($len) returned false");
+          $this->downloadAuthCookieValue_ = $tmp;
+          $limit-=$len;
+          break;
+        default:
+          $this->_unknown[$field . '-' . Protobuf::get_wiretype($wire)][] = Protobuf::read_field($fp, $wire, $limit);
+      }
+    }
+    if (!$this->validateRequired())
+      throw new Exception('Required fields are missing');
+  }
+  
+  function write($fp) {
+    if (!$this->validateRequired())
+      throw new Exception('Required fields are missing');
+    if (!is_null($this->assetId_)) {
+      fwrite($fp, "\x12");
+      Protobuf::write_varint($fp, strlen($this->assetId_));
+      fwrite($fp, $this->assetId_);
+    }
+    if (!is_null($this->assetName_)) {
+      fwrite($fp, "\x1a");
+      Protobuf::write_varint($fp, strlen($this->assetName_));
+      fwrite($fp, $this->assetName_);
+    }
+    if (!is_null($this->assetType_)) {
+      fwrite($fp, "\"");
+      Protobuf::write_varint($fp, strlen($this->assetType_));
+      fwrite($fp, $this->assetType_);
+    }
+    if (!is_null($this->assetPackage_)) {
+      fwrite($fp, "*");
+      Protobuf::write_varint($fp, strlen($this->assetPackage_));
+      fwrite($fp, $this->assetPackage_);
+    }
+    if (!is_null($this->blobUrl_)) {
+      fwrite($fp, "2");
+      Protobuf::write_varint($fp, strlen($this->blobUrl_));
+      fwrite($fp, $this->blobUrl_);
+    }
+    if (!is_null($this->assetSignature_)) {
+      fwrite($fp, ":");
+      Protobuf::write_varint($fp, strlen($this->assetSignature_));
+      fwrite($fp, $this->assetSignature_);
+    }
+    if (!is_null($this->assetSize_)) {
+      fwrite($fp, "@");
+      Protobuf::write_varint($fp, $this->assetSize_);
+    }
+    if (!is_null($this->refundTimeout_)) {
+      fwrite($fp, "H");
+      Protobuf::write_varint($fp, $this->refundTimeout_);
+    }
+    if (!is_null($this->forwardLocked_)) {
+      fwrite($fp, "P");
+      Protobuf::write_varint($fp, $this->forwardLocked_ ? 1 : 0);
+    }
+    if (!is_null($this->secured_)) {
+      fwrite($fp, "X");
+      Protobuf::write_varint($fp, $this->secured_ ? 1 : 0);
+    }
+    if (!is_null($this->versionCode_)) {
+      fwrite($fp, "`");
+      Protobuf::write_varint($fp, $this->versionCode_);
+    }
+    if (!is_null($this->downloadAuthCookieName_)) {
+      fwrite($fp, "j");
+      Protobuf::write_varint($fp, strlen($this->downloadAuthCookieName_));
+      fwrite($fp, $this->downloadAuthCookieName_);
+    }
+    if (!is_null($this->downloadAuthCookieValue_)) {
+      fwrite($fp, "r");
+      Protobuf::write_varint($fp, strlen($this->downloadAuthCookieValue_));
+      fwrite($fp, $this->downloadAuthCookieValue_);
+    }
+  }
+  
+  public function size() {
+    $size = 0;
+    if (!is_null($this->assetId_)) {
+      $l = strlen($this->assetId_);
+      $size += 1 + Protobuf::size_varint($l) + $l;
+    }
+    if (!is_null($this->assetName_)) {
+      $l = strlen($this->assetName_);
+      $size += 1 + Protobuf::size_varint($l) + $l;
+    }
+    if (!is_null($this->assetType_)) {
+      $l = strlen($this->assetType_);
+      $size += 1 + Protobuf::size_varint($l) + $l;
+    }
+    if (!is_null($this->assetPackage_)) {
+      $l = strlen($this->assetPackage_);
+      $size += 1 + Protobuf::size_varint($l) + $l;
+    }
+    if (!is_null($this->blobUrl_)) {
+      $l = strlen($this->blobUrl_);
+      $size += 1 + Protobuf::size_varint($l) + $l;
+    }
+    if (!is_null($this->assetSignature_)) {
+      $l = strlen($this->assetSignature_);
+      $size += 1 + Protobuf::size_varint($l) + $l;
+    }
+    if (!is_null($this->assetSize_)) {
+      $size += 1 + Protobuf::size_varint($this->assetSize_);
+    }
+    if (!is_null($this->refundTimeout_)) {
+      $size += 1 + Protobuf::size_varint($this->refundTimeout_);
+    }
+    if (!is_null($this->forwardLocked_)) {
+      $size += 2;
+    }
+    if (!is_null($this->secured_)) {
+      $size += 2;
+    }
+    if (!is_null($this->versionCode_)) {
+      $size += 1 + Protobuf::size_varint($this->versionCode_);
+    }
+    if (!is_null($this->downloadAuthCookieName_)) {
+      $l = strlen($this->downloadAuthCookieName_);
+      $size += 1 + Protobuf::size_varint($l) + $l;
+    }
+    if (!is_null($this->downloadAuthCookieValue_)) {
+      $l = strlen($this->downloadAuthCookieValue_);
+      $size += 1 + Protobuf::size_varint($l) + $l;
+    }
+    return $size;
+  }
+  
+  public function validateRequired() {
+    return true;
+  }
+  
+  public function __toString() {
+    return ''
+         . Protobuf::toString('unknown', $this->_unknown)
+         . Protobuf::toString('assetId_', $this->assetId_)
+         . Protobuf::toString('assetName_', $this->assetName_)
+         . Protobuf::toString('assetType_', $this->assetType_)
+         . Protobuf::toString('assetPackage_', $this->assetPackage_)
+         . Protobuf::toString('blobUrl_', $this->blobUrl_)
+         . Protobuf::toString('assetSignature_', $this->assetSignature_)
+         . Protobuf::toString('assetSize_', $this->assetSize_)
+         . Protobuf::toString('refundTimeout_', $this->refundTimeout_)
+         . Protobuf::toString('forwardLocked_', $this->forwardLocked_)
+         . Protobuf::toString('secured_', $this->secured_)
+         . Protobuf::toString('versionCode_', $this->versionCode_)
+         . Protobuf::toString('downloadAuthCookieName_', $this->downloadAuthCookieName_)
+         . Protobuf::toString('downloadAuthCookieValue_', $this->downloadAuthCookieValue_);
+  }
+  
+  // optional string assetId = 2;
+
+  private $assetId_ = null;
+  public function clearAssetId() { $this->assetId_ = null; }
+  public function hasAssetId() { return $this->assetId_ !== null; }
+  public function getAssetId() { if($this->assetId_ === null) return ""; else return $this->assetId_; }
+  public function setAssetId($value) { $this->assetId_ = $value; }
+  
+  // optional string assetName = 3;
+
+  private $assetName_ = null;
+  public function clearAssetName() { $this->assetName_ = null; }
+  public function hasAssetName() { return $this->assetName_ !== null; }
+  public function getAssetName() { if($this->assetName_ === null) return ""; else return $this->assetName_; }
+  public function setAssetName($value) { $this->assetName_ = $value; }
+  
+  // optional string assetType = 4;
+
+  private $assetType_ = null;
+  public function clearAssetType() { $this->assetType_ = null; }
+  public function hasAssetType() { return $this->assetType_ !== null; }
+  public function getAssetType() { if($this->assetType_ === null) return ""; else return $this->assetType_; }
+  public function setAssetType($value) { $this->assetType_ = $value; }
+  
+  // optional string assetPackage = 5;
+
+  private $assetPackage_ = null;
+  public function clearAssetPackage() { $this->assetPackage_ = null; }
+  public function hasAssetPackage() { return $this->assetPackage_ !== null; }
+  public function getAssetPackage() { if($this->assetPackage_ === null) return ""; else return $this->assetPackage_; }
+  public function setAssetPackage($value) { $this->assetPackage_ = $value; }
+  
+  // optional string blobUrl = 6;
+
+  private $blobUrl_ = null;
+  public function clearBlobUrl() { $this->blobUrl_ = null; }
+  public function hasBlobUrl() { return $this->blobUrl_ !== null; }
+  public function getBlobUrl() { if($this->blobUrl_ === null) return ""; else return $this->blobUrl_; }
+  public function setBlobUrl($value) { $this->blobUrl_ = $value; }
+  
+  // optional string assetSignature = 7;
+
+  private $assetSignature_ = null;
+  public function clearAssetSignature() { $this->assetSignature_ = null; }
+  public function hasAssetSignature() { return $this->assetSignature_ !== null; }
+  public function getAssetSignature() { if($this->assetSignature_ === null) return ""; else return $this->assetSignature_; }
+  public function setAssetSignature($value) { $this->assetSignature_ = $value; }
+  
+  // optional uint64 assetSize = 8;
+
+  private $assetSize_ = null;
+  public function clearAssetSize() { $this->assetSize_ = null; }
+  public function hasAssetSize() { return $this->assetSize_ !== null; }
+  public function getAssetSize() { if($this->assetSize_ === null) return 0; else return $this->assetSize_; }
+  public function setAssetSize($value) { $this->assetSize_ = $value; }
+  
+  // optional uint64 refundTimeout = 9;
+
+  private $refundTimeout_ = null;
+  public function clearRefundTimeout() { $this->refundTimeout_ = null; }
+  public function hasRefundTimeout() { return $this->refundTimeout_ !== null; }
+  public function getRefundTimeout() { if($this->refundTimeout_ === null) return 0; else return $this->refundTimeout_; }
+  public function setRefundTimeout($value) { $this->refundTimeout_ = $value; }
+  
+  // optional bool forwardLocked = 10;
+
+  private $forwardLocked_ = null;
+  public function clearForwardLocked() { $this->forwardLocked_ = null; }
+  public function hasForwardLocked() { return $this->forwardLocked_ !== null; }
+  public function getForwardLocked() { if($this->forwardLocked_ === null) return false; else return $this->forwardLocked_; }
+  public function setForwardLocked($value) { $this->forwardLocked_ = $value; }
+  
+  // optional bool secured = 11;
+
+  private $secured_ = null;
+  public function clearSecured() { $this->secured_ = null; }
+  public function hasSecured() { return $this->secured_ !== null; }
+  public function getSecured() { if($this->secured_ === null) return false; else return $this->secured_; }
+  public function setSecured($value) { $this->secured_ = $value; }
+  
+  // optional int32 versionCode = 12;
+
+  private $versionCode_ = null;
+  public function clearVersionCode() { $this->versionCode_ = null; }
+  public function hasVersionCode() { return $this->versionCode_ !== null; }
+  public function getVersionCode() { if($this->versionCode_ === null) return 0; else return $this->versionCode_; }
+  public function setVersionCode($value) { $this->versionCode_ = $value; }
+  
+  // optional string downloadAuthCookieName = 13;
+
+  private $downloadAuthCookieName_ = null;
+  public function clearDownloadAuthCookieName() { $this->downloadAuthCookieName_ = null; }
+  public function hasDownloadAuthCookieName() { return $this->downloadAuthCookieName_ !== null; }
+  public function getDownloadAuthCookieName() { if($this->downloadAuthCookieName_ === null) return ""; else return $this->downloadAuthCookieName_; }
+  public function setDownloadAuthCookieName($value) { $this->downloadAuthCookieName_ = $value; }
+  
+  // optional string downloadAuthCookieValue = 14;
+
+  private $downloadAuthCookieValue_ = null;
+  public function clearDownloadAuthCookieValue() { $this->downloadAuthCookieValue_ = null; }
+  public function hasDownloadAuthCookieValue() { return $this->downloadAuthCookieValue_ !== null; }
+  public function getDownloadAuthCookieValue() { if($this->downloadAuthCookieValue_ === null) return ""; else return $this->downloadAuthCookieValue_; }
+  public function setDownloadAuthCookieValue($value) { $this->downloadAuthCookieValue_ = $value; }
+  
+  // @@protoc_insertion_point(class_scope:GetAssetResponse.InstallAsset)
+}
+
+// message GetAssetResponse
+class GetAssetResponse {
+  private $_unknown;
+  
+  function __construct($in = NULL, &$limit = PHP_INT_MAX) {
+    if($in !== NULL) {
+      if (is_string($in)) {
+        $fp = fopen('php://memory', 'r+b');
+        fwrite($fp, $in);
+        rewind($fp);
+      } else if (is_resource($in)) {
+        $fp = $in;
+      } else {
+        throw new Exception('Invalid in parameter');
+      }
+      $this->read($fp, $limit);
+    }
+  }
+  
+  function read($fp, &$limit = PHP_INT_MAX) {
+    while(!feof($fp) && $limit > 0) {
+      $tag = Protobuf::read_varint($fp, $limit);
+      if ($tag === false) break;
+      $wire  = $tag & 0x07;
+      $field = $tag >> 3;
+      //var_dump("GetAssetResponse: Found $field type " . Protobuf::get_wiretype($wire) . " $limit bytes left");
+      switch($field) {
+        case 1:
+          ASSERT('$wire == 3');
+          $this->installasset_[] = new GetAssetResponse_InstallAsset($fp, $limit);
+          break;
+        default:
+          $this->_unknown[$field . '-' . Protobuf::get_wiretype($wire)][] = Protobuf::read_field($fp, $wire, $limit);
+      }
+    }
+    if (!$this->validateRequired())
+      throw new Exception('Required fields are missing');
+  }
+  
+  function write($fp) {
+    if (!$this->validateRequired())
+      throw new Exception('Required fields are missing');
+    if (!is_null($this->installasset_))
+      foreach($this->installasset_ as $v) {
+        fwrite($fp, "\x0b");
+        $v->write($fp); // group
+        fwrite($fp, "\x0c");
+      }
+  }
+  
+  public function size() {
+    $size = 0;
+    if (!is_null($this->installasset_))
+      foreach($this->installasset_ as $v) {
+        $size += 2 + $v->size();
+      }
+    return $size;
+  }
+  
+  public function validateRequired() {
+    return true;
+  }
+  
+  public function __toString() {
+    return ''
+         . Protobuf::toString('unknown', $this->_unknown)
+         . Protobuf::toString('installasset_', $this->installasset_);
+  }
+  
+  // repeated group InstallAsset = 1
+  private $installasset_ = null;
+  public function clearInstallasset() { $this->installasset_ = null; }
+  public function getInstallassetCount() { if ($this->installasset_ === null ) return 0; else return count($this->installasset_); }
+  public function getInstallasset($index) { return $this->installasset_[$index]; }
+  public function getInstallassetArray() { if ($this->installasset_ === null ) return array(); else return $this->installasset_; }
+  public function setInstallasset($index, $value) {$this->installasset_[$index] = $value;	}
+  public function addInstallasset($value) { $this->installasset_[] = $value; }
+  public function addAllInstallasset(array $values) { foreach($values as $value) {$this->installasset_[] = $value;} }
+  
+  // @@protoc_insertion_point(class_scope:GetAssetResponse)
 }
 
 
@@ -3215,6 +3777,15 @@ class Request_RequestGroup {
           $this->commentsRequest_ = new CommentsRequest($fp, $len);
           ASSERT('$len == 0');
           break;
+        case 10:
+          ASSERT('$wire == 2');
+          $len = Protobuf::read_varint($fp, $limit);
+          if ($len === false)
+            throw new Exception('Protobuf::read_varint returned false');
+          $limit-=$len;
+          $this->getAssetRequest_ = new GetAssetRequest($fp, $len);
+          ASSERT('$len == 0');
+          break;
         case 11:
           ASSERT('$wire == 2');
           $len = Protobuf::read_varint($fp, $limit);
@@ -3263,6 +3834,11 @@ class Request_RequestGroup {
       Protobuf::write_varint($fp, $this->commentsRequest_->size()); // message
       $this->commentsRequest_->write($fp);
     }
+    if (!is_null($this->getAssetRequest_)) {
+      fwrite($fp, "R");
+      Protobuf::write_varint($fp, $this->getAssetRequest_->size()); // message
+      $this->getAssetRequest_->write($fp);
+    }
     if (!is_null($this->imageRequest_)) {
       fwrite($fp, "Z");
       Protobuf::write_varint($fp, $this->imageRequest_->size()); // message
@@ -3290,6 +3866,10 @@ class Request_RequestGroup {
       $l = $this->commentsRequest_->size();
       $size += 1 + Protobuf::size_varint($l) + $l;
     }
+    if (!is_null($this->getAssetRequest_)) {
+      $l = $this->getAssetRequest_->size();
+      $size += 1 + Protobuf::size_varint($l) + $l;
+    }
     if (!is_null($this->imageRequest_)) {
       $l = $this->imageRequest_->size();
       $size += 1 + Protobuf::size_varint($l) + $l;
@@ -3314,6 +3894,7 @@ class Request_RequestGroup {
          . Protobuf::toString('unknown', $this->_unknown)
          . Protobuf::toString('appsRequest_', $this->appsRequest_)
          . Protobuf::toString('commentsRequest_', $this->commentsRequest_)
+         . Protobuf::toString('getAssetRequest_', $this->getAssetRequest_)
          . Protobuf::toString('imageRequest_', $this->imageRequest_)
          . Protobuf::toString('subCategoriesRequest_', $this->subCategoriesRequest_)
          . Protobuf::toString('categoriesRequest_', $this->categoriesRequest_);
@@ -3334,6 +3915,14 @@ class Request_RequestGroup {
   public function hasCommentsRequest() { return $this->commentsRequest_ !== null; }
   public function getCommentsRequest() { if($this->commentsRequest_ === null) return null; else return $this->commentsRequest_; }
   public function setCommentsRequest(CommentsRequest $value) { $this->commentsRequest_ = $value; }
+  
+  // optional .GetAssetRequest getAssetRequest = 10;
+
+  private $getAssetRequest_ = null;
+  public function clearGetAssetRequest() { $this->getAssetRequest_ = null; }
+  public function hasGetAssetRequest() { return $this->getAssetRequest_ !== null; }
+  public function getGetAssetRequest() { if($this->getAssetRequest_ === null) return null; else return $this->getAssetRequest_; }
+  public function setGetAssetRequest(GetAssetRequest $value) { $this->getAssetRequest_ = $value; }
   
   // optional .GetImageRequest imageRequest = 11;
 
@@ -3471,6 +4060,30 @@ class Request {
   // @@protoc_insertion_point(class_scope:Request)
 }
 
+// enum ResponseContext.ResultType
+class ResponseContext_ResultType {
+  const OK = 0;
+  const BAD_REQUEST = 1;
+  const INTERNAL_SERVICE_ERROR = 2;
+  const NOT_MODIFIED = 3;
+  const USER_INPUT_ERROR = 4;
+  
+  public static $_values = array(
+    0 => self::OK,
+    1 => self::BAD_REQUEST,
+    2 => self::INTERNAL_SERVICE_ERROR,
+    3 => self::NOT_MODIFIED,
+    4 => self::USER_INPUT_ERROR,
+  );
+  
+  public static function toString($value) {
+    if (is_null($value)) return null;
+    if (array_key_exists($value, self::$_values))
+      return self::$_values[$value];
+    return 'UNKNOWN';
+  }
+}
+
 // message ResponseContext
 class ResponseContext {
   private $_unknown;
@@ -3511,7 +4124,7 @@ class ResponseContext {
           $tmp = Protobuf::read_varint($fp, $limit);
           if ($tmp === false)
             throw new Exception('Protobuf::read_varint returned false');
-          $this->unknown1_ = $tmp;
+          $this->maxAge_ = $tmp;
           
           break;
         case 3:
@@ -3525,7 +4138,7 @@ class ResponseContext {
             $tmp = '';
           if ($tmp === false)
             throw new Exception("fread($len) returned false");
-          $this->unknown2_ = $tmp;
+          $this->etag_ = $tmp;
           $limit-=$len;
           break;
         case 4:
@@ -3533,7 +4146,7 @@ class ResponseContext {
           $tmp = Protobuf::read_varint($fp, $limit);
           if ($tmp === false)
             throw new Exception('Protobuf::read_varint returned false');
-          $this->unknown3_ = $tmp;
+          $this->serverVersion_ = $tmp;
           
           break;
         default:
@@ -3551,18 +4164,18 @@ class ResponseContext {
       fwrite($fp, "\x08");
       Protobuf::write_varint($fp, $this->result_);
     }
-    if (!is_null($this->unknown1_)) {
+    if (!is_null($this->maxAge_)) {
       fwrite($fp, "\x10");
-      Protobuf::write_varint($fp, $this->unknown1_);
+      Protobuf::write_varint($fp, $this->maxAge_);
     }
-    if (!is_null($this->unknown2_)) {
+    if (!is_null($this->etag_)) {
       fwrite($fp, "\x1a");
-      Protobuf::write_varint($fp, strlen($this->unknown2_));
-      fwrite($fp, $this->unknown2_);
+      Protobuf::write_varint($fp, strlen($this->etag_));
+      fwrite($fp, $this->etag_);
     }
-    if (!is_null($this->unknown3_)) {
+    if (!is_null($this->serverVersion_)) {
       fwrite($fp, " ");
-      Protobuf::write_varint($fp, $this->unknown3_);
+      Protobuf::write_varint($fp, $this->serverVersion_);
     }
   }
   
@@ -3571,15 +4184,15 @@ class ResponseContext {
     if (!is_null($this->result_)) {
       $size += 1 + Protobuf::size_varint($this->result_);
     }
-    if (!is_null($this->unknown1_)) {
-      $size += 1 + Protobuf::size_varint($this->unknown1_);
+    if (!is_null($this->maxAge_)) {
+      $size += 1 + Protobuf::size_varint($this->maxAge_);
     }
-    if (!is_null($this->unknown2_)) {
-      $l = strlen($this->unknown2_);
+    if (!is_null($this->etag_)) {
+      $l = strlen($this->etag_);
       $size += 1 + Protobuf::size_varint($l) + $l;
     }
-    if (!is_null($this->unknown3_)) {
-      $size += 1 + Protobuf::size_varint($this->unknown3_);
+    if (!is_null($this->serverVersion_)) {
+      $size += 1 + Protobuf::size_varint($this->serverVersion_);
     }
     return $size;
   }
@@ -3591,43 +4204,43 @@ class ResponseContext {
   public function __toString() {
     return ''
          . Protobuf::toString('unknown', $this->_unknown)
-         . Protobuf::toString('result_', $this->result_)
-         . Protobuf::toString('unknown1_', $this->unknown1_)
-         . Protobuf::toString('unknown2_', $this->unknown2_)
-         . Protobuf::toString('unknown3_', $this->unknown3_);
+         . Protobuf::toString('result_', ResponseContext_ResultType::toString($this->result_))
+         . Protobuf::toString('maxAge_', $this->maxAge_)
+         . Protobuf::toString('etag_', $this->etag_)
+         . Protobuf::toString('serverVersion_', $this->serverVersion_);
   }
   
-  // optional int32 result = 1;
+  // optional .ResponseContext.ResultType result = 1;
 
   private $result_ = null;
   public function clearResult() { $this->result_ = null; }
   public function hasResult() { return $this->result_ !== null; }
-  public function getResult() { if($this->result_ === null) return 0; else return $this->result_; }
+  public function getResult() { if($this->result_ === null) return ResponseContext_ResultType::OK; else return $this->result_; }
   public function setResult($value) { $this->result_ = $value; }
   
-  // optional int32 unknown1 = 2;
+  // optional int32 maxAge = 2;
 
-  private $unknown1_ = null;
-  public function clearUnknown1() { $this->unknown1_ = null; }
-  public function hasUnknown1() { return $this->unknown1_ !== null; }
-  public function getUnknown1() { if($this->unknown1_ === null) return 0; else return $this->unknown1_; }
-  public function setUnknown1($value) { $this->unknown1_ = $value; }
+  private $maxAge_ = null;
+  public function clearMaxAge() { $this->maxAge_ = null; }
+  public function hasMaxAge() { return $this->maxAge_ !== null; }
+  public function getMaxAge() { if($this->maxAge_ === null) return 0; else return $this->maxAge_; }
+  public function setMaxAge($value) { $this->maxAge_ = $value; }
   
-  // optional string unknown2 = 3;
+  // optional string etag = 3;
 
-  private $unknown2_ = null;
-  public function clearUnknown2() { $this->unknown2_ = null; }
-  public function hasUnknown2() { return $this->unknown2_ !== null; }
-  public function getUnknown2() { if($this->unknown2_ === null) return ""; else return $this->unknown2_; }
-  public function setUnknown2($value) { $this->unknown2_ = $value; }
+  private $etag_ = null;
+  public function clearEtag() { $this->etag_ = null; }
+  public function hasEtag() { return $this->etag_ !== null; }
+  public function getEtag() { if($this->etag_ === null) return ""; else return $this->etag_; }
+  public function setEtag($value) { $this->etag_ = $value; }
   
-  // optional int32 unknown3 = 4;
+  // optional int32 serverVersion = 4;
 
-  private $unknown3_ = null;
-  public function clearUnknown3() { $this->unknown3_ = null; }
-  public function hasUnknown3() { return $this->unknown3_ !== null; }
-  public function getUnknown3() { if($this->unknown3_ === null) return 0; else return $this->unknown3_; }
-  public function setUnknown3($value) { $this->unknown3_ = $value; }
+  private $serverVersion_ = null;
+  public function clearServerVersion() { $this->serverVersion_ = null; }
+  public function hasServerVersion() { return $this->serverVersion_ !== null; }
+  public function getServerVersion() { if($this->serverVersion_ === null) return 0; else return $this->serverVersion_; }
+  public function setServerVersion($value) { $this->serverVersion_ = $value; }
   
   // @@protoc_insertion_point(class_scope:ResponseContext)
 }
@@ -3690,6 +4303,15 @@ class Response_ResponseGroup {
           $this->commentsResponse_ = new CommentsResponse($fp, $len);
           ASSERT('$len == 0');
           break;
+        case 9:
+          ASSERT('$wire == 2');
+          $len = Protobuf::read_varint($fp, $limit);
+          if ($len === false)
+            throw new Exception('Protobuf::read_varint returned false');
+          $limit-=$len;
+          $this->getAssetResponse_ = new GetAssetResponse($fp, $len);
+          ASSERT('$len == 0');
+          break;
         case 10:
           ASSERT('$wire == 2');
           $len = Protobuf::read_varint($fp, $limit);
@@ -3743,6 +4365,11 @@ class Response_ResponseGroup {
       Protobuf::write_varint($fp, $this->commentsResponse_->size()); // message
       $this->commentsResponse_->write($fp);
     }
+    if (!is_null($this->getAssetResponse_)) {
+      fwrite($fp, "J");
+      Protobuf::write_varint($fp, $this->getAssetResponse_->size()); // message
+      $this->getAssetResponse_->write($fp);
+    }
     if (!is_null($this->imageResponse_)) {
       fwrite($fp, "R");
       Protobuf::write_varint($fp, $this->imageResponse_->size()); // message
@@ -3774,6 +4401,10 @@ class Response_ResponseGroup {
       $l = $this->commentsResponse_->size();
       $size += 1 + Protobuf::size_varint($l) + $l;
     }
+    if (!is_null($this->getAssetResponse_)) {
+      $l = $this->getAssetResponse_->size();
+      $size += 1 + Protobuf::size_varint($l) + $l;
+    }
     if (!is_null($this->imageResponse_)) {
       $l = $this->imageResponse_->size();
       $size += 1 + Protobuf::size_varint($l) + $l;
@@ -3799,6 +4430,7 @@ class Response_ResponseGroup {
          . Protobuf::toString('context_', $this->context_)
          . Protobuf::toString('appsResponse_', $this->appsResponse_)
          . Protobuf::toString('commentsResponse_', $this->commentsResponse_)
+         . Protobuf::toString('getAssetResponse_', $this->getAssetResponse_)
          . Protobuf::toString('imageResponse_', $this->imageResponse_)
          . Protobuf::toString('categoriesResponse_', $this->categoriesResponse_)
          . Protobuf::toString('subCategoriesResponse_', $this->subCategoriesResponse_);
@@ -3827,6 +4459,14 @@ class Response_ResponseGroup {
   public function hasCommentsResponse() { return $this->commentsResponse_ !== null; }
   public function getCommentsResponse() { if($this->commentsResponse_ === null) return null; else return $this->commentsResponse_; }
   public function setCommentsResponse(CommentsResponse $value) { $this->commentsResponse_ = $value; }
+  
+  // optional .GetAssetResponse getAssetResponse = 9;
+
+  private $getAssetResponse_ = null;
+  public function clearGetAssetResponse() { $this->getAssetResponse_ = null; }
+  public function hasGetAssetResponse() { return $this->getAssetResponse_ !== null; }
+  public function getGetAssetResponse() { if($this->getAssetResponse_ === null) return null; else return $this->getAssetResponse_; }
+  public function setGetAssetResponse(GetAssetResponse $value) { $this->getAssetResponse_ = $value; }
   
   // optional .GetImageResponse imageResponse = 10;
 
