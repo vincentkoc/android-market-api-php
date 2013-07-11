@@ -14,8 +14,8 @@ class MarketSession {
 	function __construct () {
 		$this->context = new RequestContext();
 		$this->context->setUnknown1(0);
-		$this->context->setVersion(2009011);
-		$this->context->setDeviceAndSdkVersion("passion:8");
+		$this->context->setVersion(8013013);
+		$this->context->setDeviceAndSdkVersion("crespo:15");
 
 		$this->context->setUserLanguage("en");
 		$this->context->setUserCountry("US");
@@ -84,12 +84,17 @@ class MarketSession {
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 		curl_setopt($ch, CURLOPT_POST, 1);
 		curl_setopt($ch, CURLOPT_POSTFIELDS, $post);
-		curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+		@curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
 		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
 
 
 		$headers = array(
-			"User-Agent: Android-Market/2 (sapphire PLAT-RC33); gzip",
+			//"User-Agent: Android-Market/2 (sapphire PLAT-RC33); gzip",
+			//"Content-Type: application/x-www-form-urlencoded",
+			//"Accept-Charset: ISO-8859-1,utf-8;q=0.7,*;q=0.7",
+			
+			//New Headers - Old Ones Commented Out for Refernce
+			"User-Agent: Android-Finsky/3.7.13 (api=3,versionCode=8013013,sdk=15,device=crespo,hardware=herring,product=soju)",
 			"Content-Type: application/x-www-form-urlencoded",
 			"Accept-Charset: ISO-8859-1,utf-8;q=0.7,*;q=0.7",
 		);
@@ -192,8 +197,9 @@ class MarketSession {
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 		curl_setopt($ch, CURLOPT_POST, 1);
 		curl_setopt($ch, CURLOPT_COOKIE, "ANDROID=".$this->authSubToken);
-		curl_setopt($ch, CURLOPT_USERAGENT, "Android-Market/2 (sapphire PLAT-RC33); gzip");
-
+		//curl_setopt($ch, CURLOPT_USERAGENT, "Android-Market/2 (sapphire PLAT-RC33); gzip");
+		curl_setopt($ch, CURLOPT_USERAGENT, "Android-Finsky/3.7.13 (api=3,versionCode=8013013,sdk=15,device=crespo,hardware=herring,product=soju)");
+		
 		$post = "version=2&request=".base64_encode($request);
 		curl_setopt($ch, CURLOPT_POSTFIELDS, $post);
 
