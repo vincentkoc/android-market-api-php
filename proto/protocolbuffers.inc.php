@@ -137,12 +137,8 @@ class Protobuf {
 		if ($limit !== null)
 			$limit -= $len;
 
-		$i = 0;
-		$shift = 0;
-		for ($j = 0; $j < $len; $j++) {
-			$i |= ((ord($value[$j]) & 0x7F) << $shift);
-			$shift += 7;
-		}
+		$i = 0.0;
+		for ($j = $len-1; $j >= 0; $j--)$i = $i * 128 + (ord($value[$j]) & 0x7F);
 
 		return $i;
 	}
