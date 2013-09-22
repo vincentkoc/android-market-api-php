@@ -192,9 +192,10 @@ class MarketSession {
 	 */
 	private function executeRawHttpQuery($request) {
 		$ch = curl_init();
-		curl_setopt($ch, CURLOPT_URL, "http://android.clients.google.com/market/api/ApiRequest");
+		curl_setopt($ch, CURLOPT_URL, "https://android.clients.google.com/market/api/ApiRequest");
 		curl_setopt($ch, CURLOPT_HEADER, 0);
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
 		curl_setopt($ch, CURLOPT_POST, 1);
 		curl_setopt($ch, CURLOPT_COOKIE, "ANDROID=".$this->authSubToken);
 		//curl_setopt($ch, CURLOPT_USERAGENT, "Android-Market/2 (sapphire PLAT-RC33); gzip");
