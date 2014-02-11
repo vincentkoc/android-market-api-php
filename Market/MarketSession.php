@@ -210,7 +210,6 @@ class MarketSession {
 			'Content-Length: '.strlen($post)
 		);
 		curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-		curl_setopt($ch, CURLOPT_VERBOSE, TRUE);
 
 		$ret = curl_exec($ch);
 
