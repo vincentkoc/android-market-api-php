@@ -250,9 +250,9 @@ class Protobuf {
 			case 2: // length delimited
 				$len = Protobuf::read_varint($fp, $limit);
 				$limit -= $len;
-                if ($len <= 0) {
-                    return false;
-                }
+				if ($len <= 0) {
+				    return false;
+				}
 				return fread($fp, $len);
 			//case 3: // Start group TODO we must keep looping until we find the closing end grou
 			case (3||4||7):
