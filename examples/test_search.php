@@ -6,6 +6,10 @@ include("../Market/MarketSession.php");
 
 $session = new MarketSession();
 $session->login(GOOGLE_EMAIL, GOOGLE_PASSWD);
+if ($session->login(GOOGLE_EMAIL, GOOGLE_PASSWD) == false) {
+    echo "ERROR: cannot login as " . GOOGLE_EMAIL;
+    exit(1);
+}
 $session->setAndroidId(ANDROID_DEVICEID);
 
 $ar = new AppsRequest();
