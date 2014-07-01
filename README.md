@@ -13,7 +13,7 @@ This is a PHP implementation of the [Java Android Market API](http://code.google
 For examples please read the examples avalible on the [wiki](https://github.com/splitfeed/android-market-api-php/wiki)
 
 #### Issues
-For Issues please use the Github Issues [page](https://github.com/splitfeed/android-market-api-php/issues). Alternativley you can also talk to other developers on the Google Groups [page](#)
+For Issues please use the Github Issues [page](https://github.com/splitfeed/android-market-api-php/issues). Alternativley you can also talk to other developers on the Google Groups [page](https://groups.google.com/forum/#!forum/android-market-api-php)
 
 ## Credits & Licence
 
