@@ -1,6 +1,6 @@
 <?php
 include("local.php");
-include("../Market/MarketSession.php");
+include("../src/MarketSession.php");
 
 $session = new MarketSession();
 $session->login(GOOGLE_EMAIL, GOOGLE_PASSWD);
