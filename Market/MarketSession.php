@@ -1,4 +1,10 @@
 <?php
+/*
+ * Load other Includes
+ */
+include("./proto/protocolbuffers.inc.php");
+include("./proto/market.proto.php");
+
 /**
  * @author Niklas Nilsson <splitfeed@gmail.com>
  *
