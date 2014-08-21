@@ -22,4 +22,4 @@ For Issues please use the Github Issues [page](https://github.com/splitfeed/andr
 [Protoc Gen PHP](https://github.com/bramp/protoc-gen-php)
 
 #### Licence
-TBC
+GNU GPL v2.0
