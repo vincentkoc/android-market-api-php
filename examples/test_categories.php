@@ -3,7 +3,11 @@ include("local.php");
 include("../src/MarketSession.php");
 
 $session = new MarketSession();
-$session->login(GOOGLE_EMAIL, GOOGLE_PASSWD);
+$result = $session->login(GOOGLE_EMAIL, GOOGLE_PASSWD);
+if ($result == false) {
+    echo "ERROR: cannot login as " . GOOGLE_EMAIL;
+    exit(1);
+}
 $session->setAndroidId(ANDROID_DEVICEID);
 
 $cr = new CategoriesRequest();
