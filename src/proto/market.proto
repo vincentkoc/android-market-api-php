@@ -237,6 +237,7 @@ message ResponseContext {
 message Payload {
   optional ListResponse listResponse = 1;
   optional DetailsResponse detailsResponse = 2;
+  optional BuyResponse buyResponse = 4;
   optional SearchResponse searchResponse = 5;
   optional BulkDetailsResponse bulkDetailsResponse = 19;
   optional DeliveryResponse deliveryResponse = 21;
@@ -514,4 +515,19 @@ message SingleResponseProto {
   optional GetImageResponse getImageResponse = 10;
   optional SubCategoriesResponse subCategoriesResponse = 13;
   optional CategoriesResponse getCategoriesResponse = 20;
+}
+
+message BuyResponse {
+  optional PurchaseStatusResponse purchaseStatusResponse = 39;
+  optional string purchaseCookie = 46;
+}
+
+message PurchaseStatusResponse {
+  optional int32 status = 1;
+  optional string statusMsg = 2;
+  optional string statusTitle = 3;
+  optional string briefMessage = 4;
+  optional string infoUrl = 5;
+  optional AndroidAppDeliveryData appDeliveryData = 8;
+
 }

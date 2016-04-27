@@ -538,7 +538,7 @@ class AppsResponse {
   public function getAppCount() { if ($this->app_ === null ) return 0; else return count($this->app_); }
   public function getApp($index) { return $this->app_[$index]; }
   public function getAppArray() { if ($this->app_ === null ) return array(); else return $this->app_; }
-  public function setApp($index, $value) {$this->app_[$index] = $value; }
+  public function setApp($index, $value) {$this->app_[$index] = $value;	}
   public function addApp($value) { $this->app_[] = $value; }
   public function addAllApp(array $values) { foreach($values as $value) {$this->app_[] = $value;} }
 
@@ -565,7 +565,7 @@ class AppsResponse {
   public function getAltAssetCount() { if ($this->altAsset_ === null ) return 0; else return count($this->altAsset_); }
   public function getAltAsset($index) { return $this->altAsset_[$index]; }
   public function getAltAssetArray() { if ($this->altAsset_ === null ) return array(); else return $this->altAsset_; }
-  public function setAltAsset($index, $value) {$this->altAsset_[$index] = $value; }
+  public function setAltAsset($index, $value) {$this->altAsset_[$index] = $value;	}
   public function addAltAsset($value) { $this->altAsset_[] = $value; }
   public function addAllAltAsset(array $values) { foreach($values as $value) {$this->altAsset_[] = $value;} }
 
@@ -1181,7 +1181,7 @@ class App_ExtendedInfo {
   public function getPermissionIdCount() { if ($this->permissionId_ === null ) return 0; else return count($this->permissionId_); }
   public function getPermissionId($index) { return $this->permissionId_[$index]; }
   public function getPermissionIdArray() { if ($this->permissionId_ === null ) return array(); else return $this->permissionId_; }
-  public function setPermissionId($index, $value) {$this->permissionId_[$index] = $value; }
+  public function setPermissionId($index, $value) {$this->permissionId_[$index] = $value;	}
   public function addPermissionId($value) { $this->permissionId_[] = $value; }
   public function addAllPermissionId(array $values) { foreach($values as $value) {$this->permissionId_[] = $value;} }
 
@@ -1287,7 +1287,7 @@ class App_ExtendedInfo {
   public function getPackagedependencyCount() { if ($this->packagedependency_ === null ) return 0; else return count($this->packagedependency_); }
   public function getPackagedependency($index) { return $this->packagedependency_[$index]; }
   public function getPackagedependencyArray() { if ($this->packagedependency_ === null ) return array(); else return $this->packagedependency_; }
-  public function setPackagedependency($index, $value) {$this->packagedependency_[$index] = $value; }
+  public function setPackagedependency($index, $value) {$this->packagedependency_[$index] = $value;	}
   public function addPackagedependency($value) { $this->packagedependency_[] = $value; }
   public function addAllPackagedependency(array $values) { foreach($values as $value) {$this->packagedependency_[] = $value;} }
 
@@ -1877,7 +1877,7 @@ class DownloadInfo {
   public function getAdditionalFileCount() { if ($this->additionalFile_ === null ) return 0; else return count($this->additionalFile_); }
   public function getAdditionalFile($index) { return $this->additionalFile_[$index]; }
   public function getAdditionalFileArray() { if ($this->additionalFile_ === null ) return array(); else return $this->additionalFile_; }
-  public function setAdditionalFile($index, $value) {$this->additionalFile_[$index] = $value; }
+  public function setAdditionalFile($index, $value) {$this->additionalFile_[$index] = $value;	}
   public function addAdditionalFile($value) { $this->additionalFile_[] = $value; }
   public function addAllAdditionalFile(array $values) { foreach($values as $value) {$this->additionalFile_[] = $value;} }
 
@@ -2320,7 +2320,7 @@ class CommentsResponse {
   public function getCommentsCount() { if ($this->comments_ === null ) return 0; else return count($this->comments_); }
   public function getComments($index) { return $this->comments_[$index]; }
   public function getCommentsArray() { if ($this->comments_ === null ) return array(); else return $this->comments_; }
-  public function setComments($index, $value) {$this->comments_[$index] = $value; }
+  public function setComments($index, $value) {$this->comments_[$index] = $value;	}
   public function addComments($value) { $this->comments_[] = $value; }
   public function addAllComments(array $values) { foreach($values as $value) {$this->comments_[] = $value;} }
 
@@ -2474,7 +2474,7 @@ class CategoriesResponse {
   public function getCategoriesCount() { if ($this->categories_ === null ) return 0; else return count($this->categories_); }
   public function getCategories($index) { return $this->categories_[$index]; }
   public function getCategoriesArray() { if ($this->categories_ === null ) return array(); else return $this->categories_; }
-  public function setCategories($index, $value) {$this->categories_[$index] = $value; }
+  public function setCategories($index, $value) {$this->categories_[$index] = $value;	}
   public function addCategories($value) { $this->categories_[] = $value; }
   public function addAllCategories(array $values) { foreach($values as $value) {$this->categories_[] = $value;} }
 
@@ -2683,7 +2683,7 @@ class Category {
   public function getSubCategoriesCount() { if ($this->subCategories_ === null ) return 0; else return count($this->subCategories_); }
   public function getSubCategories($index) { return $this->subCategories_[$index]; }
   public function getSubCategoriesArray() { if ($this->subCategories_ === null ) return array(); else return $this->subCategories_; }
-  public function setSubCategories($index, $value) {$this->subCategories_[$index] = $value; }
+  public function setSubCategories($index, $value) {$this->subCategories_[$index] = $value;	}
   public function addSubCategories($value) { $this->subCategories_[] = $value; }
   public function addAllSubCategories(array $values) { foreach($values as $value) {$this->subCategories_[] = $value;} }
 
@@ -2893,7 +2893,7 @@ class SubCategoriesResponse {
   public function getCategoryCount() { if ($this->category_ === null ) return 0; else return count($this->category_); }
   public function getCategory($index) { return $this->category_[$index]; }
   public function getCategoryArray() { if ($this->category_ === null ) return array(); else return $this->category_; }
-  public function setCategory($index, $value) {$this->category_[$index] = $value; }
+  public function setCategory($index, $value) {$this->category_[$index] = $value;	}
   public function addCategory($value) { $this->category_[] = $value; }
   public function addAllCategory(array $values) { foreach($values as $value) {$this->category_[] = $value;} }
 
@@ -3923,7 +3923,7 @@ class GetAssetResponse {
   public function getInstallassetCount() { if ($this->installasset_ === null ) return 0; else return count($this->installasset_); }
   public function getInstallasset($index) { return $this->installasset_[$index]; }
   public function getInstallassetArray() { if ($this->installasset_ === null ) return array(); else return $this->installasset_; }
-  public function setInstallasset($index, $value) {$this->installasset_[$index] = $value; }
+  public function setInstallasset($index, $value) {$this->installasset_[$index] = $value;	}
   public function addInstallasset($value) { $this->installasset_[] = $value; }
   public function addAllInstallasset(array $values) { foreach($values as $value) {$this->installasset_[] = $value;} }
 
@@ -3934,7 +3934,7 @@ class GetAssetResponse {
   public function getAdditionalFileCount() { if ($this->additionalFile_ === null ) return 0; else return count($this->additionalFile_); }
   public function getAdditionalFile($index) { return $this->additionalFile_[$index]; }
   public function getAdditionalFileArray() { if ($this->additionalFile_ === null ) return array(); else return $this->additionalFile_; }
-  public function setAdditionalFile($index, $value) {$this->additionalFile_[$index] = $value; }
+  public function setAdditionalFile($index, $value) {$this->additionalFile_[$index] = $value;	}
   public function addAdditionalFile($value) { $this->additionalFile_[] = $value; }
   public function addAllAdditionalFile(array $values) { foreach($values as $value) {$this->additionalFile_[] = $value;} }
 
@@ -4266,7 +4266,7 @@ class Request {
   public function getRequestgroupCount() { if ($this->requestgroup_ === null ) return 0; else return count($this->requestgroup_); }
   public function getRequestgroup($index) { return $this->requestgroup_[$index]; }
   public function getRequestgroupArray() { if ($this->requestgroup_ === null ) return array(); else return $this->requestgroup_; }
-  public function setRequestgroup($index, $value) {$this->requestgroup_[$index] = $value; }
+  public function setRequestgroup($index, $value) {$this->requestgroup_[$index] = $value;	}
   public function addRequestgroup($value) { $this->requestgroup_[] = $value; }
   public function addAllRequestgroup(array $values) { foreach($values as $value) {$this->requestgroup_[] = $value;} }
 
@@ -4995,7 +4995,7 @@ class Response {
   public function getResponsegroupCount() { if ($this->responsegroup_ === null ) return 0; else return count($this->responsegroup_); }
   public function getResponsegroup($index) { return $this->responsegroup_[$index]; }
   public function getResponsegroupArray() { if ($this->responsegroup_ === null ) return array(); else return $this->responsegroup_; }
-  public function setResponsegroup($index, $value) {$this->responsegroup_[$index] = $value; }
+  public function setResponsegroup($index, $value) {$this->responsegroup_[$index] = $value;	}
   public function addResponsegroup($value) { $this->responsegroup_[] = $value; }
   public function addAllResponsegroup(array $values) { foreach($values as $value) {$this->responsegroup_[] = $value;} }
 
@@ -5232,6 +5232,15 @@ class Payload {
           $this->detailsResponse_ = new DetailsResponse($fp, $len);
           ASSERT('$len == 0');
           break;
+        case 4:
+          ASSERT('$wire == 2');
+          $len = Protobuf::read_varint($fp, $limit);
+          if ($len === false)
+            throw new Exception('Protobuf::read_varint returned false');
+          $limit-=$len;
+          $this->buyResponse_ = new BuyResponse($fp, $len);
+          ASSERT('$len == 0');
+          break;
         case 5:
           ASSERT('$wire == 2');
           $len = Protobuf::read_varint($fp, $limit);
@@ -5280,6 +5289,11 @@ class Payload {
       Protobuf::write_varint($fp, $this->detailsResponse_->size()); // message
       $this->detailsResponse_->write($fp);
     }
+    if (!is_null($this->buyResponse_)) {
+      fwrite($fp, "\"");
+      Protobuf::write_varint($fp, $this->buyResponse_->size()); // message
+      $this->buyResponse_->write($fp);
+    }
     if (!is_null($this->searchResponse_)) {
       fwrite($fp, "*");
       Protobuf::write_varint($fp, $this->searchResponse_->size()); // message
@@ -5307,6 +5321,10 @@ class Payload {
       $l = $this->detailsResponse_->size();
       $size += 1 + Protobuf::size_varint($l) + $l;
     }
+    if (!is_null($this->buyResponse_)) {
+      $l = $this->buyResponse_->size();
+      $size += 1 + Protobuf::size_varint($l) + $l;
+    }
     if (!is_null($this->searchResponse_)) {
       $l = $this->searchResponse_->size();
       $size += 1 + Protobuf::size_varint($l) + $l;
@@ -5331,6 +5349,7 @@ class Payload {
          . Protobuf::toString('unknown', $this->_unknown)
          . Protobuf::toString('listResponse_', $this->listResponse_)
          . Protobuf::toString('detailsResponse_', $this->detailsResponse_)
+         . Protobuf::toString('buyResponse_', $this->buyResponse_)
          . Protobuf::toString('searchResponse_', $this->searchResponse_)
          . Protobuf::toString('bulkDetailsResponse_', $this->bulkDetailsResponse_)
          . Protobuf::toString('deliveryResponse_', $this->deliveryResponse_);
@@ -5351,6 +5370,14 @@ class Payload {
   public function hasDetailsResponse() { return $this->detailsResponse_ !== null; }
   public function getDetailsResponse() { if($this->detailsResponse_ === null) return null; else return $this->detailsResponse_; }
   public function setDetailsResponse(DetailsResponse $value) { $this->detailsResponse_ = $value; }
+
+  // optional .BuyResponse buyResponse = 4;
+
+  private $buyResponse_ = null;
+  public function clearBuyResponse() { $this->buyResponse_ = null; }
+  public function hasBuyResponse() { return $this->buyResponse_ !== null; }
+  public function getBuyResponse() { if($this->buyResponse_ === null) return null; else return $this->buyResponse_; }
+  public function setBuyResponse(BuyResponse $value) { $this->buyResponse_ = $value; }
 
   // optional .SearchResponse searchResponse = 5;
 
@@ -5731,7 +5758,7 @@ class AndroidAppDeliveryData {
   public function getAdditionalFileCount() { if ($this->additionalFile_ === null ) return 0; else return count($this->additionalFile_); }
   public function getAdditionalFile($index) { return $this->additionalFile_[$index]; }
   public function getAdditionalFileArray() { if ($this->additionalFile_ === null ) return array(); else return $this->additionalFile_; }
-  public function setAdditionalFile($index, $value) {$this->additionalFile_[$index] = $value; }
+  public function setAdditionalFile($index, $value) {$this->additionalFile_[$index] = $value;	}
   public function addAdditionalFile($value) { $this->additionalFile_[] = $value; }
   public function addAllAdditionalFile(array $values) { foreach($values as $value) {$this->additionalFile_[] = $value;} }
 
@@ -5742,7 +5769,7 @@ class AndroidAppDeliveryData {
   public function getDownloadAuthCookieCount() { if ($this->downloadAuthCookie_ === null ) return 0; else return count($this->downloadAuthCookie_); }
   public function getDownloadAuthCookie($index) { return $this->downloadAuthCookie_[$index]; }
   public function getDownloadAuthCookieArray() { if ($this->downloadAuthCookie_ === null ) return array(); else return $this->downloadAuthCookie_; }
-  public function setDownloadAuthCookie($index, $value) {$this->downloadAuthCookie_[$index] = $value; }
+  public function setDownloadAuthCookie($index, $value) {$this->downloadAuthCookie_[$index] = $value;	}
   public function addDownloadAuthCookie($value) { $this->downloadAuthCookie_[] = $value; }
   public function addAllDownloadAuthCookie(array $values) { foreach($values as $value) {$this->downloadAuthCookie_[] = $value;} }
 
@@ -6550,7 +6577,7 @@ class Document {
   public function getSnippetCount() { if ($this->snippet_ === null ) return 0; else return count($this->snippet_); }
   public function getSnippet($index) { return $this->snippet_[$index]; }
   public function getSnippetArray() { if ($this->snippet_ === null ) return array(); else return $this->snippet_; }
-  public function setSnippet($index, $value) {$this->snippet_[$index] = $value; }
+  public function setSnippet($index, $value) {$this->snippet_[$index] = $value;	}
   public function addSnippet($value) { $this->snippet_[] = $value; }
   public function addAllSnippet(array $values) { foreach($values as $value) {$this->snippet_[] = $value;} }
 
@@ -6561,7 +6588,7 @@ class Document {
   public function getImageCount() { if ($this->image_ === null ) return 0; else return count($this->image_); }
   public function getImage($index) { return $this->image_[$index]; }
   public function getImageArray() { if ($this->image_ === null ) return array(); else return $this->image_; }
-  public function setImage($index, $value) {$this->image_[$index] = $value; }
+  public function setImage($index, $value) {$this->image_[$index] = $value;	}
   public function addImage($value) { $this->image_[] = $value; }
   public function addAllImage(array $values) { foreach($values as $value) {$this->image_[] = $value;} }
 
@@ -6572,7 +6599,7 @@ class Document {
   public function getChildCount() { if ($this->child_ === null ) return 0; else return count($this->child_); }
   public function getChild($index) { return $this->child_[$index]; }
   public function getChildArray() { if ($this->child_ === null ) return array(); else return $this->child_; }
-  public function setChild($index, $value) {$this->child_[$index] = $value; }
+  public function setChild($index, $value) {$this->child_[$index] = $value;	}
   public function addChild($value) { $this->child_[] = $value; }
   public function addAllChild(array $values) { foreach($values as $value) {$this->child_[] = $value;} }
 
@@ -6583,7 +6610,7 @@ class Document {
   public function getCategoryIdCount() { if ($this->categoryId_ === null ) return 0; else return count($this->categoryId_); }
   public function getCategoryId($index) { return $this->categoryId_[$index]; }
   public function getCategoryIdArray() { if ($this->categoryId_ === null ) return array(); else return $this->categoryId_; }
-  public function setCategoryId($index, $value) {$this->categoryId_[$index] = $value; }
+  public function setCategoryId($index, $value) {$this->categoryId_[$index] = $value;	}
   public function addCategoryId($value) { $this->categoryId_[] = $value; }
   public function addAllCategoryId(array $values) { foreach($values as $value) {$this->categoryId_[] = $value;} }
 
@@ -6594,7 +6621,7 @@ class Document {
   public function getDecorationCount() { if ($this->decoration_ === null ) return 0; else return count($this->decoration_); }
   public function getDecoration($index) { return $this->decoration_[$index]; }
   public function getDecorationArray() { if ($this->decoration_ === null ) return array(); else return $this->decoration_; }
-  public function setDecoration($index, $value) {$this->decoration_[$index] = $value; }
+  public function setDecoration($index, $value) {$this->decoration_[$index] = $value;	}
   public function addDecoration($value) { $this->decoration_[] = $value; }
   public function addAllDecoration(array $values) { foreach($values as $value) {$this->decoration_[] = $value;} }
 
@@ -6605,7 +6632,7 @@ class Document {
   public function getParentCount() { if ($this->parent_ === null ) return 0; else return count($this->parent_); }
   public function getParent($index) { return $this->parent_[$index]; }
   public function getParentArray() { if ($this->parent_ === null ) return array(); else return $this->parent_; }
-  public function setParent($index, $value) {$this->parent_[$index] = $value; }
+  public function setParent($index, $value) {$this->parent_[$index] = $value;	}
   public function addParent($value) { $this->parent_[] = $value; }
   public function addAllParent(array $values) { foreach($values as $value) {$this->parent_[] = $value;} }
 
@@ -6990,7 +7017,7 @@ class BulkDetailsRequest {
   public function getDocidCount() { if ($this->docid_ === null ) return 0; else return count($this->docid_); }
   public function getDocid($index) { return $this->docid_[$index]; }
   public function getDocidArray() { if ($this->docid_ === null ) return array(); else return $this->docid_; }
-  public function setDocid($index, $value) {$this->docid_[$index] = $value; }
+  public function setDocid($index, $value) {$this->docid_[$index] = $value;	}
   public function addDocid($value) { $this->docid_[] = $value; }
   public function addAllDocid(array $values) { foreach($values as $value) {$this->docid_[] = $value;} }
 
@@ -7087,7 +7114,7 @@ class BulkDetailsResponse {
   public function getEntryCount() { if ($this->entry_ === null ) return 0; else return count($this->entry_); }
   public function getEntry($index) { return $this->entry_[$index]; }
   public function getEntryArray() { if ($this->entry_ === null ) return array(); else return $this->entry_; }
-  public function setEntry($index, $value) {$this->entry_[$index] = $value; }
+  public function setEntry($index, $value) {$this->entry_[$index] = $value;	}
   public function addEntry($value) { $this->entry_[] = $value; }
   public function addAllEntry(array $values) { foreach($values as $value) {$this->entry_[] = $value;} }
 
@@ -8245,7 +8272,7 @@ class AppDetails {
   public function getAppCategoryCount() { if ($this->appCategory_ === null ) return 0; else return count($this->appCategory_); }
   public function getAppCategory($index) { return $this->appCategory_[$index]; }
   public function getAppCategoryArray() { if ($this->appCategory_ === null ) return array(); else return $this->appCategory_; }
-  public function setAppCategory($index, $value) {$this->appCategory_[$index] = $value; }
+  public function setAppCategory($index, $value) {$this->appCategory_[$index] = $value;	}
   public function addAppCategory($value) { $this->appCategory_[] = $value; }
   public function addAllAppCategory(array $values) { foreach($values as $value) {$this->appCategory_[] = $value;} }
 
@@ -8272,7 +8299,7 @@ class AppDetails {
   public function getPermissionCount() { if ($this->permission_ === null ) return 0; else return count($this->permission_); }
   public function getPermission($index) { return $this->permission_[$index]; }
   public function getPermissionArray() { if ($this->permission_ === null ) return array(); else return $this->permission_; }
-  public function setPermission($index, $value) {$this->permission_[$index] = $value; }
+  public function setPermission($index, $value) {$this->permission_[$index] = $value;	}
   public function addPermission($value) { $this->permission_[] = $value; }
   public function addAllPermission(array $values) { foreach($values as $value) {$this->permission_[] = $value;} }
 
@@ -8331,7 +8358,7 @@ class AppDetails {
   public function getFileCount() { if ($this->file_ === null ) return 0; else return count($this->file_); }
   public function getFile($index) { return $this->file_[$index]; }
   public function getFileArray() { if ($this->file_ === null ) return array(); else return $this->file_; }
-  public function setFile($index, $value) {$this->file_[$index] = $value; }
+  public function setFile($index, $value) {$this->file_[$index] = $value;	}
   public function addFile($value) { $this->file_[] = $value; }
   public function addAllFile(array $values) { foreach($values as $value) {$this->file_[] = $value;} }
 
@@ -8634,7 +8661,7 @@ class Bucket {
   public function getDocumentCount() { if ($this->document_ === null ) return 0; else return count($this->document_); }
   public function getDocument($index) { return $this->document_[$index]; }
   public function getDocumentArray() { if ($this->document_ === null ) return array(); else return $this->document_; }
-  public function setDocument($index, $value) {$this->document_[$index] = $value; }
+  public function setDocument($index, $value) {$this->document_[$index] = $value;	}
   public function addDocument($value) { $this->document_[] = $value; }
   public function addAllDocument(array $values) { foreach($values as $value) {$this->document_[] = $value;} }
 
@@ -8824,7 +8851,7 @@ class ListResponse {
   public function getBucketCount() { if ($this->bucket_ === null ) return 0; else return count($this->bucket_); }
   public function getBucket($index) { return $this->bucket_[$index]; }
   public function getBucketArray() { if ($this->bucket_ === null ) return array(); else return $this->bucket_; }
-  public function setBucket($index, $value) {$this->bucket_[$index] = $value; }
+  public function setBucket($index, $value) {$this->bucket_[$index] = $value;	}
   public function addBucket($value) { $this->bucket_[] = $value; }
   public function addAllBucket(array $values) { foreach($values as $value) {$this->bucket_[] = $value;} }
 
@@ -8835,7 +8862,7 @@ class ListResponse {
   public function getDocCount() { if ($this->doc_ === null ) return 0; else return count($this->doc_); }
   public function getDoc($index) { return $this->doc_[$index]; }
   public function getDocArray() { if ($this->doc_ === null ) return array(); else return $this->doc_; }
-  public function setDoc($index, $value) {$this->doc_[$index] = $value; }
+  public function setDoc($index, $value) {$this->doc_[$index] = $value;	}
   public function addDoc($value) { $this->doc_[] = $value; }
   public function addAllDoc(array $values) { foreach($values as $value) {$this->doc_[] = $value;} }
 
@@ -10101,7 +10128,7 @@ class DocV2 {
   public function getImageCount() { if ($this->image_ === null ) return 0; else return count($this->image_); }
   public function getImage($index) { return $this->image_[$index]; }
   public function getImageArray() { if ($this->image_ === null ) return array(); else return $this->image_; }
-  public function setImage($index, $value) {$this->image_[$index] = $value; }
+  public function setImage($index, $value) {$this->image_[$index] = $value;	}
   public function addImage($value) { $this->image_[] = $value; }
   public function addAllImage(array $values) { foreach($values as $value) {$this->image_[] = $value;} }
 
@@ -10112,7 +10139,7 @@ class DocV2 {
   public function getChildCount() { if ($this->child_ === null ) return 0; else return count($this->child_); }
   public function getChild($index) { return $this->child_[$index]; }
   public function getChildArray() { if ($this->child_ === null ) return array(); else return $this->child_; }
-  public function setChild($index, $value) {$this->child_[$index] = $value; }
+  public function setChild($index, $value) {$this->child_[$index] = $value;	}
   public function addChild($value) { $this->child_[] = $value; }
   public function addAllChild(array $values) { foreach($values as $value) {$this->child_[] = $value;} }
 
@@ -10594,7 +10621,7 @@ class SearchResponse {
   public function getBucketCount() { if ($this->bucket_ === null ) return 0; else return count($this->bucket_); }
   public function getBucket($index) { return $this->bucket_[$index]; }
   public function getBucketArray() { if ($this->bucket_ === null ) return array(); else return $this->bucket_; }
-  public function setBucket($index, $value) {$this->bucket_[$index] = $value; }
+  public function setBucket($index, $value) {$this->bucket_[$index] = $value;	}
   public function addBucket($value) { $this->bucket_[] = $value; }
   public function addAllBucket(array $values) { foreach($values as $value) {$this->bucket_[] = $value;} }
 
@@ -10605,7 +10632,7 @@ class SearchResponse {
   public function getDocCount() { if ($this->doc_ === null ) return 0; else return count($this->doc_); }
   public function getDoc($index) { return $this->doc_[$index]; }
   public function getDocArray() { if ($this->doc_ === null ) return array(); else return $this->doc_; }
-  public function setDoc($index, $value) {$this->doc_[$index] = $value; }
+  public function setDoc($index, $value) {$this->doc_[$index] = $value;	}
   public function addDoc($value) { $this->doc_[] = $value; }
   public function addAllDoc(array $values) { foreach($values as $value) {$this->doc_[] = $value;} }
 
@@ -10616,7 +10643,7 @@ class SearchResponse {
   public function getRelatedSearchCount() { if ($this->relatedSearch_ === null ) return 0; else return count($this->relatedSearch_); }
   public function getRelatedSearch($index) { return $this->relatedSearch_[$index]; }
   public function getRelatedSearchArray() { if ($this->relatedSearch_ === null ) return array(); else return $this->relatedSearch_; }
-  public function setRelatedSearch($index, $value) {$this->relatedSearch_[$index] = $value; }
+  public function setRelatedSearch($index, $value) {$this->relatedSearch_[$index] = $value;	}
   public function addRelatedSearch($value) { $this->relatedSearch_[] = $value; }
   public function addAllRelatedSearch(array $values) { foreach($values as $value) {$this->relatedSearch_[] = $value;} }
 
@@ -11013,7 +11040,7 @@ class AssetsRequest {
   public function getAssetIdCount() { if ($this->assetId_ === null ) return 0; else return count($this->assetId_); }
   public function getAssetId($index) { return $this->assetId_[$index]; }
   public function getAssetIdArray() { if ($this->assetId_ === null ) return array(); else return $this->assetId_; }
-  public function setAssetId($index, $value) {$this->assetId_[$index] = $value; }
+  public function setAssetId($index, $value) {$this->assetId_[$index] = $value;	}
   public function addAssetId($value) { $this->assetId_[] = $value; }
   public function addAllAssetId(array $values) { foreach($values as $value) {$this->assetId_[] = $value;} }
 
@@ -11088,7 +11115,7 @@ class AssetsRequest {
   public function getPendingDownloadAssetIdCount() { if ($this->pendingDownloadAssetId_ === null ) return 0; else return count($this->pendingDownloadAssetId_); }
   public function getPendingDownloadAssetId($index) { return $this->pendingDownloadAssetId_[$index]; }
   public function getPendingDownloadAssetIdArray() { if ($this->pendingDownloadAssetId_ === null ) return array(); else return $this->pendingDownloadAssetId_; }
-  public function setPendingDownloadAssetId($index, $value) {$this->pendingDownloadAssetId_[$index] = $value; }
+  public function setPendingDownloadAssetId($index, $value) {$this->pendingDownloadAssetId_[$index] = $value;	}
   public function addPendingDownloadAssetId($value) { $this->pendingDownloadAssetId_[] = $value; }
   public function addAllPendingDownloadAssetId(array $values) { foreach($values as $value) {$this->pendingDownloadAssetId_[] = $value;} }
 
@@ -11115,7 +11142,7 @@ class AssetsRequest {
   public function getBadgeIdCount() { if ($this->badgeId_ === null ) return 0; else return count($this->badgeId_); }
   public function getBadgeId($index) { return $this->badgeId_[$index]; }
   public function getBadgeIdArray() { if ($this->badgeId_ === null ) return array(); else return $this->badgeId_; }
-  public function setBadgeId($index, $value) {$this->badgeId_[$index] = $value; }
+  public function setBadgeId($index, $value) {$this->badgeId_[$index] = $value;	}
   public function addBadgeId($value) { $this->badgeId_[] = $value; }
   public function addAllBadgeId(array $values) { foreach($values as $value) {$this->badgeId_[] = $value;} }
 
@@ -11321,7 +11348,7 @@ class AssetsResponse {
   public function getAssetCount() { if ($this->asset_ === null ) return 0; else return count($this->asset_); }
   public function getAsset($index) { return $this->asset_[$index]; }
   public function getAssetArray() { if ($this->asset_ === null ) return array(); else return $this->asset_; }
-  public function setAsset($index, $value) {$this->asset_[$index] = $value; }
+  public function setAsset($index, $value) {$this->asset_[$index] = $value;	}
   public function addAsset($value) { $this->asset_[] = $value; }
   public function addAllAsset(array $values) { foreach($values as $value) {$this->asset_[] = $value;} }
 
@@ -11348,7 +11375,7 @@ class AssetsResponse {
   public function getAltAssetCount() { if ($this->altAsset_ === null ) return 0; else return count($this->altAsset_); }
   public function getAltAsset($index) { return $this->altAsset_[$index]; }
   public function getAltAssetArray() { if ($this->altAsset_ === null ) return array(); else return $this->altAsset_; }
-  public function setAltAsset($index, $value) {$this->altAsset_[$index] = $value; }
+  public function setAltAsset($index, $value) {$this->altAsset_[$index] = $value;	}
   public function addAltAsset($value) { $this->altAsset_[] = $value; }
   public function addAllAltAsset(array $values) { foreach($values as $value) {$this->altAsset_[] = $value;} }
 
@@ -11650,7 +11677,7 @@ class ResponseProto {
   public function getResponseCount() { if ($this->response_ === null ) return 0; else return count($this->response_); }
   public function getResponse($index) { return $this->response_[$index]; }
   public function getResponseArray() { if ($this->response_ === null ) return array(); else return $this->response_; }
-  public function setResponse($index, $value) {$this->response_[$index] = $value; }
+  public function setResponse($index, $value) {$this->response_[$index] = $value;	}
   public function addResponse($value) { $this->response_[] = $value; }
   public function addAllResponse(array $values) { foreach($values as $value) {$this->response_[] = $value;} }
 
@@ -12039,6 +12066,358 @@ class SingleResponseProto {
   public function setGetCategoriesResponse(CategoriesResponse $value) { $this->getCategoriesResponse_ = $value; }
 
   // @@protoc_insertion_point(class_scope:SingleResponseProto)
+}
+
+// message BuyResponse
+class BuyResponse {
+  private $_unknown;
+
+  function __construct($in = NULL, &$limit = PHP_INT_MAX) {
+    if($in !== NULL) {
+      if (is_string($in)) {
+        $fp = fopen('php://memory', 'r+b');
+        fwrite($fp, $in);
+        rewind($fp);
+      } else if (is_resource($in)) {
+        $fp = $in;
+      } else {
+        throw new Exception('Invalid in parameter');
+      }
+      $this->read($fp, $limit);
+    }
+  }
+
+  function read($fp, &$limit = PHP_INT_MAX) {
+    while(!feof($fp) && $limit > 0) {
+      $tag = Protobuf::read_varint($fp, $limit);
+      if ($tag === false) break;
+      $wire  = $tag & 0x07;
+      $field = $tag >> 3;
+      //var_dump("BuyResponse: Found $field type " . Protobuf::get_wiretype($wire) . " $limit bytes left");
+      switch($field) {
+        case 39:
+          ASSERT('$wire == 2');
+          $len = Protobuf::read_varint($fp, $limit);
+          if ($len === false)
+            throw new Exception('Protobuf::read_varint returned false');
+          $limit-=$len;
+          $this->purchaseStatusResponse_ = new PurchaseStatusResponse($fp, $len);
+          ASSERT('$len == 0');
+          break;
+        case 46:
+          ASSERT('$wire == 2');
+          $len = Protobuf::read_varint($fp, $limit);
+          if ($len === false)
+            throw new Exception('Protobuf::read_varint returned false');
+          if ($len > 0)
+            $tmp = fread($fp, $len);
+          else
+            $tmp = '';
+          if ($tmp === false)
+            throw new Exception("fread($len) returned false");
+          $this->purchaseCookie_ = $tmp;
+          $limit-=$len;
+          break;
+        default:
+          $this->_unknown[$field . '-' . Protobuf::get_wiretype($wire)][] = Protobuf::read_field($fp, $wire, $limit);
+      }
+    }
+    if (!$this->validateRequired())
+      throw new Exception('Required fields are missing');
+  }
+
+  function write($fp) {
+    if (!$this->validateRequired())
+      throw new Exception('Required fields are missing');
+    if (!is_null($this->purchaseStatusResponse_)) {
+      fwrite($fp, "\xba\x02");
+      Protobuf::write_varint($fp, $this->purchaseStatusResponse_->size()); // message
+      $this->purchaseStatusResponse_->write($fp);
+    }
+    if (!is_null($this->purchaseCookie_)) {
+      fwrite($fp, "\xf2\x02");
+      Protobuf::write_varint($fp, strlen($this->purchaseCookie_));
+      fwrite($fp, $this->purchaseCookie_);
+    }
+  }
+
+  public function size() {
+    $size = 0;
+    if (!is_null($this->purchaseStatusResponse_)) {
+      $l = $this->purchaseStatusResponse_->size();
+      $size += 2 + Protobuf::size_varint($l) + $l;
+    }
+    if (!is_null($this->purchaseCookie_)) {
+      $l = strlen($this->purchaseCookie_);
+      $size += 2 + Protobuf::size_varint($l) + $l;
+    }
+    return $size;
+  }
+
+  public function validateRequired() {
+    return true;
+  }
+
+  public function __toString() {
+    return ''
+         . Protobuf::toString('unknown', $this->_unknown)
+         . Protobuf::toString('purchaseStatusResponse_', $this->purchaseStatusResponse_)
+         . Protobuf::toString('purchaseCookie_', $this->purchaseCookie_);
+  }
+
+  // optional .PurchaseStatusResponse purchaseStatusResponse = 39;
+
+  private $purchaseStatusResponse_ = null;
+  public function clearPurchaseStatusResponse() { $this->purchaseStatusResponse_ = null; }
+  public function hasPurchaseStatusResponse() { return $this->purchaseStatusResponse_ !== null; }
+  public function getPurchaseStatusResponse() { if($this->purchaseStatusResponse_ === null) return null; else return $this->purchaseStatusResponse_; }
+  public function setPurchaseStatusResponse(PurchaseStatusResponse $value) { $this->purchaseStatusResponse_ = $value; }
+
+  // optional string purchaseCookie = 46;
+
+  private $purchaseCookie_ = null;
+  public function clearPurchaseCookie() { $this->purchaseCookie_ = null; }
+  public function hasPurchaseCookie() { return $this->purchaseCookie_ !== null; }
+  public function getPurchaseCookie() { if($this->purchaseCookie_ === null) return ""; else return $this->purchaseCookie_; }
+  public function setPurchaseCookie($value) { $this->purchaseCookie_ = $value; }
+
+  // @@protoc_insertion_point(class_scope:BuyResponse)
+}
+
+// message PurchaseStatusResponse
+class PurchaseStatusResponse {
+  private $_unknown;
+
+  function __construct($in = NULL, &$limit = PHP_INT_MAX) {
+    if($in !== NULL) {
+      if (is_string($in)) {
+        $fp = fopen('php://memory', 'r+b');
+        fwrite($fp, $in);
+        rewind($fp);
+      } else if (is_resource($in)) {
+        $fp = $in;
+      } else {
+        throw new Exception('Invalid in parameter');
+      }
+      $this->read($fp, $limit);
+    }
+  }
+
+  function read($fp, &$limit = PHP_INT_MAX) {
+    while(!feof($fp) && $limit > 0) {
+      $tag = Protobuf::read_varint($fp, $limit);
+      if ($tag === false) break;
+      $wire  = $tag & 0x07;
+      $field = $tag >> 3;
+      //var_dump("PurchaseStatusResponse: Found $field type " . Protobuf::get_wiretype($wire) . " $limit bytes left");
+      switch($field) {
+        case 1:
+          ASSERT('$wire == 0');
+          $tmp = Protobuf::read_varint($fp, $limit);
+          if ($tmp === false)
+            throw new Exception('Protobuf::read_varint returned false');
+          $this->status_ = $tmp;
+
+          break;
+        case 2:
+          ASSERT('$wire == 2');
+          $len = Protobuf::read_varint($fp, $limit);
+          if ($len === false)
+            throw new Exception('Protobuf::read_varint returned false');
+          if ($len > 0)
+            $tmp = fread($fp, $len);
+          else
+            $tmp = '';
+          if ($tmp === false)
+            throw new Exception("fread($len) returned false");
+          $this->statusMsg_ = $tmp;
+          $limit-=$len;
+          break;
+        case 3:
+          ASSERT('$wire == 2');
+          $len = Protobuf::read_varint($fp, $limit);
+          if ($len === false)
+            throw new Exception('Protobuf::read_varint returned false');
+          if ($len > 0)
+            $tmp = fread($fp, $len);
+          else
+            $tmp = '';
+          if ($tmp === false)
+            throw new Exception("fread($len) returned false");
+          $this->statusTitle_ = $tmp;
+          $limit-=$len;
+          break;
+        case 4:
+          ASSERT('$wire == 2');
+          $len = Protobuf::read_varint($fp, $limit);
+          if ($len === false)
+            throw new Exception('Protobuf::read_varint returned false');
+          if ($len > 0)
+            $tmp = fread($fp, $len);
+          else
+            $tmp = '';
+          if ($tmp === false)
+            throw new Exception("fread($len) returned false");
+          $this->briefMessage_ = $tmp;
+          $limit-=$len;
+          break;
+        case 5:
+          ASSERT('$wire == 2');
+          $len = Protobuf::read_varint($fp, $limit);
+          if ($len === false)
+            throw new Exception('Protobuf::read_varint returned false');
+          if ($len > 0)
+            $tmp = fread($fp, $len);
+          else
+            $tmp = '';
+          if ($tmp === false)
+            throw new Exception("fread($len) returned false");
+          $this->infoUrl_ = $tmp;
+          $limit-=$len;
+          break;
+        case 8:
+          ASSERT('$wire == 2');
+          $len = Protobuf::read_varint($fp, $limit);
+          if ($len === false)
+            throw new Exception('Protobuf::read_varint returned false');
+          $limit-=$len;
+          $this->appDeliveryData_ = new AndroidAppDeliveryData($fp, $len);
+          ASSERT('$len == 0');
+          break;
+        default:
+          $this->_unknown[$field . '-' . Protobuf::get_wiretype($wire)][] = Protobuf::read_field($fp, $wire, $limit);
+      }
+    }
+    if (!$this->validateRequired())
+      throw new Exception('Required fields are missing');
+  }
+
+  function write($fp) {
+    if (!$this->validateRequired())
+      throw new Exception('Required fields are missing');
+    if (!is_null($this->status_)) {
+      fwrite($fp, "\x08");
+      Protobuf::write_varint($fp, $this->status_);
+    }
+    if (!is_null($this->statusMsg_)) {
+      fwrite($fp, "\x12");
+      Protobuf::write_varint($fp, strlen($this->statusMsg_));
+      fwrite($fp, $this->statusMsg_);
+    }
+    if (!is_null($this->statusTitle_)) {
+      fwrite($fp, "\x1a");
+      Protobuf::write_varint($fp, strlen($this->statusTitle_));
+      fwrite($fp, $this->statusTitle_);
+    }
+    if (!is_null($this->briefMessage_)) {
+      fwrite($fp, "\"");
+      Protobuf::write_varint($fp, strlen($this->briefMessage_));
+      fwrite($fp, $this->briefMessage_);
+    }
+    if (!is_null($this->infoUrl_)) {
+      fwrite($fp, "*");
+      Protobuf::write_varint($fp, strlen($this->infoUrl_));
+      fwrite($fp, $this->infoUrl_);
+    }
+    if (!is_null($this->appDeliveryData_)) {
+      fwrite($fp, "B");
+      Protobuf::write_varint($fp, $this->appDeliveryData_->size()); // message
+      $this->appDeliveryData_->write($fp);
+    }
+  }
+
+  public function size() {
+    $size = 0;
+    if (!is_null($this->status_)) {
+      $size += 1 + Protobuf::size_varint($this->status_);
+    }
+    if (!is_null($this->statusMsg_)) {
+      $l = strlen($this->statusMsg_);
+      $size += 1 + Protobuf::size_varint($l) + $l;
+    }
+    if (!is_null($this->statusTitle_)) {
+      $l = strlen($this->statusTitle_);
+      $size += 1 + Protobuf::size_varint($l) + $l;
+    }
+    if (!is_null($this->briefMessage_)) {
+      $l = strlen($this->briefMessage_);
+      $size += 1 + Protobuf::size_varint($l) + $l;
+    }
+    if (!is_null($this->infoUrl_)) {
+      $l = strlen($this->infoUrl_);
+      $size += 1 + Protobuf::size_varint($l) + $l;
+    }
+    if (!is_null($this->appDeliveryData_)) {
+      $l = $this->appDeliveryData_->size();
+      $size += 1 + Protobuf::size_varint($l) + $l;
+    }
+    return $size;
+  }
+
+  public function validateRequired() {
+    return true;
+  }
+
+  public function __toString() {
+    return ''
+         . Protobuf::toString('unknown', $this->_unknown)
+         . Protobuf::toString('status_', $this->status_)
+         . Protobuf::toString('statusMsg_', $this->statusMsg_)
+         . Protobuf::toString('statusTitle_', $this->statusTitle_)
+         . Protobuf::toString('briefMessage_', $this->briefMessage_)
+         . Protobuf::toString('infoUrl_', $this->infoUrl_)
+         . Protobuf::toString('appDeliveryData_', $this->appDeliveryData_);
+  }
+
+  // optional int32 status = 1;
+
+  private $status_ = null;
+  public function clearStatus() { $this->status_ = null; }
+  public function hasStatus() { return $this->status_ !== null; }
+  public function getStatus() { if($this->status_ === null) return 0; else return $this->status_; }
+  public function setStatus($value) { $this->status_ = $value; }
+
+  // optional string statusMsg = 2;
+
+  private $statusMsg_ = null;
+  public function clearStatusMsg() { $this->statusMsg_ = null; }
+  public function hasStatusMsg() { return $this->statusMsg_ !== null; }
+  public function getStatusMsg() { if($this->statusMsg_ === null) return ""; else return $this->statusMsg_; }
+  public function setStatusMsg($value) { $this->statusMsg_ = $value; }
+
+  // optional string statusTitle = 3;
+
+  private $statusTitle_ = null;
+  public function clearStatusTitle() { $this->statusTitle_ = null; }
+  public function hasStatusTitle() { return $this->statusTitle_ !== null; }
+  public function getStatusTitle() { if($this->statusTitle_ === null) return ""; else return $this->statusTitle_; }
+  public function setStatusTitle($value) { $this->statusTitle_ = $value; }
+
+  // optional string briefMessage = 4;
+
+  private $briefMessage_ = null;
+  public function clearBriefMessage() { $this->briefMessage_ = null; }
+  public function hasBriefMessage() { return $this->briefMessage_ !== null; }
+  public function getBriefMessage() { if($this->briefMessage_ === null) return ""; else return $this->briefMessage_; }
+  public function setBriefMessage($value) { $this->briefMessage_ = $value; }
+
+  // optional string infoUrl = 5;
+
+  private $infoUrl_ = null;
+  public function clearInfoUrl() { $this->infoUrl_ = null; }
+  public function hasInfoUrl() { return $this->infoUrl_ !== null; }
+  public function getInfoUrl() { if($this->infoUrl_ === null) return ""; else return $this->infoUrl_; }
+  public function setInfoUrl($value) { $this->infoUrl_ = $value; }
+
+  // optional .AndroidAppDeliveryData appDeliveryData = 8;
+
+  private $appDeliveryData_ = null;
+  public function clearAppDeliveryData() { $this->appDeliveryData_ = null; }
+  public function hasAppDeliveryData() { return $this->appDeliveryData_ !== null; }
+  public function getAppDeliveryData() { if($this->appDeliveryData_ === null) return null; else return $this->appDeliveryData_; }
+  public function setAppDeliveryData(AndroidAppDeliveryData $value) { $this->appDeliveryData_ = $value; }
+
+  // @@protoc_insertion_point(class_scope:PurchaseStatusResponse)
 }
 
 // enum AppType
