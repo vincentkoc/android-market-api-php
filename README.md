@@ -2,7 +2,7 @@
 
 ## Overview
 
-This is a PHP implementation of the [Java Android Market API](http://code.google.com/p/android-market-api/). Used to connect to the Android Marketplace (Google Play Store) using PHP. This is an un-official API as an official API currently dose not exist. 
+This is a PHP implementation of the [Java Android Market API](http://code.google.com/p/android-market-api/). Used to connect to the Android Marketplace (Google Play Store) using PHP. This is an un-official API as an official API currently does not exist. 
 
 ***
 
