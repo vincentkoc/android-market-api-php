@@ -1,17 +1,12 @@
 {
     "name": "splitfeed/android-market-api-php",
     "description": "PHP implementation of the Java Android Market API",
-    "license": "GNU GPL v2.0",
+    "license": "GPL-2.0-or-later",
     "authors": [
         {
-            "name": "Onder Vincent Koc",
-            "email": "koconder@gmail.com",
-            "role": "Developer"
-        },{
-            "name": "Niklas Nilsson",
-            "email": "splitfeed@gmail.com",
-            "role": "Developer"
-        }
+			"name": "Contributors",
+			"homepage": "https://github.com/koconder/android-market-api-php/graphs/contributors"
+		}
     ],
     "autoload": {
         "classmap": ["src"]
