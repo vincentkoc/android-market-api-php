@@ -1,10 +1,10 @@
 # Android Marketplace API (PHP)
 
-Seeking contributors, I have not been maintaining this repository for quite sometime. Open for helpers and merge requests.
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.14769247.svg)](https://doi.org/10.5281/zenodo.14769247)
 
 ## Overview
 
-This is a PHP implementation of the [Java Android Market API](http://code.google.com/p/android-market-api/). Used to connect to the Android Marketplace (Google Play Store) using PHP. This is an un-official API as an official API currently does not exist. 
+This is a PHP implementation of the Java Android Market API. Used to connect to the Android Marketplace (Google Play Store) using PHP. This is an un-official API as an official API currently does not exist. 
 
 ***
 
