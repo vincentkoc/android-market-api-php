@@ -1,3 +1,4 @@
+syntax = "proto2";
 option java_package = "com.gc.android.market.api.model";
 
 enum AppType {
@@ -14,38 +15,88 @@ message AppsRequest {
   optional string categoryId = 3;
   optional string appId = 4;
   optional bool withExtendedInfo = 6;
-  
   enum OrderType {
     NONE = 0;
     POPULAR = 1;
     NEWEST = 2;
     FEATURED = 3;
   }
-  
   enum ViewType {
   	ALL = 0;
   	FREE = 1;
   	PAID = 2;
   }
-  
   optional OrderType orderType = 7 [default = NONE];
   optional uint64 startIndex = 8;
   optional int32 entriesCount = 9;
-  optional ViewType viewType = 10 [default = ALL]; 
+  optional ViewType viewType = 10 [default = ALL];
 }
-
 
 message AppsResponse {
 	repeated App app = 1;
-	optional int32 entriesCount = 2;
+	optional int64 numTotalEntries = 2;
+    optional string correctedQuery = 3;
+    repeated App altAsset = 4;
+    optional int64 numCorrectedEntries = 5;
+    optional string header = 6;
+    optional int32 listType = 7;
 }
 
-message Category {
-	optional int32 appType = 2;
-	optional string title = 4;
-	optional string categoryId = 3;
-	optional string subtitle = 5;
-	repeated Category subCategories = 8;
+message App {
+	optional string id = 1;
+	optional string title = 2;
+
+	optional AppType appType = 3 [default = NONE];
+
+	optional string creator = 4;
+	optional string version = 5;
+	optional string price = 6;
+	optional string rating = 7;
+	optional int32 ratingsCount = 8;
+
+	optional group ExtendedInfo = 12 {
+        optional string description = 13;
+        optional int32 downloadsCount = 14;
+        repeated string permissionId = 15;
+        optional int32 installSize = 16;
+        optional string packageName = 17;
+        optional string category = 18;
+        optional string contactEmail = 20;
+        optional string downloadsCountText = 23;
+        optional string contactPhone = 26;
+        optional string contactWebsite = 27;
+        optional int32 screenshotsCount = 30;
+        optional string promoText = 31;
+        optional int32 contentRatingLevel = 36;
+        optional string contentRatingString = 37;
+        optional string recentChanges = 38;
+        repeated group PackageDependency = 39 {
+            optional string packageName = 41;
+            optional bool skipPermissions = 42;
+        }
+        optional string videoLink = 43;
+        optional DownloadInfo downloadInfo = 49;
+	}
+
+	optional string creatorId = 22;
+	optional string packageName = 24;
+	optional int32 versionCode = 25;
+	//V2
+	optional string priceCurrency = 32;
+	optional int32 priceMicros = 33;
+}
+
+message DownloadInfo {
+  optional int64 apkSize = 1;
+  repeated AppFileMetadata additionalFile = 2;
+}
+
+message Comment {
+	optional string text = 1;
+	optional int32 rating = 2;
+	optional string authorName = 3;
+	optional uint64 creationTime = 4;
+	optional string authorId = 5;
 }
 
 message CommentsRequest {
@@ -59,60 +110,19 @@ message CommentsResponse {
 	optional int32 entriesCount = 2;
 }
 
-message App {
-	optional string id = 1;
-	optional string title = 2;
-	
-	optional AppType appType = 3 [default = NONE];
-
-	optional string creator = 4;
-	optional string version = 5;
-	optional string price = 6;
-	optional string rating = 7;
-	optional int32 ratingsCount = 8;
-	
-	optional group ExtendedInfo = 12 {
-		optional string description = 13;
-		optional int32 downloadsCount = 14;
-		repeated string permissionId = 15;
-		optional int32 installSize = 16;
-		optional string packageName = 17;
-		optional string category = 18;
-		optional string contactEmail = 20;
-		optional string downloadsCountText = 23;
-		optional string contactPhone = 26;
-		optional string contactWebsite = 27;
-		
-		// V2
-		optional int32 screenshotsCount = 30;
-		optional string promoText = 31;
-		
-		// V3
-		optional string recentChanges = 38;
-		optional string promotionalVideo = 43;
-	} 	
-	
-	optional string creatorId = 22;
-	optional string packageName = 24;
-	optional int32 versionCode = 25;
-	//V2
-	optional string priceCurrency = 32;
-	optional int32 priceMicros = 33;
-}
-
-message Comment {
-	optional string text = 1;
-	optional int32 rating = 2;
-	optional string authorName = 3;
-	optional uint64 creationTime = 4;
-	optional string authorId = 5;
-}
-
 message CategoriesRequest {
 }
 
 message CategoriesResponse {
 	repeated Category categories = 1;
+}
+
+message Category {
+	optional int32 appType = 2;
+  optional string categoryId = 3;
+	optional string title = 4;
+	optional string subtitle = 5;
+	repeated Category subCategories = 8;
 }
 
 message SubCategoriesRequest {
@@ -125,22 +135,6 @@ message SubCategoriesResponse {
 	optional int32 subCategoryId = 3;
 }
 
-// operator : http://www.2030.tk/wiki/Android_market_switch
-// operatorNumeric : see http://en.wikipedia.org/wiki/Mobile_Network_Code
-message RequestContext {
-	required string authSubToken = 1; // authsub token for service 'android'
-	required int32 unknown1 = 2; // always 0
-	required int32 version = 3;  // always 1002
-	required string androidId = 4;  // android id converted to hexadecimal
-	optional string deviceAndSdkVersion = 5; // ro.product.device ':' ro.build.version.sdk 
-	optional string userLanguage = 6; // ro.product.locale.language
-	optional string userCountry = 7; // ro.product.locale.region
-	optional string operatorAlpha = 8; // gsm.operator.alpha
-	optional string simOperatorAlpha = 9; // gsm.sim.operator.alpha
-	optional string operatorNumeric = 10; // gsm.operator.numeric
-	optional string simOperatorNumeric = 11; // sim.gsm.operator.numeric
-}
-
 message GetImageRequest {
 	optional string appId = 1;
 	enum AppImageUsage {
@@ -150,12 +144,40 @@ message GetImageRequest {
 		PROMO_BADGE = 3;
 		BILING_ICON = 4;
 	}
-	optional AppImageUsage imageUsage = 3; 
+	optional AppImageUsage imageUsage = 3;
 	optional string imageId = 4; // 0 or 1
+	optional int32 screenPropertyWidth = 5;
+    optional int32 screenPropertyHeight = 6;
+    optional int32 screenPropertyDensity = 7;
 }
 
 message GetImageResponse {
 	optional bytes imageData = 1;
+    optional int32 imageDensity = 2;
+}
+
+message GetAssetRequest {
+       required string assetId = 1;
+       optional string directDownloadKey = 2;
+}
+
+message GetAssetResponse {
+    repeated group InstallAsset = 1 {
+               optional string assetId = 2;
+               optional string assetName = 3;
+               optional string assetType = 4;
+               optional string assetPackage = 5;
+               optional string blobUrl = 6;
+               optional string assetSignature = 7;
+               optional uint64 assetSize = 8;
+               optional uint64 refundTimeout = 9;
+               optional bool forwardLocked = 10;
+               optional bool secured = 11;
+               optional int32 versionCode = 12;
+               optional string downloadAuthCookieName = 13;
+               optional string downloadAuthCookieValue = 14;
+        }
+  repeated AppFileMetadata additionalFile = 15;
 }
 
 message Request {
@@ -163,26 +185,349 @@ message Request {
 	repeated group RequestGroup = 2 {
 		optional AppsRequest appsRequest = 4;
 		optional CommentsRequest commentsRequest = 5;
+		optional GetAssetRequest getAssetRequest = 10;
 		optional GetImageRequest imageRequest = 11;
 		optional SubCategoriesRequest subCategoriesRequest = 14;
 		optional CategoriesRequest categoriesRequest = 21;
 	}
 }
 
-message ResponseContext {
-	optional int32 result = 1;
-	optional int32 unknown1 = 2;
-	optional string unknown2 = 3;
-	optional int32 unknown3 = 4;
+// operator : http://www.2030.tk/wiki/Android_market_switch
+// operatorNumeric : see http://en.wikipedia.org/wiki/Mobile_Network_Code
+message RequestContext {
+	required string authSubToken = 1; // authsub token for service 'android'
+	required int32 userAuthTokenSecure = 2; // always 0, actually a boolean value
+	required int32 version = 3;  // always 1002
+	required string androidId = 4;  // android id converted to hexadecimal
+	optional string deviceAndSdkVersion = 5; // ro.product.device ':' ro.build.version.sdk
+	optional string userLanguage = 6; // ro.product.locale.language
+	optional string userCountry = 7; // ro.product.locale.region
+	optional string operatorAlpha = 8; // gsm.operator.alpha
+	optional string simOperatorAlpha = 9; // gsm.sim.operator.alpha
+	optional string operatorNumeric = 10; // gsm.operator.numeric
+	optional string simOperatorNumeric = 11; // sim.gsm.operator.numeric
 }
 
 message Response {
-	repeated group ResponseGroup = 1 { 
+	repeated group ResponseGroup = 1 {
 		optional ResponseContext context = 2;
 		optional AppsResponse appsResponse = 3;
 		optional CommentsResponse commentsResponse = 4;
+	  optional GetAssetResponse getAssetResponse = 9;
 		optional GetImageResponse imageResponse = 10;
 		optional CategoriesResponse categoriesResponse = 20;
 		optional SubCategoriesResponse subCategoriesResponse = 13;
 	}
+}
+
+message ResponseContext {
+        enum ResultType {
+             OK = 0;
+             BAD_REQUEST = 1;
+             INTERNAL_SERVICE_ERROR = 2;
+             NOT_MODIFIED = 3;
+             USER_INPUT_ERROR = 4;
+         }
+         optional ResultType result = 1;
+         optional int32 maxAge = 2;
+         optional string etag = 3;
+         optional int32 serverVersion = 4;
+}
+
+message Payload {
+  optional ListResponse listResponse = 1;
+  optional DetailsResponse detailsResponse = 2;
+  optional BuyResponse buyResponse = 4;
+  optional SearchResponse searchResponse = 5;
+  optional BulkDetailsResponse bulkDetailsResponse = 19;
+  optional DeliveryResponse deliveryResponse = 21;
+}
+
+message ResponseWrapper {
+  optional Payload payload = 1;
+ // optional ServerCommands commands = 2;
+ // repeated PreFetch preFetch = 3;
+ // repeated Notification notification = 4;
+}
+
+message AndroidAppDeliveryData {
+  optional int64 downloadSize = 1;
+  optional string signature = 2;
+  optional string downloadUrl = 3;
+  repeated AppFileMetadata additionalFile = 4;
+  repeated HttpCookie downloadAuthCookie = 5;
+  optional bool forwardLocked = 6;
+  optional int64 refundTimeout = 7;
+  optional bool serverInitiated = 8;
+  optional int64 postInstallRefundWindowMillis = 9;
+  optional bool immediateStartNeeded = 10;
+  //optional AndroidAppPatchData patchData = 11;
+  //optional EncryptionParams encryptionParams = 12;
+}
+
+message AppFileMetadata {
+  optional int32 fileType = 1;
+  optional int32 versionCode = 2;
+  optional int64 size = 3;
+  optional string downloadUrl = 4;
+}
+
+message HttpCookie {
+  optional string name = 1;
+  optional string value = 2;
+}
+
+message Docid {
+  optional string backendDocid = 1;
+  optional int32 type = 2;
+  optional int32 backend = 3;
+}
+message Document {
+  optional Docid docid = 1;
+  optional Docid fetchDocid = 2;
+  optional Docid sampleDocid = 3;
+  optional string title = 4;
+  optional string url = 5;
+  repeated string snippet = 6;
+  //optional Offer priceDeprecated = 7;
+  //optional Availability availability = 9;
+  repeated Image image = 10;
+  repeated Document child = 11;
+  //optional AggregateRating aggregateRating = 13;
+  //repeated Offer offer = 14;
+  //repeated TranslatedText translatedSnippet = 15;
+  //repeated DocumentVariant documentVariant = 16;
+  repeated string categoryId = 17;
+  repeated Document decoration = 18;
+  repeated Document parent = 19;
+  //optional string privacyPolicyUrl = 20;
+}
+
+message DocumentDetails {
+  optional AppDetails appDetails = 1;
+ //optional VideoDetails videoDetails = 6;
+
+}
+
+message DeliveryResponse {
+  optional int32 status = 1;
+  optional AndroidAppDeliveryData appDeliveryData = 2;
+}
+
+message BulkDetailsEntry {
+  optional DocV2 doc = 1;
+}
+
+message BulkDetailsRequest {
+  repeated string docid = 1;
+  optional bool includeChildDocs = 2;
+}
+
+message BulkDetailsResponse {
+  repeated BulkDetailsEntry entry = 1;
+}
+
+message DetailsResponse {
+  optional DocV1 docV1 = 1;
+  optional string analyticsCookie = 2;
+  //optional Review userReview = 3;
+  optional DocV2 docV2 = 4;
+  optional string footerHtml = 5;
+}
+
+message Image {
+  optional int32 imageType = 1;
+  optional group Dimension = 2 {
+    optional int32 width = 3;
+    optional int32 height = 4;
+  }
+  optional string imageUrl = 5;
+  optional string altTextLocalized = 6;
+  optional string secureUrl = 7;
+  optional int32 positionInSequence = 8;
+  optional bool supportsFifeUrlOptions = 9;
+  optional group Citation = 10 {
+    optional string titleLocalized = 11;
+    optional string url = 12;
+  }
+}
+
+message AppDetails {
+  optional string developerName = 1;
+  optional int32 majorVersionNumber = 2;
+  optional int32 versionCode = 3;
+  optional string versionString = 4;
+  optional string title = 5;
+  repeated string appCategory = 7;
+  optional int32 contentRating = 8;
+  optional int64 installationSize = 9;
+  repeated string permission = 10;
+  optional string developerEmail = 11;
+  optional string developerWebsite = 12;
+  optional string numDownloads = 13;
+  optional string packageName = 14;
+  optional string recentChangesHtml = 15;
+  optional string uploadDate = 16;
+  repeated AppFileMetadata file = 17;
+  optional string appType = 18;
+}
+
+message Bucket {
+  repeated DocV1 document = 1;
+  optional bool multiCorpus = 2;
+  optional string title = 3;
+  optional string iconUrl = 4;
+  optional string fullContentsUrl = 5;
+  optional double relevance = 6;
+  optional int64 estimatedResults = 7;
+  optional string analyticsCookie = 8;
+  optional string fullContentsListUrl = 9;
+  optional string nextPageUrl = 10;
+  optional bool ordered = 11;
+}
+
+message ListResponse {
+  repeated Bucket bucket = 1;
+  repeated DocV2 doc = 2;
+}
+
+message DocV1 {
+  optional Document finskyDoc = 1;
+  optional string docid = 2;
+  optional string detailsUrl = 3;
+  optional string reviewsUrl = 4;
+  optional string relatedListUrl = 5;
+  optional string moreByListUrl = 6;
+  optional string shareUrl = 7;
+  optional string creator = 8;
+  optional DocumentDetails details = 9;
+  optional string descriptionHtml = 10;
+  optional string relatedBrowseUrl = 11;
+  optional string moreByBrowseUrl = 12;
+  optional string relatedHeader = 13;
+  optional string moreByHeader = 14;
+  optional string title = 15;
+ // optional PlusOneData plusOneData = 16;
+ // optional string warningMessage = 17;
+}
+
+message ContainerMetadata {
+  optional string browseUrl = 1;
+  optional string nextPageUrl = 2;
+  optional double relevance = 3;
+  optional int64 estimatedResults = 4;
+  optional string analyticsCookie = 5;
+  optional bool ordered = 6;
+}
+
+message DocV2 {
+  optional string docid = 1;
+  optional string backendDocid = 2;
+  optional int32 docType = 3;
+  optional int32 backendId = 4;
+  optional string title = 5;
+  optional string creator = 6;
+  optional string descriptionHtml = 7;
+ // repeated Offer offer = 8;
+  //optional Availability availability = 9;
+  repeated Image image = 10;
+  repeated DocV2 child = 11;
+  optional ContainerMetadata containerMetadata = 12;
+  optional DocumentDetails details = 13;
+  // optional AggregateRating aggregateRating = 14;
+  //optional Annotations annotations = 15;
+  optional string detailsUrl = 16;
+  optional string shareUrl = 17;
+  optional string reviewsUrl = 18;
+  optional string backendUrl = 19;
+  optional string purchaseDetailsUrl = 20;
+  optional bool detailsReusable = 21;
+  optional string subtitle = 22;
+}
+
+message RelatedSearch {
+  optional string searchUrl = 1;
+  optional string header = 2;
+  optional int32 backendId = 3;
+  optional int32 docType = 4;
+  optional bool current = 5;
+}
+
+message SearchResponse {
+  optional string originalQuery = 1;
+  optional string suggestedQuery = 2;
+  optional bool aggregateQuery = 3;
+  repeated Bucket bucket = 4;
+  repeated DocV2 doc = 5;
+  repeated RelatedSearch relatedSearch = 6;
+}
+
+message AssetsRequest {
+  optional int32 assetType = 1;
+  optional string query = 2;
+  optional string categoryId = 3;
+  repeated string assetId = 4;
+  optional bool retrieveVendingHistory = 5;
+  optional bool retrieveExtendedInfo = 6;
+  optional int32 sortOrder = 7;
+  optional int64 startIndex = 8;
+  optional int64 numEntries = 9;
+  optional int32 viewFilter = 10;
+  optional string rankingType = 11;
+  optional bool retrieveCarrierChannel = 12;
+  repeated string pendingDownloadAssetId = 13;
+  optional bool reconstructVendingHistory = 14;
+  optional bool unfilteredResults = 15;
+  repeated string badgeId = 16;
+}
+
+message AssetsResponse {
+  repeated App asset = 1;
+  optional int64 numTotalEntries = 2;
+  optional string correctedQuery = 3;
+  repeated App altAsset = 4;
+  optional int64 numCorrectedEntries = 5;
+  optional string header = 6;
+  optional int32 listType = 7;
+}
+
+message ResponseProto {
+  repeated group Response = 1 {
+    optional AssetsResponse assetsResponse = 3;
+    optional GetAssetResponse getAssetResponse = 9;
+    optional GetImageResponse getImageResponse = 10;
+    optional SubCategoriesResponse subCategoriesResponse = 13;
+    optional CategoriesResponse getCategoriesResponse = 20;
+  }
+}
+
+message SingleRequestProto {
+  optional AssetsRequest assetRequest = 4;
+  optional GetAssetRequest getAssetRequest = 10;
+  optional GetImageRequest getImageRequest = 11;
+  optional SubCategoriesRequest subCategoriesRequest = 14;
+  optional CategoriesRequest getCategoriesRequest = 21;
+}
+
+message SingleResponseProto {
+  optional AssetsResponse assetsResponse = 3;
+  optional GetAssetResponse getAssetResponse = 9;
+  optional GetImageResponse getImageResponse = 10;
+  optional SubCategoriesResponse subCategoriesResponse = 13;
+  optional CategoriesResponse getCategoriesResponse = 20;
+}
+
+message BuyResponse {
+  optional PurchaseStatusResponse purchaseStatusResponse = 39;
+  optional string purchaseCookie = 46;
+}
+
+message PurchaseStatusResponse {
+  optional int32 status = 1;
+  optional string statusMsg = 2;
+  optional string statusTitle = 3;
+  optional string briefMessage = 4;
+  optional string infoUrl = 5;
+  optional AndroidAppDeliveryData appDeliveryData = 8;
+
 }
