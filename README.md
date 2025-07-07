@@ -1,11 +1,8 @@
 # Android Market API (PHP)
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.14769247.svg)](https://doi.org/10.5281/zenodo.14769247)
-[![Cite this repo](https://img.shields.io/badge/Cite-this-repo-💡-blueviolet?logo=academia)](https://github.com/splitfeed/android-market-api-php)
 
-> Un-official PHP client for the (legacy) Android Market / Google Play Store  
-> — first released in 2012 and still used for archival research, market-data
-> collection, and automation pipelines.
+Un-official PHP client for the (legacy) Android Market / Google Play Store — first released in 2012 and still used for archival research, market-data collection, and automation pipelines.
 
 ---
 
