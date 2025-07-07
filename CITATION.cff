@@ -1,0 +1,70 @@
+# ============================================================
+#  CITATION.cff ― Android Market API (PHP)
+#  Format-spec: Citation File Format v1.2.0
+# ============================================================
+
+cff-version: "1.2.0"
+message: "If you use this software, please cite it using the metadata below."
+
+title: "Android Market API (PHP)"
+version: "v1"
+doi: 10.5281/zenodo.14769247           # DOI for this specific release
+date-released: 2025-01-30
+
+type: software
+url: "https://github.com/splitfeed/android-market-api-php"
+repository: "https://github.com/splitfeed/android-market-api-php"
+repository-code: "https://github.com/splitfeed/android-market-api-php"
+
+authors:
+  - given-names: Vincent
+    family-names: Koc
+    name: "Vincent Koc"
+    affiliation: "Hyperthink LLC"
+
+# ------------------------------------------------------------------
+# Alternate / historical identifiers (helps citation crawlers merge)
+# ------------------------------------------------------------------
+identifiers:
+  - type: doi
+    value: 10.5281/zenodo.14769246     # concept DOI – all versions
+    description: "DOI representing all versions (latest resolves here)"
+  - type: doi
+    value: 10.5281/zenodo.14769247     # version-specific DOI (v1)
+    description: "DOI for version v1"
+  - type: url
+    value: "https://github.com/splitfeed/android-market-api-php"
+    description: "Primary GitHub repository (current)"
+  - type: url
+    value: "https://github.com/ondervincentkoc/android-market-api-php"
+    description: "Original GitHub location (2012 – 2018)"
+  - type: url
+    value: "https://code.google.com/archive/p/android-market-api-php/"
+    description: "Google Code read-only mirror (legacy)"
+  - type: url
+    value: "http://android-market-api-php.googlecode.com/files/"
+    description: "Legacy direct-download directory referenced in early blogs"
+
+keywords:
+  - Android
+  - Google Play
+  - PHP
+  - API
+  - Software
+
+abstract: |
+  PHP implementation of the (legacy) Android Market / Google Play API, enabling
+  programmatic access to app metadata, purchase history, and APK downloads
+  without relying on the official SDK. First released in 2012; still used in
+  archival research, market-data collection, and automation pipelines.
+
+preferred-citation:
+  type: software
+  title: "Android Market API (PHP)"
+  version: "v1"
+  doi: 10.5281/zenodo.14769247
+  url: "https://doi.org/10.5281/zenodo.14769247"
+  authors:
+    - given-names: Vincent
+      family-names: Koc
+  date-released: 2025-01-30
